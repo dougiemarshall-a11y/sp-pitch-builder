@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+11<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -77,51 +77,82 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
 
 /* ── PITCH OUTPUT ── */
 #pitch-out{display:none}
-.pitch-headline{font-size:24px;font-weight:900;line-height:1.25;color:#1a1a1a;margin-bottom:16px;letter-spacing:-.4px}
-.pitch-headline .hi{color:#008060}
-.pitch-headline .lo{color:#c0392b}
 
-.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.kpi{background:#f8f8f8;border-radius:11px;padding:15px;position:relative;overflow:hidden}
-.kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#e0e0e0}
-.kpi.red::before{background:#c0392b}
-.kpi.green::before{background:#008060}
-.kpi.amber::before{background:#f39c12}
-.kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#888;margin-bottom:5px}
-.kpi-val{font-size:22px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
-.kpi-sub{font-size:11px;color:#aaa;margin-top:3px}
-.kpi-badge{font-size:11px;font-weight:700;margin-top:5px;display:inline-block;padding:2px 7px;border-radius:4px}
-.kpi-badge.down{background:#fdecea;color:#c0392b}
-.kpi-badge.up{background:#e8f5ee;color:#008060}
-.kpi-badge.neutral{background:#fff3e0;color:#e67e00}
+/* money moment */
+.money-moment{background:#1a1a1a;border-radius:14px;padding:28px;margin:20px 0;text-align:center;position:relative;overflow:hidden}
+.money-moment::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#008060,#95bf47)}
+.money-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#666;margin-bottom:8px}
+.money-val{font-size:52px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1}
+.money-val span{color:#95bf47}
+.money-sub{font-size:14px;color:#888;margin-top:8px;line-height:1.5}
+.money-sub strong{color:#ccc}
 
-.tpoints{list-style:none;margin:14px 0}
-.tpoints li{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:14px;line-height:1.6;color:#333}
-.tpoints li:last-child{border-bottom:none}
-.tpoints li .arrow{color:#008060;font-weight:900;flex-shrink:0;font-size:16px;line-height:1.4}
-.tpoints li strong{color:#1a1a1a}
+/* story sections */
+.story-block{margin:22px 0}
+.story-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#008060;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.story-label::after{content:'';flex:1;height:1px;background:#e8f5ef}
+.story-lead{font-size:20px;font-weight:800;color:#1a1a1a;line-height:1.3;margin-bottom:8px;letter-spacing:-.3px}
+.story-lead .lo{color:#c0392b}
+.story-lead .hi{color:#008060}
+.story-body{font-size:14px;line-height:1.75;color:#444}
+.story-body strong{color:#1a1a1a}
 
-.objbox{background:#fff8ec;border-left:4px solid #f39c12;border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0}
-.objbox .obj-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#e67e00;margin-bottom:8px}
-.objbox p{font-size:13.5px;line-height:1.7;color:#333;font-style:italic}
-.objbox strong{color:#1a1a1a;font-style:normal}
+/* evidence row */
+.evidence-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.ev{background:#f8f8f8;border-radius:11px;padding:14px;border-top:3px solid #e0e0e0}
+.ev.red{border-top-color:#c0392b}
+.ev.green{border-top-color:#008060}
+.ev.amber{border-top-color:#f39c12}
+.ev-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#888;margin-bottom:6px}
+.ev-val{font-size:22px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
+.ev-bm{font-size:11px;color:#aaa;margin-top:3px}
+.ev-badge{font-size:11px;font-weight:700;margin-top:6px;display:inline-block;padding:2px 8px;border-radius:4px}
+.ev-badge.down{background:#fdecea;color:#c0392b}
+.ev-badge.up{background:#e8f5ee;color:#008060}
+.ev-badge.neutral{background:#fff3e0;color:#e67e00}
 
-.comp-section{margin-top:20px}
+/* activation gap */
+.gap-wrap{background:#f8f8f8;border-radius:12px;padding:18px;margin:16px 0;border:1px solid #eee}
+.gap-row{margin-bottom:14px}
+.gap-row:last-of-type{margin-bottom:0}
+.gap-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.gap-header span:first-child{font-size:12px;font-weight:600;color:#555}
+.gap-header span:last-child{font-size:14px;font-weight:900}
+.gap-track{height:10px;background:#e8e8e8;border-radius:5px;overflow:hidden}
+.gap-fill{height:100%;border-radius:5px;transition:width 1s ease}
+.gap-callout{margin-top:12px;background:#fdecea;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:700;color:#c0392b;text-align:center}
+
+/* discovery questions */
+.dq-list{list-style:none;counter-reset:dq}
+.dq-list li{counter-increment:dq;display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px;line-height:1.55;color:#333;align-items:flex-start}
+.dq-list li:last-child{border-bottom:none}
+.dq-list li::before{content:counter(dq);background:#1a1a1a;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px}
+.dq-list li em{color:#008060;font-style:normal;font-weight:700}
+
+/* objection reframe */
+.objbox{background:#fff8ec;border-left:4px solid #f39c12;border-radius:0 12px 12px 0;padding:18px 20px;margin:20px 0}
+.obj-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#e67e00;margin-bottom:10px}
+.obj-script{font-size:14px;line-height:1.75;color:#333;font-style:italic}
+.obj-script strong{color:#1a1a1a;font-style:normal}
+.obj-script .punchline{font-style:normal;font-weight:800;color:#1a1a1a;font-size:15px;display:block;margin-top:10px;padding-top:10px;border-top:1px solid #f0d9a8}
+
+/* next step */
+.next-step{background:linear-gradient(135deg,#008060 0%,#005c44 100%);border-radius:12px;padding:20px;margin-top:20px;color:#fff}
+.next-step-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#95bf47;margin-bottom:8px}
+.next-step-text{font-size:15px;font-weight:700;line-height:1.5;color:#fff}
+.next-step-text em{font-style:italic;color:#c8f0e0}
+
+/* competitors */
+.comp-section{margin-top:22px}
 .comp-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.comp-chip{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;width:72px;height:48px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.comp-chip img{max-width:60px;max-height:36px;object-fit:contain;filter:grayscale(1);opacity:.65;transition:all .2s}
+.comp-chip{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;width:76px;height:50px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
+.comp-chip:hover{border-color:#95bf47;background:#f0faf6}
+.comp-chip img{max-width:62px;max-height:38px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:all .2s}
 .comp-chip:hover img{filter:grayscale(0);opacity:1}
-.comp-chip .fallback{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px}
+.comp-chip .fallback{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px;display:none}
 
 .pitch-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 .pitch-actions .btn{flex:1;justify-content:center}
-
-/* ── ACTIVATION GAP VISUAL ── */
-.gap-bar-wrap{margin:16px 0;background:#f8f8f8;border-radius:10px;padding:16px}
-.gap-bar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#555;margin-bottom:8px}
-.gap-bar-track{height:12px;background:#e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:6px}
-.gap-bar-fill{height:100%;border-radius:6px;transition:width .8s ease}
-.gap-bar-sub{font-size:11px;color:#aaa;text-align:right}
 
 /* ── ANIM ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -404,109 +435,190 @@ function generatePitch(){
     shopId:     v('shop-id')
   };
 
-  // Update merchant banner name
   document.getElementById('m-name').textContent = D.merchantName;
 
-  const cartGap = D.cartRate && D.cartBm ? ((D.cartBm-D.cartRate)/D.cartBm*100) : null;
-  const chkGap  = D.chkRate  && D.chkBm  ? ((D.chkRate-D.chkBm)/D.chkBm*100)   : null;
-  const activationGap = D.spCust && D.spGmv ? (D.spCust - D.spGmv) : null;
-  const totalRevOpp = (D.revCart||0)+(D.revChk||0);
-  const sessNoCart = D.sessions && D.cartRate ? Math.round(D.sessions*(1-D.cartRate/100)) : null;
+  // ── DERIVED VALUES ──
+  const cartGap    = D.cartRate && D.cartBm ? ((D.cartBm - D.cartRate) / D.cartBm * 100) : null;
+  const chkGap     = D.chkRate  && D.chkBm  ? ((D.chkRate - D.chkBm)  / D.chkBm  * 100) : null;
+  const actGap     = D.spCust && D.spGmv ? (D.spCust - D.spGmv) : null;
+  const totalRev   = (D.revCart||0) + (D.revChk||0);
+  const sessNoCart = D.sessions && D.cartRate ? Math.round(D.sessions * (1 - D.cartRate / 100)) : null;
+  // "For every 100 visitors, X add to cart"
+  const cartPer100 = D.cartRate ? Math.round(D.cartRate) : null;
+  const bmPer100   = D.cartBm   ? Math.round(D.cartBm)   : null;
+  // SP customers not using it
+  const spCustCount = D.spCust && D.sessions ? Math.round(D.sessions * D.spCust / 100) : null;
 
-  D._cartGap = cartGap;
-  D._chkGap  = chkGap;
-  D._actGap  = activationGap;
-  D._totalRevOpp = totalRevOpp;
-  D._sessNoCart  = sessNoCart;
+  D._cartGap = cartGap; D._chkGap = chkGap; D._actGap = actGap;
+  D._totalRevOpp = totalRev; D._sessNoCart = sessNoCart;
 
+  const mn = D.merchantName;
   const brands = BRANDS[D.vertical]||[];
+
   const logoHTML = brands.map(domain=>`
     <div class="comp-chip" title="${domain}">
       <img src="https://logo.clearbit.com/${domain}" alt="${domain.split('.')[0]}"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="fallback" style="display:none">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
+      <div class="fallback">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
     </div>`).join('');
 
-  // ── KPI CARDS ──
-  const kpiHTML = `
-    <div class="kpi-row">
-      <div class="kpi ${cartGap&&cartGap>5?'red':cartGap&&cartGap<0?'green':'amber'}">
-        <div class="kpi-label">Cart Add Rate</div>
-        <div class="kpi-val">${pct(D.cartRate)}</div>
-        <div class="kpi-sub">Benchmark: <strong>${pct(D.cartBm)}</strong></div>
-        ${cartGap!==null?`<span class="kpi-badge ${cartGap>0?'down':'up'}">${cartGap>0?'↓ '+fmt(cartGap)+'% below bm':'↑ '+fmt(Math.abs(cartGap))+'% above bm'}</span>`:''}
+  // ── THE MONEY MOMENT ──
+  const moneyVal  = totalRev > 0 ? fmtC(totalRev) : (D.spRev ? fmtC(D.spRev) : null);
+  const moneyHTML = moneyVal ? `
+    <div class="money-moment">
+      <div class="money-label">90-day revenue opportunity — at just 5% funnel improvement</div>
+      <div class="money-val"><span>${moneyVal}</span></div>
+      <div class="money-sub">That's the number this conversation is about.<br>
+        <strong>Based on ${mn}'s own traffic data — not an estimate.</strong></div>
+    </div>` : '';
+
+  // ── ACT 1: THE PROBLEM ──
+  let act1Lead, act1Body;
+  if(cartGap && cartGap > 5){
+    act1Lead = `For every 100 people landing on ${mn}'s store, <span class="lo">only ${cartPer100||'~3'} add to cart.</span> Comparable brands get ${bmPer100||'~5'}.`;
+    act1Body = `${sessNoCart ? `That's <strong>${fmtN(sessNoCart)} sessions every 90 days</strong> — real people who found the store, looked around, and left without a product in their cart.` : ''} The gap isn't traffic. It's what happens when traffic arrives. ${D.mobilePct ? `And with <strong>${pct(D.mobilePct)} of sessions on mobile</strong>, every extra tap in the checkout is costing them buyers.` : ''}`;
+  } else if(actGap && actGap > 15){
+    act1Lead = `<span class="lo">${pct(D.spCust)} of ${mn}'s customers have Shop Pay.</span> Only <span class="lo">${pct(D.spGmv)}</span> of revenue flows through it.`;
+    act1Body = `That's a <strong>${fmt(actGap)}-point activation gap</strong> — customers who already have the fastest checkout on their phone, visiting a store that isn't offering it to them. The audience is there. The intent is there. The checkout isn't meeting them.`;
+  } else {
+    act1Lead = `${mn} is leaving <span class="lo">${moneyVal||'significant revenue'}</span> on the table every 90 days — and the data shows exactly where.`;
+    act1Body = `The funnel is partially working. But there are specific, fixable drop-off points that are costing them buyers at the exact moment of purchase intent.`;
+  }
+
+  // ── ACT 2: THE ROOT CAUSE ──
+  const causes = [];
+  if(D.mobilePct && D.socialPct){
+    causes.push(`<strong>${pct(D.mobilePct)} mobile traffic + ${pct(D.socialPct)} from social.</strong> That's an audience coming from Facebook and Instagram ads, on a phone, mid-scroll — the highest-intent, lowest-patience buyer profile that exists. A 12-field checkout form is the worst possible experience you can hand them at that moment.`);
+  } else if(D.mobilePct){
+    causes.push(`<strong>${pct(D.mobilePct)} of sessions are on mobile.</strong> Mobile buyers expect one-tap checkout. Every form field is a reason to abandon.`);
+  }
+  if(D.spCust && D.spGmv){
+    causes.push(`<strong>${pct(D.spCust)} of ${mn}'s customers already have Shop Pay.</strong> ${spCustCount ? `That's roughly <strong>${fmtN(spCustCount)} people</strong> every 90 days who walk in with a one-tap wallet — and are handed a form instead.` : `They're not being offered the fastest checkout they already use everywhere else.`}`);
+  }
+  if(D.spOrders){
+    causes.push(`<strong>${pct(D.spOrders)} of orders are already placed by Shop Pay users</strong> — not because SP is activated fully, but because those buyers found their way to it. These are your highest-value, most loyal customers. The checkout isn't matching what they expect.`);
+  }
+  if(D.gateway2){
+    causes.push(`<strong>${D.gateway2} is already doing ${D.spGmv?pct(D.spGmv):'significant'} of GMV</strong> — proof positive the customer base prefers express wallet checkout. Shop Pay is the same instinct, with the full conversion advantage of the Shop network behind it.`);
+  }
+
+  const act2HTML = causes.length > 0 ? `
+    <div class="story-block">
+      <div class="story-label">Act 2 — Why it's happening</div>
+      <div class="story-lead">The checkout isn't built for the audience that's showing up.</div>
+      <ul style="list-style:none;margin-top:12px">
+        ${causes.map(c=>`<li style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:14px;line-height:1.65;color:#444"><span style="color:#008060;font-weight:900;font-size:16px;flex-shrink:0;line-height:1.3">→</span><span>${c}</span></li>`).join('')}
+      </ul>
+    </div>` : '';
+
+  // ── EVIDENCE ROW ──
+  const evidenceHTML = `
+    <div class="evidence-row">
+      <div class="ev ${cartGap&&cartGap>5?'red':cartGap&&cartGap<0?'green':'amber'}">
+        <div class="ev-label">Cart Add Rate</div>
+        <div class="ev-val">${pct(D.cartRate)}</div>
+        <div class="ev-bm">Benchmark: <strong>${pct(D.cartBm)}</strong></div>
+        ${cartGap!==null?`<span class="ev-badge ${cartGap>0?'down':'up'}">${cartGap>0?'↓ '+fmt(cartGap)+'pts below':'↑ '+fmt(Math.abs(cartGap))+'pts above'}</span>`:''}
       </div>
-      <div class="kpi ${chkGap&&chkGap<-10?'red':chkGap&&chkGap>10?'green':'amber'}">
-        <div class="kpi-label">Checkout Completion</div>
-        <div class="kpi-val">${pct(D.chkRate)}</div>
-        <div class="kpi-sub">Benchmark: <strong>${pct(D.chkBm)}</strong></div>
-        ${chkGap!==null?`<span class="kpi-badge ${chkGap<0?'down':'up'}">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'% below bm':'↑ '+fmt(chkGap)+'% above bm'}</span>`:''}
+      <div class="ev ${chkGap&&chkGap<-10?'red':chkGap&&chkGap>10?'green':'amber'}">
+        <div class="ev-label">Checkout Completion</div>
+        <div class="ev-val">${pct(D.chkRate)}</div>
+        <div class="ev-bm">Benchmark: <strong>${pct(D.chkBm)}</strong></div>
+        ${chkGap!==null?`<span class="ev-badge ${chkGap<0?'down':'up'}">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'pts below':'↑ '+fmt(chkGap)+'pts above'}</span>`:''}
       </div>
-      <div class="kpi green">
-        <div class="kpi-label">90d Revenue Opportunity</div>
-        <div class="kpi-val">${totalRevOpp>0?fmtC(totalRevOpp):'—'}</div>
-        <div class="kpi-sub">At 5% funnel improvement</div>
-        ${totalRevOpp>0?`<span class="kpi-badge neutral">Based on their own data</span>`:''}
+      <div class="ev ${actGap&&actGap>15?'red':'amber'}">
+        <div class="ev-label">SP Activation Gap</div>
+        <div class="ev-val">${actGap?fmt(actGap)+'pt':'—'}</div>
+        <div class="ev-bm">${D.spCust?pct(D.spCust)+' have SP':'—'} · ${D.spGmv?pct(D.spGmv)+' use it':'—'}</div>
+        ${actGap?`<span class="ev-badge down">Untapped audience</span>`:''}
       </div>
     </div>`;
 
   // ── ACTIVATION GAP VISUAL ──
   const gapHTML = D.spCust && D.spGmv ? `
-    <div class="gap-bar-wrap">
-      <div class="kpi-label" style="margin-bottom:10px">Shop Pay Activation Gap — The Untapped Opportunity</div>
-      <div style="margin-bottom:10px">
-        <div class="gap-bar-label"><span>Customers who have Shop Pay</span><span style="color:#008060;font-weight:800">${pct(D.spCust)}</span></div>
-        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:${D.spCust}%;background:#95bf47"></div></div>
+    <div class="gap-wrap">
+      <div class="story-label" style="margin-bottom:14px">The activation gap — visualised</div>
+      <div class="gap-row">
+        <div class="gap-header">
+          <span>Customers who have Shop Pay</span>
+          <span style="color:#008060">${pct(D.spCust)}</span>
+        </div>
+        <div class="gap-track"><div class="gap-fill" style="width:${Math.min(D.spCust,100)}%;background:#95bf47"></div></div>
       </div>
-      <div>
-        <div class="gap-bar-label"><span>GMV actually flowing through Shop Pay</span><span style="color:#c0392b;font-weight:800">${pct(D.spGmv)}</span></div>
-        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:${D.spGmv}%;background:#c0392b"></div></div>
+      <div class="gap-row">
+        <div class="gap-header">
+          <span>GMV currently flowing through Shop Pay</span>
+          <span style="color:#c0392b">${pct(D.spGmv)}</span>
+        </div>
+        <div class="gap-track"><div class="gap-fill" style="width:${Math.min(D.spGmv,100)}%;background:#c0392b"></div></div>
       </div>
-      <div style="margin-top:10px;font-size:12px;color:#555;text-align:center">
-        <strong style="color:#c0392b">${fmt(activationGap)} percentage point gap</strong> — customers with Shop Pay who aren't using it at checkout
+      <div class="gap-callout">
+        ${fmt(actGap)}-point gap — buyers who have Shop Pay and aren't being offered it
       </div>
     </div>` : '';
 
-  // ── TALKING POINTS ──
-  const points = [];
-  if(D.mobilePct) points.push(`<strong>${pct(D.mobilePct)} of traffic is mobile.</strong> Shop Pay removes 12 form fields from the mobile checkout. One tap, Face ID, done. No card details, no address re-entry — the exact friction that's driving your cart drop-off.`);
-  if(D.socialPct) points.push(`<strong>${pct(D.socialPct)} of sessions come from social (Facebook + Instagram).</strong> Shop Pay converts social-referred buyers at up to 18% higher rates. The moment a buyer clicks an ad, Shop Pay keeps them in flow — no checkout form to kill the impulse.`);
-  if(D.spCust&&D.spGmv) points.push(`<strong>${pct(D.spCust)} of customers already have Shop Pay in their wallet. Only ${pct(D.spGmv)} of GMV flows through it.</strong> That's a ${fmt(activationGap)}-point activation gap — buyers who have the fastest checkout available and aren't being offered it.`);
-  if(D.spOrders) points.push(`<strong>${pct(D.spOrders)} of orders already come from Shop Pay users</strong> — your highest-intent buyers default to SP. The question is why the checkout experience isn't matching their preference.`);
-  if(D.spRev) points.push(`<strong>The incremental revenue model shows ${fmtC(D.spRev)} uplift</strong> from the 5% checkout conversion improvement Shop Pay delivers. This isn't a forecast — it's modelled on their actual transaction data.`);
-  if(D.gateway2) points.push(`<strong>${D.gateway2} is already processing ${D.gateway2==='Apple Pay'?'32%':'significant'} of GMV</strong> — proof the customer base prefers express wallet checkout. Shop Pay is the same behaviour, with the added conversion layer of the Shop network.`);
+  // ── DISCOVERY QUESTIONS ──
+  const dqs = [
+    D.mobilePct ? `When you look at where your ad spend goes, what proportion is going to ${D.mobilePct?`mobile placements — knowing ${pct(D.mobilePct)} of your traffic is already arriving on mobile`:'mobile vs desktop'}? <em>→ Connects their marketing cost to the checkout friction story.</em>` : null,
+    D.spCust ? `Have you ever looked at how your checkout drop-off rate compares between customers who have Shop Pay and those who don't? <em>→ Opens the door to showing the activation gap data.</em>` : null,
+    `If I could show you the exact number of customers who visited your store last month with Shop Pay already in their phone — and left without using it — would that be a useful number to have? <em>→ Creates curiosity before you show them the ${D.spCust?pct(D.spCust)+' figure':'data'}.</em>`,
+    D.revCart ? `On a quarterly basis, what would an extra ${fmtC(D.revCart)} in revenue mean for the business? <em>→ Anchors the conversation to value before discussing price.</em>` : null,
+  ].filter(Boolean);
 
-  const tpHTML = `<ul class="tpoints">${points.map(p=>`<li><span class="arrow">→</span><span>${p}</span></li>`).join('')}</ul>`;
+  const dqHTML = `
+    <div class="story-block">
+      <div class="story-label">Discovery questions — ask these before you pitch</div>
+      <ul class="dq-list">
+        ${dqs.map(q=>`<li>${q}</li>`).join('')}
+      </ul>
+    </div>`;
 
-  // ── OBJECTION HANDLER ──
-  const objText = `"I hear you on cost — let's look at what your current checkout is actually costing you. ${sessNoCart?`You're running ${fmtN(sessNoCart)} sessions every 90 days where someone visited and left without a cart.`:''} ${D.revCart?`Moving just 5% more of those to cart is worth <strong>${fmtC(D.revCart)}</strong> in 90 days — that's based on your own traffic data, not an estimate.`:''} ${D.spCust&&D.spGmv?` And <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone</strong> — they're ready to buy in one tap and you're still asking them to fill in forms.`:''}<br><br>Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments. The cost question is the wrong frame — the right frame is: <strong>what is your current checkout costing you every month?"</strong>`;
+  // ── OBJECTION REFRAME ──
+  const objHTML = `
+    <div class="objbox">
+      <div class="obj-label">⚡ When they say "Shop Pay is too expensive" — say this</div>
+      <div class="obj-script">
+        "I completely understand the instinct to look at rate. But I want to flip the frame for a second, because I think we're looking at the wrong number.
+        ${sessNoCart ? `<br><br>Right now, <strong>${fmtN(sessNoCart)} people</strong> visit your store every 90 days and leave without a product in their cart.` : ''}
+        ${D.revCart ? ` If Shop Pay moves just 5% more of those sessions to the next step — which is conservative based on what we see across comparable brands — that's <strong>${fmtC(D.revCart)} in additional revenue over 90 days.</strong>` : ''}
+        ${D.spCust ? ` And here's the thing: <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone.</strong> They're not asking for forms. They're ready to buy in one tap. You're just not offering it to them yet.` : ''}
+        <span class="punchline">Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments. The question isn't what it costs — it's what your current checkout is costing you every single month."</span>
+      </div>
+    </div>`;
 
-  const headline = cartGap && cartGap > 5
-    ? `Cart add rate is <span class="lo">${fmt(cartGap)}% below benchmark</span> — ${sessNoCart?fmtN(sessNoCart)+' sessions':''} without a cart every 90 days.`
-    : D.spCust && D.spGmv
-    ? `<span class="lo">${fmt(activationGap)} percentage points</span> between customers who have Shop Pay and those using it.`
-    : `<span class="hi">${totalRevOpp>0?fmtC(totalRevOpp):''}</span> in 90-day revenue opportunity — based on their own data.`;
+  // ── COMPETITORS ──
+  const compHTML = brands.length > 0 ? `
+    <div class="comp-section">
+      <div class="story-label">Brands in ${D.vertical} already using Shop Pay</div>
+      <p style="font-size:13px;color:#666;margin-bottom:12px">These merchants are converting more of your shared audience. Their customers checkout in one tap. Yours are filling in forms.</p>
+      <div class="comp-grid">${logoHTML}</div>
+    </div>` : '';
+
+  // ── NEXT STEP ──
+  const nextHTML = `
+    <div class="next-step">
+      <div class="next-step-label">Before you hang up — ask for this</div>
+      <div class="next-step-text">
+        "Can we get 30 minutes with you and your Head of eCommerce together? I want to walk you through exactly where the drop-off is happening in your funnel, show you what ${D.spCust?pct(D.spCust)+' of your customers':' a significant chunk of your buyers'} already expect from your checkout, and model out what a 5% improvement looks like for your specific revenue. <em>No commitment — just the data."</em>
+      </div>
+    </div>`;
 
   const html = `
-    <div style="margin-bottom:20px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888;margin-bottom:8px">The Opportunity</div>
-      <div class="pitch-headline">${headline}</div>
+    ${moneyHTML}
+
+    <div class="story-block">
+      <div class="story-label">Act 1 — What's actually happening</div>
+      <div class="story-lead">${act1Lead}</div>
+      <div class="story-body">${act1Body}</div>
     </div>
-    ${kpiHTML}
+
+    ${evidenceHTML}
     ${gapHTML}
-    <div style="margin-top:22px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#008060;margin-bottom:2px">Why Shop Pay closes this gap</div>
-    </div>
-    ${tpHTML}
-    <div class="objbox">
-      <div class="obj-label">⚡ When they say "it's too expensive" — use this</div>
-      <p>${objText}</p>
-    </div>
-    ${brands.length>0?`
-    <div class="comp-section">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555;margin-bottom:10px">Brands in ${D.vertical} already using Shop Pay</div>
-      <div class="comp-grid">${logoHTML}</div>
-    </div>`:''}`;
+    ${act2HTML}
+    ${dqHTML}
+    ${objHTML}
+    ${compHTML}
+    ${nextHTML}`;
 
   document.getElementById('pitch-body').innerHTML = html;
   document.getElementById('pitch-out').style.display = 'block';
