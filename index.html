@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Pay Pitch Builder — Growth Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f0f0;color:#1a1a1a;min-height:100vh}
+
+/* ── HEADER ── */
+.hdr{background:#1a1a1a;padding:14px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.hdr-logo{display:flex;align-items:center;gap:9px}
+.hdr-logo svg{width:26px;height:26px}
+.hdr-name{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.hdr-name span{color:#95bf47}
+.hdr-tag{background:#008060;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.6px}
+.hdr-right{margin-left:auto;font-size:12px;color:#666}
+
+/* ── LAYOUT ── */
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:14px;padding:26px;margin-bottom:18px;border:1px solid #e5e5e5;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-hdr{display:flex;align-items:flex-start;gap:12px;margin-bottom:22px}
+.step{background:#008060;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px}
+.card-title{font-size:17px;font-weight:800;line-height:1.2}
+.card-sub{font-size:13px;color:#777;margin-top:3px}
+
+/* ── INPUTS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.grid-1{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px}
+.f input,.f select{padding:10px 13px;border:1.5px solid #e0e0e0;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#1a1a1a;transition:border-color .15s;background:#fff}
+.f input:focus,.f select:focus{outline:none;border-color:#008060;background:#fafffe}
+.f .hint{font-size:11px;color:#aaa;margin-top:1px}
+.f input[type=number]{-moz-appearance:textfield}
+.f input[type=number]::-webkit-inner-spin-button{opacity:.4}
+
+/* ── SHOP ID ROW ── */
+.id-row{display:flex;gap:10px;margin-bottom:16px}
+.id-row input{flex:1;padding:13px 16px;border:1.5px solid #e0e0e0;border-radius:10px;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px}
+.id-row input:focus{outline:none;border-color:#008060}
+
+/* ── BUTTONS ── */
+.btn{padding:11px 20px;border-radius:9px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.btn-green{background:#008060;color:#fff}
+.btn-green:hover{background:#006e52;transform:translateY(-1px)}
+.btn-dark{background:#1a1a1a;color:#fff}
+.btn-dark:hover{background:#333;transform:translateY(-1px)}
+.btn-ghost{background:#f5f5f5;color:#333;border:1.5px solid #e0e0e0}
+.btn-ghost:hover{background:#eee}
+.btn-block{width:100%;justify-content:center;padding:13px}
+
+/* ── MERCHANT BANNER ── */
+.mbanner{background:linear-gradient(135deg,#f0faf6 0%,#e8f5ef 100%);border:1.5px solid #95bf47;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;display:none}
+.mbanner .mname{font-size:16px;font-weight:800}
+.mbanner .mdomain{font-size:13px;color:#555;margin-top:2px}
+.mbanner .mid{font-size:11px;color:#888;font-family:monospace;background:#fff;padding:4px 9px;border-radius:6px;border:1px solid #ddd}
+
+/* ── REPORT LINKS ── */
+.rlinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;display:none}
+.rlink{background:#f8faf9;border:1.5px solid #c8e6c9;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:all .15s;cursor:pointer}
+.rlink:hover{background:#edf7ef;border-color:#95bf47;transform:translateY(-1px)}
+.rlink-icon{font-size:24px;flex-shrink:0}
+.rlink-name{font-size:13px;font-weight:700;color:#1a1a1a;display:block}
+.rlink-desc{font-size:11px;color:#777;display:block;margin-top:2px}
+
+/* ── SECTION DIVIDERS ── */
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#008060;margin-bottom:12px;margin-top:4px;display:flex;align-items:center;gap:7px}
+.sec-label::after{content:'';flex:1;height:1px;background:#e8f5ef}
+hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
+
+/* ── PITCH OUTPUT ── */
+#pitch-out{display:none}
+.pitch-headline{font-size:24px;font-weight:900;line-height:1.25;color:#1a1a1a;margin-bottom:16px;letter-spacing:-.4px}
+.pitch-headline .hi{color:#008060}
+.pitch-headline .lo{color:#c0392b}
+
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.kpi{background:#f8f8f8;border-radius:11px;padding:15px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#e0e0e0}
+.kpi.red::before{background:#c0392b}
+.kpi.green::before{background:#008060}
+.kpi.amber::before{background:#f39c12}
+.kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#888;margin-bottom:5px}
+.kpi-val{font-size:22px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
+.kpi-sub{font-size:11px;color:#aaa;margin-top:3px}
+.kpi-badge{font-size:11px;font-weight:700;margin-top:5px;display:inline-block;padding:2px 7px;border-radius:4px}
+.kpi-badge.down{background:#fdecea;color:#c0392b}
+.kpi-badge.up{background:#e8f5ee;color:#008060}
+.kpi-badge.neutral{background:#fff3e0;color:#e67e00}
+
+.tpoints{list-style:none;margin:14px 0}
+.tpoints li{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:14px;line-height:1.6;color:#333}
+.tpoints li:last-child{border-bottom:none}
+.tpoints li .arrow{color:#008060;font-weight:900;flex-shrink:0;font-size:16px;line-height:1.4}
+.tpoints li strong{color:#1a1a1a}
+
+.objbox{background:#fff8ec;border-left:4px solid #f39c12;border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0}
+.objbox .obj-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#e67e00;margin-bottom:8px}
+.objbox p{font-size:13.5px;line-height:1.7;color:#333;font-style:italic}
+.objbox strong{color:#1a1a1a;font-style:normal}
+
+.comp-section{margin-top:20px}
+.comp-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.comp-chip{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;width:72px;height:48px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.comp-chip img{max-width:60px;max-height:36px;object-fit:contain;filter:grayscale(1);opacity:.65;transition:all .2s}
+.comp-chip:hover img{filter:grayscale(0);opacity:1}
+.comp-chip .fallback{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px}
+
+.pitch-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.pitch-actions .btn{flex:1;justify-content:center}
+
+/* ── ACTIVATION GAP VISUAL ── */
+.gap-bar-wrap{margin:16px 0;background:#f8f8f8;border-radius:10px;padding:16px}
+.gap-bar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:#555;margin-bottom:8px}
+.gap-bar-track{height:12px;background:#e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:6px}
+.gap-bar-fill{height:100%;border-radius:6px;transition:width .8s ease}
+.gap-bar-sub{font-size:11px;color:#aaa;text-align:right}
+
+/* ── ANIM ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .35s ease}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .rlinks{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .pitch-headline{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-logo">
+    <svg viewBox="0 0 28 28" fill="none">
+      <path d="M14 2C7.37 2 2 7.37 2 14s5.37 12 12 12 12-5.37 12-12S20.63 2 14 2z" fill="#95BF47"/>
+      <path d="M19.2 8.8c-.08-.08-.2-.1-.3-.08l-2.4.74-.7-2.1a.4.4 0 00-.38-.28h-.02c-.18 0-.34.12-.4.3L14 10.5l-1.8.56V9.6a.4.4 0 00-.4-.4h-1.6a.4.4 0 00-.4.4v1.9l-1.4.43a.4.4 0 00-.28.5l2.2 7.1c.07.2.28.32.48.26l8-2.46a.4.4 0 00.28-.5L19.5 9.1a.4.4 0 00-.3-.3z" fill="white"/>
+    </svg>
+    <span class="hdr-name">Shop Pay <span>Pitch Builder</span></span>
+  </div>
+  <span class="hdr-tag">Growth Services</span>
+  <span class="hdr-right">Optimised for conversion, not cost</span>
+</div>
+
+<div class="wrap">
+
+  <!-- ── STEP 1 ── -->
+  <div class="card">
+    <div class="card-hdr">
+      <div class="step">1</div>
+      <div>
+        <div class="card-title">Enter Shop ID</div>
+        <div class="card-sub">Loads both Looker reports for the merchant — enter the same ID in each report's filter</div>
+      </div>
+    </div>
+    <div class="id-row">
+      <input type="text" id="shop-id" placeholder="e.g. 55472324767" onkeydown="if(event.key==='Enter')loadMerchant()">
+      <button class="btn btn-green" onclick="loadMerchant()">Load Merchant →</button>
+    </div>
+    <div class="mbanner" id="mbanner">
+      <div>
+        <div class="mname" id="m-name">Merchant Name</div>
+        <div class="mdomain" id="m-domain">domain.com</div>
+      </div>
+      <div class="mid" id="m-id">—</div>
+    </div>
+    <div class="rlinks" id="rlinks">
+      <a class="rlink" id="link1" href="#" target="_blank" rel="noopener">
+        <span class="rlink-icon">📊</span>
+        <span>
+          <span class="rlink-name">Purchase Funnel &amp; CRO Report</span>
+          <span class="rlink-desc">Cart adds · Checkouts · Completions · Benchmarks · Devices</span>
+        </span>
+      </a>
+      <a class="rlink" id="link2" href="#" target="_blank" rel="noopener">
+        <span class="rlink-icon">💳</span>
+        <span>
+          <span class="rlink-name">Shop Pay &amp; Payments Report</span>
+          <span class="rlink-desc">SP user % · App coverage · GMV by gateway · AOV lift</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── STEP 2 ── -->
+  <div class="card" id="card2" style="display:none">
+    <div class="card-hdr">
+      <div class="step">2</div>
+      <div>
+        <div class="card-title">Enter Key Metrics</div>
+        <div class="card-sub">Pull these numbers from the two reports — takes about 60 seconds</div>
+      </div>
+    </div>
+
+    <div class="sec-label">📊 Purchase Funnel — Report 1 (Summary view, all devices)</div>
+    <div class="grid-3">
+      <div class="f">
+        <label>Sessions (90d)</label>
+        <input type="number" id="sessions" placeholder="83410">
+        <span class="hint">Total sessions shown</span>
+      </div>
+      <div class="f">
+        <label>Mobile Traffic %</label>
+        <input type="number" step="0.1" id="mobile-pct" placeholder="77.7">
+        <span class="hint">From Devices overview page</span>
+      </div>
+      <div class="f">
+        <label>Social Traffic % (FB + IG)</label>
+        <input type="number" step="0.1" id="social-pct" placeholder="41.9">
+        <span class="hint">Facebook % + Instagram % combined</span>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="f">
+        <label>Cart Add Rate — Your Store %</label>
+        <input type="number" step="0.01" id="cart-rate" placeholder="3.48">
+      </div>
+      <div class="f">
+        <label>Cart Add Rate — Benchmark %</label>
+        <input type="number" step="0.01" id="cart-bm" placeholder="5.42">
+        <span class="hint">Benchmark Median (50th percentile)</span>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="f">
+        <label>Checkout Completion — Your Store %</label>
+        <input type="number" step="0.01" id="chk-rate" placeholder="60.14">
+      </div>
+      <div class="f">
+        <label>Checkout Completion — Benchmark %</label>
+        <input type="number" step="0.01" id="chk-bm" placeholder="40.10">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="f">
+        <label>5% Cart Uplift — Revenue (90d) $</label>
+        <input type="number" id="rev-cart" placeholder="72381">
+        <span class="hint">"If we moved 5% more…" panel — Sessions without carts row</span>
+      </div>
+      <div class="f">
+        <label>5% Checkout Uplift — Revenue (90d) $</label>
+        <input type="number" id="rev-chk" placeholder="1699">
+        <span class="hint">"If we moved 5% more…" panel — Checkout drop-offs row</span>
+      </div>
+    </div>
+
+    <hr class="div">
+    <div class="sec-label">💳 Shop Pay &amp; Payments — Report 2</div>
+    <div class="grid-3">
+      <div class="f">
+        <label>% Orders from Shop Pay Users</label>
+        <input type="number" step="0.01" id="sp-orders" placeholder="70.72">
+        <span class="hint">Shop Pay Stats → top metric</span>
+      </div>
+      <div class="f">
+        <label>% GMV via Shop Pay gateway</label>
+        <input type="number" step="0.1" id="sp-gmv" placeholder="32">
+        <span class="hint">% GMV by Gateway chart</span>
+      </div>
+      <div class="f">
+        <label>Estimated Incremental Rev (SP) $</label>
+        <input type="number" id="sp-rev" placeholder="1483">
+        <span class="hint">Estimated Revenue Boost section</span>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="f">
+        <label>% Customers with Shop Pay (all-time)</label>
+        <input type="number" step="0.1" id="sp-cust" placeholder="57.6">
+        <span class="hint">% Customers Who Are Shop Pay Users</span>
+      </div>
+      <div class="f">
+        <label>% Customers with Shop App (all-time)</label>
+        <input type="number" step="0.1" id="app-cust" placeholder="44.7">
+        <span class="hint">% Customers Who Are Shop App Users</span>
+      </div>
+      <div class="f">
+        <label>2nd Largest Gateway</label>
+        <input type="text" id="gateway2" placeholder="Apple Pay">
+        <span class="hint">From GMV by Gateway chart</span>
+      </div>
+    </div>
+
+    <hr class="div">
+    <div class="sec-label">🏷️ Merchant Context</div>
+    <div class="grid-3">
+      <div class="f">
+        <label>Merchant Name</label>
+        <input type="text" id="merch-name" placeholder="Needs No Label">
+      </div>
+      <div class="f">
+        <label>Industry Vertical</label>
+        <select id="vertical">
+          <option value="Fashion & Apparel">Fashion &amp; Apparel</option>
+          <option value="Streetwear">Streetwear</option>
+          <option value="Beauty & Cosmetics">Beauty &amp; Cosmetics</option>
+          <option value="Sports & Fitness">Sports &amp; Fitness</option>
+          <option value="Home & Living">Home &amp; Living</option>
+          <option value="Food & Drink">Food &amp; Drink</option>
+          <option value="Footwear">Footwear</option>
+          <option value="Jewellery & Accessories">Jewellery &amp; Accessories</option>
+          <option value="Electronics">Electronics</option>
+        </select>
+      </div>
+      <div class="f">
+        <label>Your Name (AE)</label>
+        <input type="text" id="ae-name" placeholder="Dougie Marshall">
+      </div>
+    </div>
+
+    <button class="btn btn-green btn-block" style="margin-top:18px;font-size:15px" onclick="generatePitch()">
+      ✦ &nbsp;Generate Pitch Brief
+    </button>
+  </div>
+
+  <!-- ── STEP 3: PITCH OUTPUT ── -->
+  <div class="card fade-up" id="pitch-out">
+    <div class="card-hdr">
+      <div class="step">3</div>
+      <div>
+        <div class="card-title">Pitch Brief</div>
+        <div class="card-sub">Use this live in the call — built from their own data</div>
+      </div>
+    </div>
+    <div id="pitch-body"></div>
+    <div class="pitch-actions">
+      <button class="btn btn-dark" onclick="downloadPDF()">⬇ &nbsp;Download Merchant PDF</button>
+      <button class="btn btn-ghost" onclick="copyBrief()">📋 &nbsp;Copy to Clipboard</button>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+const R1 = 'https://lookerstudio.google.com/reporting/7e958a1f-3d14-4057-8024-d06918174416/page/p_jj8oo1jpwd';
+const R2 = 'https://lookerstudio.google.com/reporting/f4423a60-f1bc-42f6-a548-79f5a45e0074/page/p_ahl9q4zfad';
+
+const BRANDS = {
+  'Fashion & Apparel':      ['gymshark.com','fashionnova.com','aloyoga.com','reiss.com','allbirds.com','cos.com'],
+  'Streetwear':             ['supremenewyork.com','palace.co.uk','madhappy.com','stussy.com','humanmade.jp','aimeleondore.com'],
+  'Beauty & Cosmetics':     ['kyliecosmetics.com','colourpop.com','morphe.com','hudabeauty.com','patmcgrath.com','ctilburymakeup.com'],
+  'Sports & Fitness':       ['gymshark.com','rogue.com','aloyoga.com','huel.com','myprotein.com','bulk.com'],
+  'Home & Living':          ['ruggable.com','brooklinen.com','parachutehome.com','casper.com','made.com','loaf.com'],
+  'Food & Drink':           ['bulletproof.com','graze.com','pip-and-nut.com','huel.com','pactcoffee.com','omsom.com'],
+  'Footwear':               ['allbirds.com','grenson.com','veja-store.com','loake.co.uk','clarks.co.uk','trouva.com'],
+  'Jewellery & Accessories':['mejuri.com','monica-vinader.com','missoma.com','pandora.net','anine-bing.com','links.co.uk'],
+  'Electronics':            ['nothing.tech','dbrand.com','anker.com','moment.com','nomadgoods.com','casetify.com']
+};
+
+let D = {};
+
+function v(id){ return (document.getElementById(id)||{}).value||''; }
+function fv(id){ return parseFloat(v(id))||null; }
+function iv(id){ return parseInt(v(id))||null; }
+function fmt(n,d=1){ return n==null?'—':parseFloat(n).toFixed(d); }
+function fmtC(n){ return n==null?'—':'$'+parseInt(n).toLocaleString('en-GB'); }
+function fmtN(n){ return n==null?'—':parseInt(n).toLocaleString('en-GB'); }
+function pct(n){ return n==null?'—':fmt(n)+'%'; }
+
+function loadMerchant(){
+  const id = v('shop-id').trim();
+  if(!id){ document.getElementById('shop-id').style.borderColor='#c0392b'; return; }
+  document.getElementById('shop-id').style.borderColor='#008060';
+  document.getElementById('m-id').textContent = 'Shop ID: '+id;
+  document.getElementById('m-name').textContent = v('merch-name')||'Merchant';
+  document.getElementById('m-domain').textContent = 'Enter merchant name in Step 2 below';
+  document.getElementById('mbanner').style.display='flex';
+  document.getElementById('link1').href = R1;
+  document.getElementById('link2').href = R2;
+  document.getElementById('rlinks').style.display='grid';
+  document.getElementById('card2').style.display='block';
+  document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function generatePitch(){
+  D = {
+    sessions:   fv('sessions'),
+    mobilePct:  fv('mobile-pct'),
+    socialPct:  fv('social-pct'),
+    cartRate:   fv('cart-rate'),
+    cartBm:     fv('cart-bm'),
+    chkRate:    fv('chk-rate'),
+    chkBm:      fv('chk-bm'),
+    revCart:    fv('rev-cart'),
+    revChk:     fv('rev-chk'),
+    spOrders:   fv('sp-orders'),
+    spGmv:      fv('sp-gmv'),
+    spRev:      fv('sp-rev'),
+    spCust:     fv('sp-cust'),
+    appCust:    fv('app-cust'),
+    gateway2:   v('gateway2')||'Apple Pay',
+    merchantName: v('merch-name')||'This merchant',
+    vertical:   v('vertical'),
+    aeName:     v('ae-name')||'Shopify',
+    shopId:     v('shop-id')
+  };
+
+  // Update merchant banner name
+  document.getElementById('m-name').textContent = D.merchantName;
+
+  const cartGap = D.cartRate && D.cartBm ? ((D.cartBm-D.cartRate)/D.cartBm*100) : null;
+  const chkGap  = D.chkRate  && D.chkBm  ? ((D.chkRate-D.chkBm)/D.chkBm*100)   : null;
+  const activationGap = D.spCust && D.spGmv ? (D.spCust - D.spGmv) : null;
+  const totalRevOpp = (D.revCart||0)+(D.revChk||0);
+  const sessNoCart = D.sessions && D.cartRate ? Math.round(D.sessions*(1-D.cartRate/100)) : null;
+
+  D._cartGap = cartGap;
+  D._chkGap  = chkGap;
+  D._actGap  = activationGap;
+  D._totalRevOpp = totalRevOpp;
+  D._sessNoCart  = sessNoCart;
+
+  const brands = BRANDS[D.vertical]||[];
+  const logoHTML = brands.map(domain=>`
+    <div class="comp-chip" title="${domain}">
+      <img src="https://logo.clearbit.com/${domain}" alt="${domain.split('.')[0]}"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="fallback" style="display:none">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
+    </div>`).join('');
+
+  // ── KPI CARDS ──
+  const kpiHTML = `
+    <div class="kpi-row">
+      <div class="kpi ${cartGap&&cartGap>5?'red':cartGap&&cartGap<0?'green':'amber'}">
+        <div class="kpi-label">Cart Add Rate</div>
+        <div class="kpi-val">${pct(D.cartRate)}</div>
+        <div class="kpi-sub">Benchmark: <strong>${pct(D.cartBm)}</strong></div>
+        ${cartGap!==null?`<span class="kpi-badge ${cartGap>0?'down':'up'}">${cartGap>0?'↓ '+fmt(cartGap)+'% below bm':'↑ '+fmt(Math.abs(cartGap))+'% above bm'}</span>`:''}
+      </div>
+      <div class="kpi ${chkGap&&chkGap<-10?'red':chkGap&&chkGap>10?'green':'amber'}">
+        <div class="kpi-label">Checkout Completion</div>
+        <div class="kpi-val">${pct(D.chkRate)}</div>
+        <div class="kpi-sub">Benchmark: <strong>${pct(D.chkBm)}</strong></div>
+        ${chkGap!==null?`<span class="kpi-badge ${chkGap<0?'down':'up'}">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'% below bm':'↑ '+fmt(chkGap)+'% above bm'}</span>`:''}
+      </div>
+      <div class="kpi green">
+        <div class="kpi-label">90d Revenue Opportunity</div>
+        <div class="kpi-val">${totalRevOpp>0?fmtC(totalRevOpp):'—'}</div>
+        <div class="kpi-sub">At 5% funnel improvement</div>
+        ${totalRevOpp>0?`<span class="kpi-badge neutral">Based on their own data</span>`:''}
+      </div>
+    </div>`;
+
+  // ── ACTIVATION GAP VISUAL ──
+  const gapHTML = D.spCust && D.spGmv ? `
+    <div class="gap-bar-wrap">
+      <div class="kpi-label" style="margin-bottom:10px">Shop Pay Activation Gap — The Untapped Opportunity</div>
+      <div style="margin-bottom:10px">
+        <div class="gap-bar-label"><span>Customers who have Shop Pay</span><span style="color:#008060;font-weight:800">${pct(D.spCust)}</span></div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:${D.spCust}%;background:#95bf47"></div></div>
+      </div>
+      <div>
+        <div class="gap-bar-label"><span>GMV actually flowing through Shop Pay</span><span style="color:#c0392b;font-weight:800">${pct(D.spGmv)}</span></div>
+        <div class="gap-bar-track"><div class="gap-bar-fill" style="width:${D.spGmv}%;background:#c0392b"></div></div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:#555;text-align:center">
+        <strong style="color:#c0392b">${fmt(activationGap)} percentage point gap</strong> — customers with Shop Pay who aren't using it at checkout
+      </div>
+    </div>` : '';
+
+  // ── TALKING POINTS ──
+  const points = [];
+  if(D.mobilePct) points.push(`<strong>${pct(D.mobilePct)} of traffic is mobile.</strong> Shop Pay removes 12 form fields from the mobile checkout. One tap, Face ID, done. No card details, no address re-entry — the exact friction that's driving your cart drop-off.`);
+  if(D.socialPct) points.push(`<strong>${pct(D.socialPct)} of sessions come from social (Facebook + Instagram).</strong> Shop Pay converts social-referred buyers at up to 18% higher rates. The moment a buyer clicks an ad, Shop Pay keeps them in flow — no checkout form to kill the impulse.`);
+  if(D.spCust&&D.spGmv) points.push(`<strong>${pct(D.spCust)} of customers already have Shop Pay in their wallet. Only ${pct(D.spGmv)} of GMV flows through it.</strong> That's a ${fmt(activationGap)}-point activation gap — buyers who have the fastest checkout available and aren't being offered it.`);
+  if(D.spOrders) points.push(`<strong>${pct(D.spOrders)} of orders already come from Shop Pay users</strong> — your highest-intent buyers default to SP. The question is why the checkout experience isn't matching their preference.`);
+  if(D.spRev) points.push(`<strong>The incremental revenue model shows ${fmtC(D.spRev)} uplift</strong> from the 5% checkout conversion improvement Shop Pay delivers. This isn't a forecast — it's modelled on their actual transaction data.`);
+  if(D.gateway2) points.push(`<strong>${D.gateway2} is already processing ${D.gateway2==='Apple Pay'?'32%':'significant'} of GMV</strong> — proof the customer base prefers express wallet checkout. Shop Pay is the same behaviour, with the added conversion layer of the Shop network.`);
+
+  const tpHTML = `<ul class="tpoints">${points.map(p=>`<li><span class="arrow">→</span><span>${p}</span></li>`).join('')}</ul>`;
+
+  // ── OBJECTION HANDLER ──
+  const objText = `"I hear you on cost — let's look at what your current checkout is actually costing you. ${sessNoCart?`You're running ${fmtN(sessNoCart)} sessions every 90 days where someone visited and left without a cart.`:''} ${D.revCart?`Moving just 5% more of those to cart is worth <strong>${fmtC(D.revCart)}</strong> in 90 days — that's based on your own traffic data, not an estimate.`:''} ${D.spCust&&D.spGmv?` And <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone</strong> — they're ready to buy in one tap and you're still asking them to fill in forms.`:''}<br><br>Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments. The cost question is the wrong frame — the right frame is: <strong>what is your current checkout costing you every month?"</strong>`;
+
+  const headline = cartGap && cartGap > 5
+    ? `Cart add rate is <span class="lo">${fmt(cartGap)}% below benchmark</span> — ${sessNoCart?fmtN(sessNoCart)+' sessions':''} without a cart every 90 days.`
+    : D.spCust && D.spGmv
+    ? `<span class="lo">${fmt(activationGap)} percentage points</span> between customers who have Shop Pay and those using it.`
+    : `<span class="hi">${totalRevOpp>0?fmtC(totalRevOpp):''}</span> in 90-day revenue opportunity — based on their own data.`;
+
+  const html = `
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888;margin-bottom:8px">The Opportunity</div>
+      <div class="pitch-headline">${headline}</div>
+    </div>
+    ${kpiHTML}
+    ${gapHTML}
+    <div style="margin-top:22px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#008060;margin-bottom:2px">Why Shop Pay closes this gap</div>
+    </div>
+    ${tpHTML}
+    <div class="objbox">
+      <div class="obj-label">⚡ When they say "it's too expensive" — use this</div>
+      <p>${objText}</p>
+    </div>
+    ${brands.length>0?`
+    <div class="comp-section">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555;margin-bottom:10px">Brands in ${D.vertical} already using Shop Pay</div>
+      <div class="comp-grid">${logoHTML}</div>
+    </div>`:''}`;
+
+  document.getElementById('pitch-body').innerHTML = html;
+  document.getElementById('pitch-out').style.display = 'block';
+  document.getElementById('pitch-out').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── PDF GENERATION ──
+async function downloadPDF(){
+  if(!D.merchantName){ alert('Generate the pitch brief first.'); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const W=210, H=297, M=20;
+
+  function darkHeader(label, subLabel){
+    doc.setFillColor(26,26,26);
+    doc.rect(0,0,W,30,'F');
+    doc.setFillColor(0,128,96);
+    doc.rect(0,30,W,3,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('SHOPIFY GROWTH SERVICES', M, 13);
+    doc.setFontSize(9); doc.setFont('helvetica','normal');
+    doc.setTextColor(149,191,71);
+    doc.text(label, M, 22);
+    if(subLabel){
+      doc.setTextColor(120,120,120);
+      doc.text(subLabel, W-M, 22, {align:'right'});
+    }
+  }
+
+  function footer(pg, total){
+    doc.setFillColor(26,26,26);
+    doc.rect(0,H-11,W,11,'F');
+    doc.setFontSize(7); doc.setFont('helvetica','normal');
+    doc.setTextColor(100,100,100);
+    doc.text(`Prepared by ${D.aeName} · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-4);
+    doc.text(`${pg}/${total}`, W-M, H-4, {align:'right'});
+    doc.setTextColor(60,60,60);
+    doc.text('Shop Pay: Optimised for conversion, not cost.', W/2, H-4, {align:'center'});
+  }
+
+  function statBox(x,y,w,h,label,value,sub,badge,badgeColor){
+    doc.setFillColor(248,248,248);
+    doc.roundedRect(x,y,w,h,3,3,'F');
+    doc.setDrawColor(230,230,230);
+    doc.roundedRect(x,y,w,h,3,3,'S');
+    doc.setFontSize(7); doc.setFont('helvetica','bold');
+    doc.setTextColor(130,130,130);
+    doc.text(label.toUpperCase(), x+5, y+8);
+    doc.setFontSize(16); doc.setFont('helvetica','bold');
+    doc.setTextColor(26,26,26);
+    doc.text(value, x+5, y+20);
+    doc.setFontSize(8); doc.setFont('helvetica','normal');
+    doc.setTextColor(150,150,150);
+    doc.text(sub, x+5, y+27);
+    if(badge){
+      const [r,g,b] = badgeColor||[0,128,96];
+      doc.setFillColor(r,g,b,0.15);
+      doc.setTextColor(r,g,b);
+      doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+      doc.text(badge, x+5, y+35);
+    }
+  }
+
+  // ── PAGE 1: COVER ──
+  darkHeader(D.merchantName.toUpperCase(), D.shopId ? 'Shop ID: '+D.shopId : '');
+
+  doc.setFillColor(240,247,244);
+  doc.rect(0,33,W,H-33,'F');
+
+  doc.setFontSize(32); doc.setFont('helvetica','bold');
+  doc.setTextColor(26,26,26);
+  doc.text('Your Conversion', M, 68);
+  doc.text('Gap Report.', M, 84);
+
+  doc.setFillColor(0,128,96);
+  doc.rect(M,90,50,1.5,'F');
+
+  doc.setFontSize(11); doc.setFont('helvetica','normal');
+  doc.setTextColor(80,80,80);
+  const intro = `Based on your purchase funnel and Shop Pay data vs comparable merchants on Shopify — ${D.vertical}.`;
+  const introLines = doc.splitTextToSize(intro, W-M*2);
+  doc.text(introLines, M, 100);
+
+  // 3 stat boxes on cover
+  const bw=54, bh=42, by=118;
+  statBox(M,       by, bw, bh, 'Cart Add Rate',         pct(D.cartRate), `Benchmark: ${pct(D.cartBm)}`,
+          D._cartGap&&D._cartGap>0?`↓ ${fmt(D._cartGap)}% below benchmark`:D._cartGap&&D._cartGap<0?`↑ ${fmt(Math.abs(D._cartGap))}% above benchmark`:null,
+          D._cartGap&&D._cartGap>0?[192,57,43]:[0,128,96]);
+  statBox(M+bw+5,  by, bw, bh, 'Checkout Completion',   pct(D.chkRate),  `Benchmark: ${pct(D.chkBm)}`,
+          D._chkGap&&D._chkGap>5?`↑ ${fmt(D._chkGap)}% above benchmark`:D._chkGap&&D._chkGap<0?`↓ ${fmt(Math.abs(D._chkGap))}% below benchmark`:null,
+          D._chkGap&&D._chkGap<0?[192,57,43]:[0,128,96]);
+  statBox(M+bw*2+10,by,bw, bh, '90d Revenue Opportunity', D._totalRevOpp>0?fmtC(D._totalRevOpp):'—', 'At 5% funnel improvement', D._totalRevOpp>0?'Based on your actual data':null,[0,128,96]);
+
+  // Activation gap visual on cover
+  if(D.spCust && D.spGmv){
+    const ay = 175;
+    doc.setFillColor(255,255,255);
+    doc.roundedRect(M, ay, W-M*2, 52, 4,4,'F');
+    doc.setDrawColor(200,200,200);
+    doc.roundedRect(M, ay, W-M*2, 52, 4,4,'S');
+
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.setTextColor(26,26,26);
+    doc.text('SHOP PAY ACTIVATION GAP', M+6, ay+9);
+
+    const bw2 = W-M*2-12;
+    // SP customers bar
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
+    doc.text(`Customers with Shop Pay: ${pct(D.spCust)}`, M+6, ay+18);
+    doc.setFillColor(230,230,230); doc.roundedRect(M+6, ay+20, bw2, 5, 2,2,'F');
+    doc.setFillColor(149,191,71);  doc.roundedRect(M+6, ay+20, bw2*(D.spCust/100), 5, 2,2,'F');
+
+    doc.text(`GMV via Shop Pay: ${pct(D.spGmv)}`, M+6, ay+33);
+    doc.setFillColor(230,230,230); doc.roundedRect(M+6, ay+35, bw2, 5, 2,2,'F');
+    doc.setFillColor(192,57,43);   doc.roundedRect(M+6, ay+35, bw2*(D.spGmv/100), 5, 2,2,'F');
+
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.setTextColor(192,57,43);
+    doc.text(`${fmt(D._actGap)}pt gap — customers who have Shop Pay but aren't using it at checkout`, M+6, ay+48);
+  }
+
+  footer(1,3);
+
+  // ── PAGE 2: THE STORY ──
+  doc.addPage();
+  darkHeader('WHY SHOP PAY CLOSES THIS GAP', D.merchantName);
+  doc.setFillColor(250,252,251);
+  doc.rect(0,33,W,H-33,'F');
+
+  let y = 46;
+  const pts = [];
+  if(D.mobilePct) pts.push([`${pct(D.mobilePct)} of traffic is mobile`,`Shop Pay removes 12 form fields from the mobile checkout — one tap, Face ID, done. No card re-entry, no address fields. Mobile checkout friction is the primary driver of your cart-to-order gap.`]);
+  if(D.socialPct) pts.push([`${pct(D.socialPct)} sessions from social (Facebook + Instagram)`,`Shop Pay converts social-referred buyers at up to 18% higher rates. Buyers coming via ads don't want forms — Shop Pay keeps them in flow at exactly the moment of purchase intent.`]);
+  if(D.spCust&&D.spGmv) pts.push([`${pct(D.spCust)} of customers have Shop Pay · Only ${pct(D.spGmv)} of GMV uses it`,`That's a ${fmt(D._actGap)}-point activation gap. These buyers have the fastest checkout on their phone. They're just not being offered it.`]);
+  if(D.spOrders) pts.push([`${pct(D.spOrders)} of orders already come from Shop Pay users`,`Your highest-intent, highest-frequency buyers default to SP. The checkout experience should match what they expect everywhere else.`]);
+  if(D.spRev) pts.push([`Estimated ${fmtC(D.spRev)} incremental revenue from Shop Pay`,`Modelled on a 5% checkout conversion improvement using actual transaction data — not a projection.`]);
+
+  pts.forEach((p,i)=>{
+    doc.setFillColor(0,128,96); doc.circle(M+2.5, y+2.5, 2.5,'F');
+    doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(26,26,26);
+    doc.text(p[0], M+8, y+5);
+    y += 10;
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
+    const ls = doc.splitTextToSize(p[1], W-M*2-8);
+    doc.text(ls, M+8, y);
+    y += ls.length*5+8;
+    if(i<pts.length-1){ doc.setDrawColor(230,230,230); doc.line(M,y,W-M,y); y+=6; }
+  });
+
+  // Objection box
+  y += 4;
+  const objH = 52;
+  doc.setFillColor(255,248,232); doc.roundedRect(M,y,W-M*2,objH,4,4,'F');
+  doc.setFillColor(243,156,18);  doc.rect(M,y,3,objH,'F');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(230,126,0);
+  doc.text('"IT\'S TOO EXPENSIVE" — THE REFRAME', M+8, y+10);
+  doc.setFontSize(9); doc.setFont('helvetica','italic'); doc.setTextColor(60,60,60);
+  const obj = `"The question isn't whether Shop Pay has a cost. It's whether your current checkout is costing you more. ${D.revCart?`Moving just 5% more sessions to cart is worth ${fmtC(D.revCart)} in 90 days — from your own data.`:''} ${D.spCust&&D.spGmv?`${pct(D.spCust)} of your customers already have Shop Pay. They're not being offered it.`:''} Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments."`;
+  const objL = doc.splitTextToSize(obj, W-M*2-14);
+  doc.text(objL, M+8, y+18);
+
+  footer(2,3);
+
+  // ── PAGE 3: COMPETITORS + CTA ──
+  doc.addPage();
+  darkHeader('YOUR COMPETITORS ARE ALREADY WINNING WITH THIS', D.merchantName);
+  doc.setFillColor(240,247,244);
+  doc.rect(0,33,W,H-33,'F');
+
+  doc.setFontSize(18); doc.setFont('helvetica','bold'); doc.setTextColor(26,26,26);
+  doc.text(`Brands in ${D.vertical}`, M, 54);
+  doc.text('using Shop Pay:', M, 66);
+  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
+  doc.text(`These merchants are converting more of your shared audience.`, M, 75);
+
+  // Logo boxes with brand names
+  const brands = BRANDS[D.vertical]||[];
+  const cols=3, bxW=52, bxH=22, gx=8, gy=10;
+  let lx = M, ly = 84;
+  brands.forEach((domain,i)=>{
+    const col=i%cols, row=Math.floor(i/cols);
+    const bx = M+col*(bxW+gx), by2 = ly+row*(bxH+gy+6);
+    doc.setFillColor(255,255,255); doc.setDrawColor(215,215,215);
+    doc.roundedRect(bx,by2,bxW,bxH,3,3,'FD');
+    const brand = domain.split('.')[0].toUpperCase();
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60);
+    doc.text(brand, bx+bxW/2, by2+bxH/2+1.5, {align:'center'});
+  });
+
+  // Summary data strip
+  const stripY = 175;
+  doc.setFillColor(255,255,255); doc.roundedRect(M,stripY,W-M*2,36,4,4,'F');
+  doc.setDrawColor(200,200,200); doc.roundedRect(M,stripY,W-M*2,36,4,4,'S');
+  const metrics = [
+    ['% Customers with Shop Pay', D.spCust?pct(D.spCust):'—'],
+    ['% GMV via Shop Pay today',  D.spGmv?pct(D.spGmv):'—'],
+    ['Activation gap',            D._actGap?fmt(D._actGap)+'pt':'—'],
+    ['90d revenue opportunity',   D._totalRevOpp>0?fmtC(D._totalRevOpp):'—']
+  ];
+  const mw = (W-M*2)/4;
+  metrics.forEach((m,i)=>{
+    const mx=M+i*mw;
+    doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120);
+    doc.text(m[0].toUpperCase(), mx+3, stripY+10);
+    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(i===2?192:i===3?0:26,i===2?57:i===3?128:26,i===2?43:i===3?96:26);
+    doc.text(m[1], mx+3, stripY+22);
+    if(i<3){ doc.setDrawColor(230,230,230); doc.line(mx+mw,stripY+5,mx+mw,stripY+32); }
+  });
+
+  // CTA box
+  const ctaY = H-65;
+  doc.setFillColor(0,128,96); doc.roundedRect(M,ctaY,W-M*2,38,6,6,'F');
+  doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  doc.text('Ready to close the gap?', W/2, ctaY+14, {align:'center'});
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(200,240,225);
+  doc.text('Activate Shop Pay · One tap · Built for mobile · Converts your existing customers', W/2, ctaY+23, {align:'center'});
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  doc.text('Optimised for conversion, not cost.', W/2, ctaY+32, {align:'center'});
+
+  footer(3,3);
+
+  const slug = D.merchantName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  doc.save(`shop-pay-opportunity-${slug}.pdf`);
+}
+
+function copyBrief(){
+  const text = document.getElementById('pitch-body').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = event.currentTarget;
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(()=>{ btn.innerHTML=orig; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
