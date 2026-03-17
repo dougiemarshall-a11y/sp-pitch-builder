@@ -156,6 +156,30 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
 .lift-pill{display:inline-block;background:#e8f5ee;color:#008060;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
 .lift-pill.rev{background:#1a1a1a;color:#95bf47;font-size:13px;padding:3px 10px}
 
+/* auth rate danger block */
+.auth-danger{background:#fff0ef;border:1.5px solid #f5a1a0;border-radius:12px;padding:20px;margin:22px 0}
+.auth-danger-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.auth-danger-icon{font-size:26px;flex-shrink:0}
+.auth-danger-title{font-size:15px;font-weight:800;color:#c0392b}
+.auth-danger-sub{font-size:12px;color:#888;margin-top:3px}
+.auth-stat{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid #fde8e7;font-size:14px;color:#444;line-height:1.6}
+.auth-stat:last-child{border-bottom:none}
+.auth-stat .as-num{font-size:21px;font-weight:900;color:#c0392b;min-width:64px;flex-shrink:0;line-height:1.2}
+
+/* SP proof points */
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.proof-pt{background:#f0faf5;border:1.5px solid #c8e6c9;border-radius:10px;padding:14px 12px;text-align:center}
+.proof-pt-val{font-size:18px;font-weight:900;color:#008060;letter-spacing:-.5px}
+.proof-pt-label{font-size:10px;color:#555;margin-top:5px;line-height:1.45;font-weight:600}
+@media(max-width:600px){.proof-grid{grid-template-columns:1fr 1fr}}
+
+/* redirect gateway warning */
+.redirect-warn{background:#fff8ec;border:1.5px solid #f7c36e;border-radius:12px;padding:20px;margin:22px 0}
+.redirect-warn-title{font-size:15px;font-weight:800;color:#b45309;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.redirect-stat{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f7e9c5;font-size:14px;line-height:1.65;color:#444}
+.redirect-stat:last-child{border-bottom:none}
+.redirect-stat .rs-arr{color:#b45309;font-weight:900;font-size:16px;flex-shrink:0;line-height:1.3}
+
 /* next step */
 .next-step{background:linear-gradient(135deg,#008060 0%,#005c44 100%);border-radius:12px;padding:20px;margin-top:20px;color:#fff}
 .next-step-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#95bf47;margin-bottom:8px}
@@ -342,6 +366,29 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
     </div>
 
     <hr class="div">
+    <div class="sec-label">⚡ Processor &amp; Checkout Setup <span style="font-weight:400;color:#aaa;font-size:10px;text-transform:none;letter-spacing:0">(optional — unlocks auth rate + redirect calculators)</span></div>
+    <div class="grid-3">
+      <div class="f">
+        <label>Current Payment Processor</label>
+        <input type="text" id="current-processor" placeholder="Stripe / PayPal / Adyen…">
+        <span class="hint">Non-SP processor — triggers 243bps auth rate analysis</span>
+      </div>
+      <div class="f">
+        <label>Average Order Value (AOV) £/$</label>
+        <input type="number" id="aov" placeholder="85">
+        <span class="hint">Used to calculate false decline revenue loss</span>
+      </div>
+      <div class="f" style="justify-content:flex-start;gap:6px">
+        <label>Redirects away from Shopify checkout?</label>
+        <label style="display:flex;align-items:center;gap:9px;cursor:pointer;margin-top:6px;padding:9px 12px;border:1.5px solid #e0e0e0;border-radius:8px;background:#fff">
+          <input type="checkbox" id="redirect-gateway" style="width:17px;height:17px;accent-color:#c0392b;flex-shrink:0">
+          <span style="font-size:13px;font-weight:600;color:#444">Yes — uses a 3rd party redirect gateway</span>
+        </label>
+        <span class="hint">Triggers mobile drop-off analysis</span>
+      </div>
+    </div>
+
+    <hr class="div">
     <div class="sec-label">🏷️ Merchant Context</div>
     <div class="grid-3">
       <div class="f">
@@ -448,11 +495,14 @@ function generatePitch(){
     spRev:      fv('sp-rev'),
     spCust:     fv('sp-cust'),
     appCust:    fv('app-cust'),
-    gateway2:   v('gateway2')||'Apple Pay',
-    merchantName: v('merch-name')||'This merchant',
-    vertical:   v('vertical'),
-    aeName:     v('ae-name')||'Shopify',
-    shopId:     v('shop-id')
+    gateway2:         v('gateway2')||'Apple Pay',
+    merchantName:     v('merch-name')||'This merchant',
+    vertical:         v('vertical'),
+    aeName:           v('ae-name')||'Shopify',
+    shopId:           v('shop-id'),
+    currentProcessor: v('current-processor')||null,
+    aov:              fv('aov'),
+    redirectGateway:  document.getElementById('redirect-gateway').checked
   };
 
   document.getElementById('m-name').textContent = D.merchantName;
@@ -471,6 +521,12 @@ function generatePitch(){
 
   D._cartGap = cartGap; D._chkGap = chkGap; D._actGap = actGap;
   D._totalRevOpp = totalRev; D._sessNoCart = sessNoCart;
+
+  // ── AUTH RATE DERIVED ──
+  const AUTH_RATE_GAP = 0.0243; // 243bps — SP vs any other processor on Shopify
+  const _curChkN      = D.sessions && D.cartRate && D.chkRate
+    ? Math.round(D.sessions * D.cartRate / 100 * D.chkRate / 100) : null;
+  const authRevLoss   = D.aov && _curChkN ? Math.round(_curChkN * AUTH_RATE_GAP * D.aov) : null;
 
   const mn = D.merchantName;
   const brands = BRANDS[D.vertical]||[];
@@ -577,6 +633,81 @@ function generatePitch(){
       </div>
     </div>` : '';
 
+  // ── AUTH RATE DANGER SECTION ──
+  const procName = D.currentProcessor || 'your current processor';
+  const authHTML = `
+    <div class="auth-danger">
+      <div class="auth-danger-hdr">
+        <span class="auth-danger-icon">⚠️</span>
+        <div>
+          <div class="auth-danger-title">The hidden cost of ${D.currentProcessor ? D.currentProcessor : 'your current processor'}</div>
+          <div class="auth-danger-sub">Before we talk about SP's rate — this is what ${procName} is costing you right now</div>
+        </div>
+      </div>
+      <div class="auth-stat">
+        <span class="as-num">+243bps</span>
+        <span>Shopify Payments has a <strong>243 basis point higher authorisation rate</strong> than any other processor available on Shopify. Transactions that ${procName} declines as suspected fraud, Shopify Payments would have approved — because it's trained on 10 billion Shopify-native transactions, not generic card data.</span>
+      </div>
+      ${authRevLoss ? `<div class="auth-stat">
+        <span class="as-num">~${fmtC(authRevLoss)}</span>
+        <span>Estimated revenue lost to false declines every 90 days — based on ${fmtN(_curChkN)} completed orders at ${fmtC(D.aov)} AOV. These are real buyers with valid cards who got declined. Most don't retry. They just leave.</span>
+      </div>` : ''}
+      <div class="auth-stat">
+        <span class="as-num">99.7%</span>
+        <span><strong>SP acceptance rate</strong> — powered by ML models trained on 10B+ transactions and Shopify's proprietary network signals. Lower false declines = more revenue captured, lower chargeback risk.</span>
+      </div>
+      <div class="auth-stat">
+        <span class="as-num">$745M</span>
+        <span>In fraudulent transactions flagged and blocked by Shopify Payments — protecting merchants from actual fraud while still approving the legitimate buyers other processors get wrong.</span>
+      </div>
+    </div>`;
+
+  // ── SP PROOF POINTS ──
+  const proofHTML = `
+    <div class="story-block">
+      <div class="story-label">Why Shopify Payments wins on authorisation</div>
+      <div class="proof-grid">
+        <div class="proof-pt">
+          <div class="proof-pt-val">+243bps</div>
+          <div class="proof-pt-label">Higher auth rate than any other processor on Shopify</div>
+        </div>
+        <div class="proof-pt">
+          <div class="proof-pt-val">99.7%</div>
+          <div class="proof-pt-label">Acceptance rate — more approvals, fewer false declines</div>
+        </div>
+        <div class="proof-pt">
+          <div class="proof-pt-val">10B+</div>
+          <div class="proof-pt-label">ML-trained transactions powering Shopify's fraud model</div>
+        </div>
+        <div class="proof-pt">
+          <div class="proof-pt-val">200M+</div>
+          <div class="proof-pt-label">Shop Pay users — world's largest 1-tap checkout network</div>
+        </div>
+      </div>
+    </div>`;
+
+  // ── REDIRECT GATEWAY SECTION ──
+  const redirectHTML = D.redirectGateway ? `
+    <div class="redirect-warn">
+      <div class="redirect-warn-title">🔀 The redirect tax — what leaving the checkout is costing</div>
+      <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:12px">Every time a buyer clicks to pay via a third-party gateway, they're taken off the Shopify checkout and land on an external payment page. For a merchant with ${D.mobilePct ? `<strong>${pct(D.mobilePct)} mobile traffic</strong>` : 'high mobile traffic'}, this is a conversion killer.</p>
+      <div class="redirect-stat">
+        <span class="rs-arr">→</span>
+        <span><strong>Mobile buyers expect continuity.</strong> A redirect breaks the native checkout flow — different UI, different trust signals, a fresh form to fill in. On mobile this friction alone causes significant drop-off at the moment of highest purchase intent. The buyer was already committed. The redirect undoes it.</span>
+      </div>
+      <div class="redirect-stat">
+        <span class="rs-arr">→</span>
+        <span><strong>The "low cost" illusion.</strong> A 0.1% saving on transaction fees is irrelevant if 8–15% of buyers abandon during the redirect. The cost isn't in the fee — it's in the orders that never complete. You don't see those in your transaction report because the sale never happened.</span>
+      </div>
+      ${D.mobilePct && D.socialPct ? `<div class="redirect-stat">
+        <span class="rs-arr">→</span>
+        <span>With <strong>${pct(D.mobilePct)} mobile traffic</strong> and <strong>${pct(D.socialPct)} from Facebook + Instagram</strong>, ${mn}'s buyer profile is exactly the highest-intent, lowest-patience audience that exists. They came via an ad, they're on their phone, they're mid-scroll. A redirect at the final step is the worst possible handoff — and it's entirely avoidable with Shopify Payments native checkout.</span>
+      </div>` : D.mobilePct ? `<div class="redirect-stat">
+        <span class="rs-arr">→</span>
+        <span>With <strong>${pct(D.mobilePct)} of sessions on mobile</strong>, every additional friction point in the payment flow costs buyers. Shop Pay's native checkout keeps the entire journey within Shopify — no redirects, no context-switching, no re-entering card details.</span>
+      </div>` : ''}
+    </div>` : '';
+
   // ── WITH vs WITHOUT SP PROJECTION ──
   // SP checkout conversion lift: ~5% improvement (from Shopify's BCG study, confirmed in report data)
   // SP cart add lift: ~15% improvement on mobile (from Shop Pay product data)
@@ -664,11 +795,13 @@ function generatePitch(){
     <div class="objbox">
       <div class="obj-label">⚡ When they say "Shop Pay is too expensive" — say this</div>
       <div class="obj-script">
-        "I completely understand the instinct to look at rate. But I want to flip the frame for a second, because I think we're looking at the wrong number.
-        ${sessNoCart ? `<br><br>Right now, <strong>${fmtN(sessNoCart)} people</strong> visit your store every 90 days and leave without a product in their cart.` : ''}
-        ${D.revCart ? ` If Shop Pay moves just 5% more of those sessions to the next step — which is conservative based on what we see across comparable brands — that's <strong>${fmtC(D.revCart)} in additional revenue over 90 days.</strong>` : ''}
-        ${D.spCust ? ` And here's the thing: <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone.</strong> They're not asking for forms. They're ready to buy in one tap. You're just not offering it to them yet.` : ''}
-        <span class="punchline">Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments. The question isn't what it costs — it's what your current checkout is costing you every single month."</span>
+        "I completely understand the instinct to look at rate. Before we go there, I want to put one number on the table that most people in this conversation miss.
+        <br><br>
+        Shopify Payments has a <strong>243 basis point higher authorisation rate</strong> than any other processor available on Shopify. That means ${D.currentProcessor ? `${D.currentProcessor}` : 'your current processor'} is actively declining legitimate buyers that Shopify Payments would have approved. These are real customers with valid cards — declined by a fraud model that doesn't know your business the way Shopify's does.${authRevLoss ? ` Based on your order volume and AOV, that's approximately <strong>${fmtC(authRevLoss)} in false declines every 90 days.</strong> Silent revenue loss. It doesn't show up in your reports because the sale never happened.` : ' Most merchants have no idea this is happening because declined transactions don\'t show up in your revenue dashboard.'}
+        ${sessNoCart ? `<br><br>On top of that, <strong>${fmtN(sessNoCart)} people</strong> visit the store every 90 days and leave without a product in their cart.` : ''}
+        ${D.revCart ? ` If Shop Pay moves just 5% more of those sessions to the next step, that's <strong>${fmtC(D.revCart)} in additional revenue over 90 days</strong> — from your own traffic data.` : ''}
+        ${D.spCust ? ` And <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone.</strong> They're ready to buy in one tap. You're just not offering it to them yet.` : ''}
+        <span class="punchline">The question isn't what Shop Pay costs. It's what your current processor is already costing you — every single month — in declined transactions, checkout friction, and mobile drop-off you can't see."</span>
       </div>
     </div>`;
 
@@ -700,6 +833,9 @@ function generatePitch(){
 
     ${evidenceHTML}
     ${gapHTML}
+    ${authHTML}
+    ${proofHTML}
+    ${redirectHTML}
     ${projHTML}
     ${act2HTML}
     ${dqHTML}
