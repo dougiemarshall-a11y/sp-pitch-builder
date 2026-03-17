@@ -198,16 +198,107 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
 .pitch-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
 .pitch-actions .btn{flex:1;justify-content:center}
 
+/* ── BUSINESS CASE OUTPUT ── */
+.bc-cover{background:linear-gradient(160deg,#1a1a1a 0%,#111 100%);border-radius:14px 14px 0 0;padding:36px 36px 28px;position:relative;overflow:hidden}
+.bc-cover::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#008060,#95bf47)}
+.bc-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#95bf47;margin-bottom:14px}
+.bc-title{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.05;margin-bottom:0}
+.bc-cover-meta{display:flex;gap:0;margin-top:22px;padding-top:20px;border-top:1px solid #252525}
+.bc-meta-item{flex:1;display:flex;flex-direction:column;gap:4px;padding-right:20px}
+.bc-meta-item:not(:last-child){border-right:1px solid #252525;margin-right:20px}
+.bc-meta-label{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#3a3a3a;font-weight:700}
+.bc-meta-val{font-size:13px;font-weight:700;color:#888}
+.bc-exec{background:#f0faf5;border:1.5px solid #95bf47;border-top:none;border-radius:0 0 14px 14px;padding:24px 36px;margin-bottom:24px}
+.bc-exec-headline{font-size:17px;font-weight:800;color:#1a1a1a;line-height:1.5;margin-bottom:10px;letter-spacing:-.2px}
+.bc-exec-headline .green{color:#008060}
+.bc-exec-headline .red{color:#c0392b}
+.bc-exec-body{font-size:13px;color:#555;line-height:1.85}
+.bc-section{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:16px;border:1px solid #eaeaea;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.bc-section-hdr{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:18px;border-bottom:2px solid #f5f5f5}
+.bc-num{font-size:10px;font-weight:900;color:#008060;background:#e8f5ee;padding:4px 9px;border-radius:5px;letter-spacing:.6px;flex-shrink:0;margin-top:3px;font-family:monospace}
+.bc-sec-title{font-size:16px;font-weight:800;color:#1a1a1a;letter-spacing:-.2px}
+.bc-sec-desc{font-size:12px;color:#888;margin-top:3px;line-height:1.55}
+/* KPI cards */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi-card{border-radius:10px;padding:18px 16px;border:1px solid #e8e8e8}
+.kpi-card.bad{background:#fff5f5;border-color:#fca5a5}
+.kpi-card.good{background:#f0faf5;border-color:#86efac}
+.kpi-card.warn{background:#fffbeb;border-color:#fde68a}
+.kpi-card.neutral{background:#fafafa}
+.kpi-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#aaa;margin-bottom:9px}
+.kpi-val{font-size:30px;font-weight:900;letter-spacing:-1.5px;line-height:1;color:#1a1a1a}
+.kpi-card.bad .kpi-val{color:#dc2626}
+.kpi-card.good .kpi-val{color:#008060}
+.kpi-bm{font-size:11px;color:#aaa;margin-top:6px}
+.kpi-delta{font-size:11px;font-weight:700;margin-top:8px;padding:2px 8px;border-radius:4px;display:inline-block}
+.kpi-card.bad .kpi-delta{background:#fee2e2;color:#dc2626}
+.kpi-card.good .kpi-delta{background:#dcfce7;color:#15803d}
+.kpi-card.warn .kpi-delta{background:#fef9c3;color:#92400e}
+/* leakage items */
+.leakage-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #f5f5f5;align-items:flex-start}
+.leakage-item:last-child{border-bottom:none}
+.leakage-badge{min-width:72px;border-radius:8px;padding:10px 8px;text-align:center;flex-shrink:0}
+.leakage-badge.red{background:#fee2e2}
+.leakage-badge.amber{background:#fef9c3}
+.leakage-badge.green{background:#dcfce7}
+.leakage-num{font-size:18px;font-weight:900;line-height:1}
+.leakage-badge.red .leakage-num{color:#dc2626}
+.leakage-badge.amber .leakage-num{color:#92400e}
+.leakage-badge.green .leakage-num{color:#008060}
+.leakage-badge-label{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#aaa;margin-top:4px}
+.leakage-body{font-size:14px;line-height:1.72;color:#444}
+.leakage-body strong{color:#1a1a1a}
+.leakage-body .lsub{font-size:12px;color:#888;margin-top:5px;display:block;line-height:1.5}
+/* financial table */
+.fi-table{width:100%;border-collapse:collapse;font-size:14px;border-radius:10px;overflow:hidden}
+.fi-table thead tr{background:#1a1a1a}
+.fi-table thead th{padding:12px 16px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#555}
+.fi-table thead th:first-child{color:#fff}
+.fi-table thead th.th-now{color:#f59e0b}
+.fi-table thead th.th-sp{color:#95bf47}
+.fi-table tbody tr:nth-child(even){background:#fafafa}
+.fi-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#444;vertical-align:middle}
+.fi-table td:first-child{font-weight:700;color:#1a1a1a;font-size:13px}
+.fi-table td.td-now{font-weight:600;color:#666}
+.fi-table td.td-sp{font-weight:900;color:#008060;font-size:15px}
+.fi-chip{display:inline-block;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
+.fi-chip.big{background:#1a1a1a;color:#95bf47;font-size:13px;padding:3px 10px}
+.fi-total td{border-top:2px solid #1a1a1a !important;border-bottom:none !important;padding-top:16px !important;font-weight:900 !important;font-size:15px;color:#1a1a1a !important}
+.fi-total td.td-sp{color:#008060 !important;font-size:18px !important}
+.fi-note{font-size:11px;color:#bbb;margin-top:10px;line-height:1.6}
+/* proof points */
+.sp-proof{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.sp-proof-item{background:#f0faf5;border:1px solid #bbf7d0;border-radius:10px;padding:16px 12px;text-align:center}
+.sp-proof-val{font-size:20px;font-weight:900;color:#008060;letter-spacing:-.5px}
+.sp-proof-label{font-size:10px;color:#444;margin-top:6px;line-height:1.45;font-weight:600}
+/* brands */
+.bc-brand-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.bc-brand-chip{background:#f5f5f5;border:1px solid #e5e5e5;border-radius:8px;width:78px;height:52px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
+.bc-brand-chip:hover{border-color:#86efac;background:#f0faf5}
+.bc-brand-chip img{max-width:64px;max-height:38px;object-fit:contain;filter:grayscale(1);opacity:.5;transition:all .2s}
+.bc-brand-chip:hover img{filter:grayscale(0);opacity:1}
+.bc-brand-chip .fb{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px;display:none}
+/* recommendation */
+.bc-rec{background:linear-gradient(160deg,#1a1a1a 0%,#111 100%);border-radius:14px;padding:32px 36px;margin-top:6px;position:relative;overflow:hidden}
+.bc-rec::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#95bf47,#008060)}
+.bc-rec-label{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#95bf47;margin-bottom:10px}
+.bc-rec-title{font-size:22px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}
+.bc-rec-body{font-size:14px;color:#777;line-height:1.85;margin-bottom:20px}
+.bc-rec-ask{background:#008060;border-radius:10px;padding:16px 20px;font-size:14px;font-weight:700;color:#fff;line-height:1.65}
+.bc-rec-ask strong{color:#cbf3e0}
 /* ── ANIM ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .35s ease}
-
+.fade-up{animation:fadeUp .4s ease}
 /* ── RESPONSIVE ── */
 @media(max-width:600px){
   .grid-2,.grid-3{grid-template-columns:1fr}
   .rlinks{grid-template-columns:1fr}
-  .kpi-row{grid-template-columns:1fr 1fr}
-  .pitch-headline{font-size:18px}
+  .kpi-row,.sp-proof{grid-template-columns:1fr 1fr}
+  .bc-title{font-size:26px}
+  .bc-cover-meta{flex-wrap:wrap}
+  .bc-meta-item{flex:none;width:calc(50% - 10px);border-right:none !important;margin-right:0 !important}
+  .bc-section{padding:20px 18px}
+  .bc-cover,.bc-exec,.bc-rec{padding-left:20px;padding-right:20px}
 }
 </style>
 </head>
@@ -416,7 +507,7 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
     </div>
 
     <button class="btn btn-green btn-block" style="margin-top:18px;font-size:15px" onclick="generatePitch()">
-      ✦ &nbsp;Generate Pitch Brief
+      ✦ &nbsp;Build Business Case
     </button>
   </div>
 
@@ -425,13 +516,13 @@ hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
     <div class="card-hdr">
       <div class="step">3</div>
       <div>
-        <div class="card-title">Pitch Brief</div>
-        <div class="card-sub">Use this live in the call — built from their own data</div>
+        <div class="card-title">Business Case</div>
+        <div class="card-sub">Data-led, merchant-ready — built from their own funnel &amp; payments data</div>
       </div>
     </div>
     <div id="pitch-body"></div>
     <div class="pitch-actions">
-      <button class="btn btn-dark" onclick="downloadPDF()">⬇ &nbsp;Download Merchant PDF</button>
+      <button class="btn btn-dark" onclick="downloadPDF()">⬇ &nbsp;Download Business Case PDF</button>
       <button class="btn btn-ghost" onclick="copyBrief()">📋 &nbsp;Copy to Clipboard</button>
     </div>
   </div>
@@ -538,310 +629,287 @@ function generatePitch(){
       <div class="fallback">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
     </div>`).join('');
 
-  // ── THE MONEY MOMENT ──
-  const moneyVal  = totalRev > 0 ? fmtC(totalRev) : (D.spRev ? fmtC(D.spRev) : null);
-  const moneyHTML = moneyVal ? `
-    <div class="money-moment">
-      <div class="money-label">90-day revenue opportunity — at just 5% funnel improvement</div>
-      <div class="money-val"><span>${moneyVal}</span></div>
-      <div class="money-sub">That's the number this conversation is about.<br>
-        <strong>Based on ${mn}'s own traffic data — not an estimate.</strong></div>
-    </div>` : '';
+  // ─── BUSINESS CASE HTML GENERATION ───────────────────────────
 
-  // ── ACT 1: THE PROBLEM ──
-  let act1Lead, act1Body;
-  if(cartGap && cartGap > 5){
-    act1Lead = `For every 100 people landing on ${mn}'s store, <span class="lo">only ${cartPer100||'~3'} add to cart.</span> Comparable brands get ${bmPer100||'~5'}.`;
-    act1Body = `${sessNoCart ? `That's <strong>${fmtN(sessNoCart)} sessions every 90 days</strong> — real people who found the store, looked around, and left without a product in their cart.` : ''} The gap isn't traffic. It's what happens when traffic arrives. ${D.mobilePct ? `And with <strong>${pct(D.mobilePct)} of sessions on mobile</strong>, every extra tap in the checkout is costing them buyers.` : ''}`;
-  } else if(actGap && actGap > 15){
-    act1Lead = `<span class="lo">${pct(D.spCust)} of ${mn}'s customers have Shop Pay.</span> Only <span class="lo">${pct(D.spGmv)}</span> of revenue flows through it.`;
-    act1Body = `That's a <strong>${fmt(actGap)}-point activation gap</strong> — customers who already have the fastest checkout on their phone, visiting a store that isn't offering it to them. The audience is there. The intent is there. The checkout isn't meeting them.`;
-  } else {
-    act1Lead = `${mn} is leaving <span class="lo">${moneyVal||'significant revenue'}</span> on the table every 90 days — and the data shows exactly where.`;
-    act1Body = `The funnel is partially working. But there are specific, fixable drop-off points that are costing them buyers at the exact moment of purchase intent.`;
-  }
+  const dateStr    = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const totalRevOpp = totalRev > 0 ? totalRev : (D.spRev || 0);
+  const procName   = D.currentProcessor || 'current processor';
 
-  // ── ACT 2: THE ROOT CAUSE ──
-  const causes = [];
-  if(D.mobilePct && D.socialPct){
-    causes.push(`<strong>${pct(D.mobilePct)} mobile traffic + ${pct(D.socialPct)} from social.</strong> That's an audience coming from Facebook and Instagram ads, on a phone, mid-scroll — the highest-intent, lowest-patience buyer profile that exists. A 12-field checkout form is the worst possible experience you can hand them at that moment.`);
-  } else if(D.mobilePct){
-    causes.push(`<strong>${pct(D.mobilePct)} of sessions are on mobile.</strong> Mobile buyers expect one-tap checkout. Every form field is a reason to abandon.`);
-  }
-  if(D.spCust && D.spGmv){
-    causes.push(`<strong>${pct(D.spCust)} of ${mn}'s customers already have Shop Pay.</strong> ${spCustCount ? `That's roughly <strong>${fmtN(spCustCount)} people</strong> every 90 days who walk in with a one-tap wallet — and are handed a form instead.` : `They're not being offered the fastest checkout they already use everywhere else.`}`);
-  }
-  if(D.spOrders){
-    causes.push(`<strong>${pct(D.spOrders)} of orders are already placed by Shop Pay users</strong> — not because SP is activated fully, but because those buyers found their way to it. These are your highest-value, most loyal customers. The checkout isn't matching what they expect.`);
-  }
-  if(D.gateway2){
-    causes.push(`<strong>${D.gateway2} is already doing ${D.spGmv?pct(D.spGmv):'significant'} of GMV</strong> — proof positive the customer base prefers express wallet checkout. Shop Pay is the same instinct, with the full conversion advantage of the Shop network behind it.`);
-  }
-
-  const act2HTML = causes.length > 0 ? `
-    <div class="story-block">
-      <div class="story-label">Act 2 — Why it's happening</div>
-      <div class="story-lead">The checkout isn't built for the audience that's showing up.</div>
-      <ul style="list-style:none;margin-top:12px">
-        ${causes.map(c=>`<li style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:14px;line-height:1.65;color:#444"><span style="color:#008060;font-weight:900;font-size:16px;flex-shrink:0;line-height:1.3">→</span><span>${c}</span></li>`).join('')}
-      </ul>
-    </div>` : '';
-
-  // ── EVIDENCE ROW ──
-  const evidenceHTML = `
-    <div class="evidence-row">
-      <div class="ev ${cartGap&&cartGap>5?'red':cartGap&&cartGap<0?'green':'amber'}">
-        <div class="ev-label">Cart Add Rate</div>
-        <div class="ev-val">${pct(D.cartRate)}</div>
-        <div class="ev-bm">Benchmark: <strong>${pct(D.cartBm)}</strong></div>
-        ${cartGap!==null?`<span class="ev-badge ${cartGap>0?'down':'up'}">${cartGap>0?'↓ '+fmt(cartGap)+'pts below':'↑ '+fmt(Math.abs(cartGap))+'pts above'}</span>`:''}
-      </div>
-      <div class="ev ${chkGap&&chkGap<-10?'red':chkGap&&chkGap>10?'green':'amber'}">
-        <div class="ev-label">Checkout Completion</div>
-        <div class="ev-val">${pct(D.chkRate)}</div>
-        <div class="ev-bm">Benchmark: <strong>${pct(D.chkBm)}</strong></div>
-        ${chkGap!==null?`<span class="ev-badge ${chkGap<0?'down':'up'}">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'pts below':'↑ '+fmt(chkGap)+'pts above'}</span>`:''}
-      </div>
-      <div class="ev ${actGap&&actGap>15?'red':'amber'}">
-        <div class="ev-label">SP Activation Gap</div>
-        <div class="ev-val">${actGap?fmt(actGap)+'pt':'—'}</div>
-        <div class="ev-bm">${D.spCust?pct(D.spCust)+' have SP':'—'} · ${D.spGmv?pct(D.spGmv)+' use it':'—'}</div>
-        ${actGap?`<span class="ev-badge down">Untapped audience</span>`:''}
-      </div>
-    </div>`;
-
-  // ── ACTIVATION GAP VISUAL ──
-  const gapHTML = D.spCust && D.spGmv ? `
-    <div class="gap-wrap">
-      <div class="story-label" style="margin-bottom:14px">The activation gap — visualised</div>
-      <div class="gap-row">
-        <div class="gap-header">
-          <span>Customers who have Shop Pay</span>
-          <span style="color:#008060">${pct(D.spCust)}</span>
-        </div>
-        <div class="gap-track"><div class="gap-fill" style="width:${Math.min(D.spCust,100)}%;background:#95bf47"></div></div>
-      </div>
-      <div class="gap-row">
-        <div class="gap-header">
-          <span>GMV currently flowing through Shop Pay</span>
-          <span style="color:#c0392b">${pct(D.spGmv)}</span>
-        </div>
-        <div class="gap-track"><div class="gap-fill" style="width:${Math.min(D.spGmv,100)}%;background:#c0392b"></div></div>
-      </div>
-      <div class="gap-callout">
-        ${fmt(actGap)}-point gap — buyers who have Shop Pay and aren't being offered it
-      </div>
-    </div>` : '';
-
-  // ── AUTH RATE DANGER SECTION ──
-  const procName = D.currentProcessor || 'your current processor';
-  const authHTML = `
-    <div class="auth-danger">
-      <div class="auth-danger-hdr">
-        <span class="auth-danger-icon">⚠️</span>
-        <div>
-          <div class="auth-danger-title">The hidden cost of ${D.currentProcessor ? D.currentProcessor : 'your current processor'}</div>
-          <div class="auth-danger-sub">Before we talk about SP's rate — this is what ${procName} is costing you right now</div>
-        </div>
-      </div>
-      <div class="auth-stat">
-        <span class="as-num">+243bps</span>
-        <span>Shopify Payments has a <strong>243 basis point higher authorisation rate</strong> than any other processor available on Shopify. Transactions that ${procName} declines as suspected fraud, Shopify Payments would have approved — because it's trained on 10 billion Shopify-native transactions, not generic card data.</span>
-      </div>
-      ${authRevLoss ? `<div class="auth-stat">
-        <span class="as-num">~${fmtC(authRevLoss)}</span>
-        <span>Estimated revenue lost to false declines every 90 days — based on ${fmtN(_curChkN)} completed orders at ${fmtC(D.aov)} AOV. These are real buyers with valid cards who got declined. Most don't retry. They just leave.</span>
-      </div>` : ''}
-      <div class="auth-stat">
-        <span class="as-num">99.7%</span>
-        <span><strong>SP acceptance rate</strong> — powered by ML models trained on 10B+ transactions and Shopify's proprietary network signals. Lower false declines = more revenue captured, lower chargeback risk.</span>
-      </div>
-      <div class="auth-stat">
-        <span class="as-num">$745M</span>
-        <span>In fraudulent transactions flagged and blocked by Shopify Payments — protecting merchants from actual fraud while still approving the legitimate buyers other processors get wrong.</span>
-      </div>
-    </div>`;
-
-  // ── SP PROOF POINTS ──
-  const proofHTML = `
-    <div class="story-block">
-      <div class="story-label">Why Shopify Payments wins on authorisation</div>
-      <div class="proof-grid">
-        <div class="proof-pt">
-          <div class="proof-pt-val">+243bps</div>
-          <div class="proof-pt-label">Higher auth rate than any other processor on Shopify</div>
-        </div>
-        <div class="proof-pt">
-          <div class="proof-pt-val">99.7%</div>
-          <div class="proof-pt-label">Acceptance rate — more approvals, fewer false declines</div>
-        </div>
-        <div class="proof-pt">
-          <div class="proof-pt-val">10B+</div>
-          <div class="proof-pt-label">ML-trained transactions powering Shopify's fraud model</div>
-        </div>
-        <div class="proof-pt">
-          <div class="proof-pt-val">200M+</div>
-          <div class="proof-pt-label">Shop Pay users — world's largest 1-tap checkout network</div>
-        </div>
-      </div>
-    </div>`;
-
-  // ── REDIRECT GATEWAY SECTION ──
-  const redirectHTML = D.redirectGateway ? `
-    <div class="redirect-warn">
-      <div class="redirect-warn-title">🔀 The redirect tax — what leaving the checkout is costing</div>
-      <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:12px">Every time a buyer clicks to pay via a third-party gateway, they're taken off the Shopify checkout and land on an external payment page. For a merchant with ${D.mobilePct ? `<strong>${pct(D.mobilePct)} mobile traffic</strong>` : 'high mobile traffic'}, this is a conversion killer.</p>
-      <div class="redirect-stat">
-        <span class="rs-arr">→</span>
-        <span><strong>Mobile buyers expect continuity.</strong> A redirect breaks the native checkout flow — different UI, different trust signals, a fresh form to fill in. On mobile this friction alone causes significant drop-off at the moment of highest purchase intent. The buyer was already committed. The redirect undoes it.</span>
-      </div>
-      <div class="redirect-stat">
-        <span class="rs-arr">→</span>
-        <span><strong>The "low cost" illusion.</strong> A 0.1% saving on transaction fees is irrelevant if 8–15% of buyers abandon during the redirect. The cost isn't in the fee — it's in the orders that never complete. You don't see those in your transaction report because the sale never happened.</span>
-      </div>
-      ${D.mobilePct && D.socialPct ? `<div class="redirect-stat">
-        <span class="rs-arr">→</span>
-        <span>With <strong>${pct(D.mobilePct)} mobile traffic</strong> and <strong>${pct(D.socialPct)} from Facebook + Instagram</strong>, ${mn}'s buyer profile is exactly the highest-intent, lowest-patience audience that exists. They came via an ad, they're on their phone, they're mid-scroll. A redirect at the final step is the worst possible handoff — and it's entirely avoidable with Shopify Payments native checkout.</span>
-      </div>` : D.mobilePct ? `<div class="redirect-stat">
-        <span class="rs-arr">→</span>
-        <span>With <strong>${pct(D.mobilePct)} of sessions on mobile</strong>, every additional friction point in the payment flow costs buyers. Shop Pay's native checkout keeps the entire journey within Shopify — no redirects, no context-switching, no re-entering card details.</span>
-      </div>` : ''}
-    </div>` : '';
-
-  // ── WITH vs WITHOUT SP PROJECTION ──
-  // SP checkout conversion lift: ~5% improvement (from Shopify's BCG study, confirmed in report data)
-  // SP cart add lift: ~15% improvement on mobile (from Shop Pay product data)
-  const SP_CHECKOUT_LIFT = 0.05;  // +5% checkout conversion rate
-  const SP_CART_LIFT     = 0.15;  // +15% on cart add rate (mobile express buttons)
-  const SP_MOBILE_LIFT   = 0.18;  // +18% on mobile conversion (from report: social traffic converts at 18% higher)
-
-  let projHTML = '';
+  // ── PROJECTION MATH ──
+  const SP_CHECKOUT_LIFT = 0.05;
+  const SP_CART_LIFT     = 0.15;
+  let spCartRate, spChkRate, spCartN, spChkN, curCartN, curChkNCalc, addedOrders, revLift;
   if(D.sessions && D.cartRate && D.chkRate){
-    const s = D.sessions;
-    // Current funnel
-    const curCartN    = Math.round(s * D.cartRate / 100);
-    const curChkN     = Math.round(curCartN * D.chkRate / 100);
+    curCartN    = Math.round(D.sessions * D.cartRate / 100);
+    curChkNCalc = Math.round(curCartN   * D.chkRate  / 100);
+    spCartRate  = Math.min(D.cartRate * (1 + SP_CART_LIFT),     100);
+    spChkRate   = Math.min(D.chkRate  * (1 + SP_CHECKOUT_LIFT), 100);
+    spCartN     = Math.round(D.sessions * spCartRate / 100);
+    spChkN      = Math.round(spCartN    * spChkRate  / 100);
+    addedOrders = spChkN - curChkNCalc;
+    revLift     = D.spRev ? D.spRev : totalRevOpp;
+  }
 
-    // With SP funnel (conservative — only applying checkout lift + cart lift)
-    const spCartRate  = Math.min(D.cartRate * (1 + SP_CART_LIFT), 100);
-    const spChkRate   = Math.min(D.chkRate  * (1 + SP_CHECKOUT_LIFT), 100);
-    const spCartN     = Math.round(s * spCartRate / 100);
-    const spChkN      = Math.round(spCartN * spChkRate / 100);
+  // ── COVER ──
+  const execHeadline = totalRevOpp > 0
+    ? `${mn} has a <span class="green">${fmtC(totalRevOpp)}</span> 90-day revenue opportunity identified directly from purchase funnel and payments data.`
+    : `${mn}'s purchase funnel and payments data reveals a material conversion gap that Shopify Payments is positioned to close.`;
 
-    // Revenue delta (use spRev if provided, else estimate from checkout lift)
-    const addedOrders = spChkN - curChkN;
-    const revLift     = D.spRev ? D.spRev : (D.revCart||0) + (D.revChk||0);
+  const execBodyParts = [
+    D.cartRate && D.cartBm && cartGap > 5
+      ? `Cart add rate is ${fmt(cartGap,1)}% below benchmark (${pct(D.cartRate)} vs ${pct(D.cartBm)}), with ${sessNoCart ? fmtN(sessNoCart)+' sessions per quarter' : 'the majority of traffic'} exiting without engaging the cart.`
+      : null,
+    D.spCust && actGap > 10
+      ? `${pct(D.spCust)} of customers already hold Shop Pay yet only ${pct(D.spGmv)} of GMV flows through it — a ${fmt(actGap)}-point activation gap representing a pre-qualified audience not being converted.`
+      : null,
+    `With a 243 basis point authorisation rate advantage over any alternative processor on Shopify, activating Shopify Payments also recovers silent revenue lost to false transaction declines that does not appear in standard reporting.`,
+  ].filter(Boolean).join(' ');
 
-    // Mobile conversion uplift
-    const spMobileConv  = D.mobilePct ? `+${Math.round(SP_MOBILE_LIFT*100)}% on ${pct(D.mobilePct)} mobile sessions` : null;
+  const coverHTML = `
+    <div class="bc-cover">
+      <div class="bc-eyebrow">Business Case · Shopify Payments</div>
+      <div class="bc-title">${mn}</div>
+      <div class="bc-cover-meta">
+        <div class="bc-meta-item"><span class="bc-meta-label">Vertical</span><span class="bc-meta-val">${D.vertical}</span></div>
+        <div class="bc-meta-item"><span class="bc-meta-label">Shop ID</span><span class="bc-meta-val">${D.shopId||'—'}</span></div>
+        <div class="bc-meta-item"><span class="bc-meta-label">Prepared by</span><span class="bc-meta-val">${D.aeName}</span></div>
+        <div class="bc-meta-item"><span class="bc-meta-label">Date</span><span class="bc-meta-val">${dateStr}</span></div>
+      </div>
+    </div>
+    <div class="bc-exec">
+      <div class="bc-exec-headline">${execHeadline}</div>
+      <div class="bc-exec-body">${execBodyParts}</div>
+    </div>`;
 
-    // SP coverage activation (extra orders from activating dormant SP users)
-    const dormantSP  = actGap ? `${fmt(actGap)}pt of buyers unlocked` : null;
+  // ── SECTION 01: CURRENT PERFORMANCE ──
+  const kpiCards = `
+    <div class="kpi-row">
+      <div class="kpi-card ${cartGap&&cartGap>5?'bad':cartGap&&cartGap<-5?'good':'warn'}">
+        <div class="kpi-label">Cart Add Rate</div>
+        <div class="kpi-val">${pct(D.cartRate)}</div>
+        <div class="kpi-bm">Benchmark median: <strong>${pct(D.cartBm)}</strong></div>
+        ${cartGap!==null?`<div class="kpi-delta">${cartGap>0?'↓ '+fmt(cartGap)+'pts below benchmark':'↑ '+fmt(Math.abs(cartGap))+'pts above benchmark'}</div>`:''}
+      </div>
+      <div class="kpi-card ${chkGap&&chkGap<-10?'bad':chkGap&&chkGap>10?'good':'warn'}">
+        <div class="kpi-label">Checkout Completion</div>
+        <div class="kpi-val">${pct(D.chkRate)}</div>
+        <div class="kpi-bm">Benchmark median: <strong>${pct(D.chkBm)}</strong></div>
+        ${chkGap!==null?`<div class="kpi-delta">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'pts below benchmark':'↑ '+fmt(chkGap)+'pts above benchmark'}</div>`:''}
+      </div>
+      <div class="kpi-card ${actGap&&actGap>15?'bad':actGap?'warn':'neutral'}">
+        <div class="kpi-label">Shop Pay Activation Gap</div>
+        <div class="kpi-val">${actGap?fmt(actGap)+'pt':'—'}</div>
+        <div class="kpi-bm">${D.spCust?pct(D.spCust)+' hold SP':'—'} · ${D.spGmv?pct(D.spGmv)+' using it':'—'}</div>
+        ${actGap?`<div class="kpi-delta">${fmt(actGap)}pt untapped audience</div>`:''}
+      </div>
+    </div>`;
 
+  const funnelSummary = D.sessions ? `
+    <p style="font-size:14px;color:#555;line-height:1.78;margin-bottom:${D.spCust&&D.spGmv?'14px':'0'}">
+      Over 90 days, ${fmtN(D.sessions)} sessions generated ${curCartN?fmtN(curCartN)+' cart adds':'—'} and ${_curChkN?fmtN(_curChkN)+' completed orders':'—'}.
+      ${sessNoCart?` <strong>${fmtN(sessNoCart)} sessions</strong> (${fmt(100-D.cartRate,1)}%) exited before adding to cart.`:''}
+      ${D.mobilePct?` ${pct(D.mobilePct)} of traffic arrived on mobile${D.socialPct?`, with ${pct(D.socialPct)} referred from social channels`:''}. `:''}
+    </p>` : '';
+
+  const gapBars = D.spCust && D.spGmv ? `
+    <div style="background:#fafafa;border-radius:10px;padding:18px 20px;border:1px solid #f0f0f0">
+      <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#bbb;margin-bottom:16px">Shop Pay audience vs activation</p>
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:600;color:#555">Customers holding Shop Pay</span>
+          <span style="font-size:15px;font-weight:900;color:#008060">${pct(D.spCust)}</span>
+        </div>
+        <div style="height:7px;background:#e5e5e5;border-radius:4px;overflow:hidden">
+          <div style="height:100%;width:${Math.min(D.spCust,100)}%;background:#95bf47;border-radius:4px"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:600;color:#555">GMV currently via Shop Pay gateway</span>
+          <span style="font-size:15px;font-weight:900;color:#dc2626">${pct(D.spGmv)}</span>
+        </div>
+        <div style="height:7px;background:#e5e5e5;border-radius:4px;overflow:hidden">
+          <div style="height:100%;width:${Math.min(D.spGmv,100)}%;background:#fca5a5;border-radius:4px"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:#fee2e2;border-radius:7px;padding:10px 14px;font-size:13px;font-weight:700;color:#dc2626;text-align:center">
+        ${fmt(actGap)}-point gap — ${pct(D.spCust)} of customers hold Shop Pay · only ${pct(D.spGmv)} using it at checkout
+      </div>
+    </div>` : '';
+
+  const sec01 = `
+    <div class="bc-section">
+      <div class="bc-section-hdr">
+        <span class="bc-num">01</span>
+        <div>
+          <div class="bc-sec-title">Current Conversion Performance</div>
+          <div class="bc-sec-desc">Purchase funnel metrics vs Shopify benchmark medians · 90-day rolling window</div>
+        </div>
+      </div>
+      ${kpiCards}${funnelSummary}${gapBars}
+    </div>`;
+
+  // ── SECTION 02: REVENUE LEAKAGE ──
+  const leakageItems = [];
+
+  leakageItems.push(`
+    <div class="leakage-item">
+      <div class="leakage-badge red">
+        <div class="leakage-num">${authRevLoss ? '~'+fmtC(authRevLoss) : '+243bps'}</div>
+        <div class="leakage-badge-label">${authRevLoss ? '90-day est.' : 'auth rate'}</div>
+      </div>
+      <div class="leakage-body">
+        <strong>False decline leakage${D.currentProcessor ? ' — '+D.currentProcessor : ''}</strong> — Shopify Payments carries a 243 basis point higher authorisation rate than any alternative processor on Shopify. Legitimate transactions declined by ${procName}'s fraud model would have been approved by Shopify's — which is trained on 10 billion Shopify-native transactions, not generic card network data.
+        ${authRevLoss ? `Applied to ${fmtN(_curChkN)} completed orders at ${fmtC(D.aov)} AOV, this represents approximately <strong>${fmtC(authRevLoss)} per quarter</strong> in transactions declined that SP would have approved. These do not appear in revenue reporting because the purchase never completed.` : `Enter Average Order Value in the form above to quantify the exact quarterly impact for ${mn}.`}
+        <span class="lsub">Source: Shopify Payments authorisation data · 99.7% SP acceptance rate vs industry average · $745M fraud blocked without false declines</span>
+      </div>
+    </div>`);
+
+  if(sessNoCart && totalRevOpp > 0){
+    leakageItems.push(`
+      <div class="leakage-item">
+        <div class="leakage-badge red">
+          <div class="leakage-num">${fmtC(totalRevOpp)}</div>
+          <div class="leakage-badge-label">90-day opp.</div>
+        </div>
+        <div class="leakage-body">
+          <strong>Checkout friction drop-off</strong> — ${fmtN(sessNoCart)} sessions per quarter exit without adding to cart.${D.revCart?` A conservative 5% improvement to this stage represents <strong>${fmtC(D.revCart)} in additional 90-day revenue</strong> — modelled on ${mn}'s actual session and conversion data.`:''} Shop Pay's express checkout at the product and cart stage reduces the steps required to purchase for the ${D.spCust?pct(D.spCust)+' of the customer base already holding Shop Pay':'pre-existing Shop Pay audience'}.
+          <span class="lsub">Based on ${mn}'s own purchase funnel data · Conservative 5% improvement model (Shopify / BCG study)</span>
+        </div>
+      </div>`);
+  }
+
+  if(actGap && actGap > 10){
+    leakageItems.push(`
+      <div class="leakage-item">
+        <div class="leakage-badge amber">
+          <div class="leakage-num">${fmt(actGap)}pt</div>
+          <div class="leakage-badge-label">activation gap</div>
+        </div>
+        <div class="leakage-body">
+          <strong>Dormant audience</strong> — ${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. Only ${pct(D.spGmv)} of GMV currently routes through it.${spCustCount?` That represents approximately ${fmtN(spCustCount)} customers per quarter arriving at checkout with a one-tap payment method in their pocket, being presented with a multi-field form instead.`:''} Shop Pay users convert at up to 36% higher rates on the same store when the native checkout experience is available to them.
+          <span class="lsub">Shop Pay users: 36% higher conversion rate index vs non-SP users · Source: Shopify internal data</span>
+        </div>
+      </div>`);
+  }
+
+  if(D.redirectGateway){
+    leakageItems.push(`
+      <div class="leakage-item">
+        <div class="leakage-badge amber">
+          <div class="leakage-num">Redirect</div>
+          <div class="leakage-badge-label">dropout risk</div>
+        </div>
+        <div class="leakage-body">
+          <strong>Third-party redirect penalty</strong> — ${D.mobilePct?`With ${pct(D.mobilePct)} of sessions on mobile, every redirect to a third-party payment page breaks checkout continuity at the moment of highest purchase intent.`:'Redirecting buyers to a third-party payment page introduces friction that disproportionately affects mobile users.'} The cost is not measured in transaction fees — it is measured in orders that begin and never complete. Buyers do not typically return after an interrupted checkout. Shopify Payments processes natively within the existing checkout flow: no redirect, no re-authentication, no additional form fields for returning customers.
+          <span class="lsub">${D.mobilePct&&D.socialPct?`${pct(D.mobilePct)} mobile · ${pct(D.socialPct)} social-referred — highest-intent, lowest-patience buyer segment`:'Native checkout continuity is a primary driver of mobile conversion rate'}</span>
+        </div>
+      </div>`);
+  }
+
+  const sec02 = `
+    <div class="bc-section">
+      <div class="bc-section-hdr">
+        <span class="bc-num">02</span>
+        <div>
+          <div class="bc-sec-title">Revenue Leakage Analysis</div>
+          <div class="bc-sec-desc">Quantified and unquantified revenue loss attributable to current payment infrastructure</div>
+        </div>
+      </div>
+      ${leakageItems.join('')}
+    </div>`;
+
+  // ── SECTION 03: FINANCIAL MODEL ──
+  let sec03 = '';
+  if(D.sessions && D.cartRate && D.chkRate){
     const rows = [
-      ['Cart Add Rate',          pct(D.cartRate),   pct(fmt(spCartRate,2)),  `+${fmt(spCartRate-D.cartRate,2)}pt`],
-      ['Checkout Completion',    pct(D.chkRate),    pct(fmt(spChkRate,2)),   `+${fmt(spChkRate-D.chkRate,2)}pt`],
-      ['Carts per 90 days',      fmtN(curCartN),    fmtN(spCartN),           `+${fmtN(spCartN-curCartN)}`],
-      ['Completed orders (90d)', fmtN(curChkN),     fmtN(spChkN),            `+${fmtN(addedOrders)}`],
-      ['Revenue uplift (90d)',   '—',               revLift>0?fmtC(revLift):'—', revLift>0?`<span class="lift-pill rev">+${fmtC(revLift)}</span>`:''],
-      ...(D.mobilePct?[['Mobile conversion',    `${pct(D.mobilePct)} of traffic`, `+18% lift on mobile`, `<span class="lift-pill">Shop Pay express</span>`]]:[]),
-      ...(actGap?[['SP audience activation', `${pct(D.spGmv)} using SP today`, `${pct(D.spCust)} could use SP`, `<span class="lift-pill">${fmt(actGap)}pt gap to close</span>`]]:[]),
+      ['Cart Add Rate',          pct(D.cartRate),    pct(fmt(spCartRate,2)),  `<span class="fi-chip">+${fmt(spCartRate-D.cartRate,2)}pt</span>`],
+      ['Checkout Completion',    pct(D.chkRate),     pct(fmt(spChkRate,2)),   `<span class="fi-chip">+${fmt(spChkRate-D.chkRate,2)}pt</span>`],
+      ['Carts (90d)',            fmtN(curCartN),     fmtN(spCartN),           `<span class="fi-chip">+${fmtN(spCartN-curCartN)}</span>`],
+      ['Completed Orders (90d)', fmtN(curChkNCalc),  fmtN(spChkN),            `<span class="fi-chip">+${fmtN(addedOrders)}</span>`],
+      ...(D.mobilePct?[['Mobile Conversion', `${pct(D.mobilePct)} of sessions`, '+18% lift on mobile sessions', `<span class="fi-chip">Shop Pay express</span>`]]:[]),
+      ...(actGap?[['SP Audience',       `${pct(D.spGmv)} activated`, `${pct(D.spCust)} reachable`, `<span class="fi-chip">${fmt(actGap)}pt gap</span>`]]:[]),
     ];
-
-    projHTML = `
-      <div class="projection">
-        <div class="story-label">Without vs. With Shopify Payments</div>
-        <p style="font-size:13px;color:#666;margin-bottom:14px">Conservative projections based on Shopify's BCG study (5% checkout conversion uplift) + ${mn}'s own funnel data. No inflated estimates.</p>
-        <table class="proj-table">
-          <thead>
-            <tr>
+    sec03 = `
+      <div class="bc-section">
+        <div class="bc-section-hdr">
+          <span class="bc-num">03</span>
+          <div>
+            <div class="bc-sec-title">Financial Impact Model</div>
+            <div class="bc-sec-desc">Conservative projection — Shopify BCG study (5% checkout uplift) · ${mn}'s own funnel data · 90-day horizon · Auth rate uplift additive</div>
+          </div>
+        </div>
+        <div style="overflow:auto">
+          <table class="fi-table">
+            <thead><tr>
               <th>Metric</th>
-              <th class="col-now">Without SP (today)</th>
-              <th class="col-sp">With Shopify Payments</th>
-              <th class="col-lift">Uplift</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map(r=>`<tr>
-              <td>${r[0]}</td>
-              <td class="val-now">${r[1]}</td>
-              <td class="val-sp">${r[2]}</td>
-              <td class="val-lift">${r[3]}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
-        <p style="font-size:11px;color:#aaa;margin-top:8px">Assumptions: +5% checkout conversion rate (BCG / Shopify data) · +15% cart add rate (Shop Pay express buttons on PDPs) · +18% mobile conversion (one-tap, no form friction) · All figures 90-day rolling.</p>
+              <th class="th-now">Current State</th>
+              <th class="th-sp">With Shopify Payments</th>
+              <th>Change</th>
+            </tr></thead>
+            <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td class="td-now">${r[1]}</td><td class="td-sp">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
+            ${revLift>0?`<tfoot><tr class="fi-total">
+              <td>Revenue Uplift (90d)</td>
+              <td class="td-now">Baseline</td>
+              <td class="td-sp">${fmtC(revLift)}</td>
+              <td><span class="fi-chip big">+${fmtC(revLift)}</span></td>
+            </tr></tfoot>`:''}
+          </table>
+        </div>
+        <p class="fi-note">Assumptions: +5% checkout conversion (BCG / Shopify network data) · +15% cart add rate (Shop Pay express buttons at PDP + cart) · +18% mobile conversion (native one-tap, no form friction). Auth rate uplift (+243bps) and dormant SP audience activation are additive to these projections and not included in the totals above.</p>
       </div>`;
   }
 
-  // ── DISCOVERY QUESTIONS ──
-  const dqs = [
-    D.mobilePct ? `When you look at where your ad spend goes, what proportion is going to ${D.mobilePct?`mobile placements — knowing ${pct(D.mobilePct)} of your traffic is already arriving on mobile`:'mobile vs desktop'}? <em>→ Connects their marketing cost to the checkout friction story.</em>` : null,
-    D.spCust ? `Have you ever looked at how your checkout drop-off rate compares between customers who have Shop Pay and those who don't? <em>→ Opens the door to showing the activation gap data.</em>` : null,
-    `If I could show you the exact number of customers who visited your store last month with Shop Pay already in their phone — and left without using it — would that be a useful number to have? <em>→ Creates curiosity before you show them the ${D.spCust?pct(D.spCust)+' figure':'data'}.</em>`,
-    D.revCart ? `On a quarterly basis, what would an extra ${fmtC(D.revCart)} in revenue mean for the business? <em>→ Anchors the conversation to value before discussing price.</em>` : null,
-  ].filter(Boolean);
+  // ── SECTION 04: PLATFORM ADVANTAGE ──
+  const brandLogoHTML = brands.map(domain=>`
+    <div class="bc-brand-chip" title="${domain}">
+      <img src="https://logo.clearbit.com/${domain}" alt="${domain.split('.')[0]}"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="fb">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
+    </div>`).join('');
 
-  const dqHTML = `
-    <div class="story-block">
-      <div class="story-label">Discovery questions — ask these before you pitch</div>
-      <ul class="dq-list">
-        ${dqs.map(q=>`<li>${q}</li>`).join('')}
-      </ul>
-    </div>`;
-
-  // ── OBJECTION REFRAME ──
-  const objHTML = `
-    <div class="objbox">
-      <div class="obj-label">⚡ When they say "Shop Pay is too expensive" — say this</div>
-      <div class="obj-script">
-        "I completely understand the instinct to look at rate. Before we go there, I want to put one number on the table that most people in this conversation miss.
-        <br><br>
-        Shopify Payments has a <strong>243 basis point higher authorisation rate</strong> than any other processor available on Shopify. That means ${D.currentProcessor ? `${D.currentProcessor}` : 'your current processor'} is actively declining legitimate buyers that Shopify Payments would have approved. These are real customers with valid cards — declined by a fraud model that doesn't know your business the way Shopify's does.${authRevLoss ? ` Based on your order volume and AOV, that's approximately <strong>${fmtC(authRevLoss)} in false declines every 90 days.</strong> Silent revenue loss. It doesn't show up in your reports because the sale never happened.` : ' Most merchants have no idea this is happening because declined transactions don\'t show up in your revenue dashboard.'}
-        ${sessNoCart ? `<br><br>On top of that, <strong>${fmtN(sessNoCart)} people</strong> visit the store every 90 days and leave without a product in their cart.` : ''}
-        ${D.revCart ? ` If Shop Pay moves just 5% more of those sessions to the next step, that's <strong>${fmtC(D.revCart)} in additional revenue over 90 days</strong> — from your own traffic data.` : ''}
-        ${D.spCust ? ` And <strong>${pct(D.spCust)} of your customers already have Shop Pay on their phone.</strong> They're ready to buy in one tap. You're just not offering it to them yet.` : ''}
-        <span class="punchline">The question isn't what Shop Pay costs. It's what your current processor is already costing you — every single month — in declined transactions, checkout friction, and mobile drop-off you can't see."</span>
+  const sec04 = `
+    <div class="bc-section">
+      <div class="bc-section-hdr">
+        <span class="bc-num">04</span>
+        <div>
+          <div class="bc-sec-title">The Shopify Payments Platform Advantage</div>
+          <div class="bc-sec-desc">Performance data behind the recommendation</div>
+        </div>
       </div>
-    </div>`;
-
-  // ── COMPETITORS ──
-  const compHTML = brands.length > 0 ? `
-    <div class="comp-section">
-      <div class="story-label">Brands in ${D.vertical} already using Shop Pay</div>
-      <p style="font-size:13px;color:#666;margin-bottom:12px">These merchants are converting more of your shared audience. Their customers checkout in one tap. Yours are filling in forms.</p>
-      <div class="comp-grid">${logoHTML}</div>
-    </div>` : '';
-
-  // ── NEXT STEP ──
-  const nextHTML = `
-    <div class="next-step">
-      <div class="next-step-label">Before you hang up — ask for this</div>
-      <div class="next-step-text">
-        "Can we get 30 minutes with you and your Head of eCommerce together? I want to walk you through exactly where the drop-off is happening in your funnel, show you what ${D.spCust?pct(D.spCust)+' of your customers':' a significant chunk of your buyers'} already expect from your checkout, and model out what a 5% improvement looks like for your specific revenue. <em>No commitment — just the data."</em>
+      <div class="sp-proof">
+        <div class="sp-proof-item"><div class="sp-proof-val">+243bps</div><div class="sp-proof-label">Higher authorisation rate vs any alternative processor on Shopify</div></div>
+        <div class="sp-proof-item"><div class="sp-proof-val">99.7%</div><div class="sp-proof-label">Transaction acceptance rate — fewer false declines, more revenue</div></div>
+        <div class="sp-proof-item"><div class="sp-proof-val">10B+</div><div class="sp-proof-label">ML-trained Shopify transactions powering the fraud detection model</div></div>
+        <div class="sp-proof-item"><div class="sp-proof-val">200M+</div><div class="sp-proof-label">Shop Pay users — the world's largest 1-tap checkout network</div></div>
       </div>
+      ${brands.length>0?`
+      <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#bbb;margin-bottom:10px">Brands in ${D.vertical} already on Shopify Payments</p>
+      <p style="font-size:13px;color:#666;margin-bottom:12px;line-height:1.65">These merchants share the same customer base and compete for the same buyers. Their customers checkout in one tap via Shop Pay. The competitive checkout standard has already been set.</p>
+      <div class="bc-brand-grid">${brandLogoHTML}</div>`:''
+      }
     </div>`;
 
-  const html = `
-    ${moneyHTML}
+  // ── SECTION 05: RECOMMENDATION ──
+  const recBodyParts = [
+    totalRevOpp>0 ? `The analysis identifies ${fmtC(totalRevOpp)} in realizable 90-day revenue from checkout conversion improvements alone — before accounting for auth rate uplift${authRevLoss?` (est. ${fmtC(authRevLoss)}/quarter in false decline recovery)`:''}${actGap?` or full activation of the ${pct(D.spCust)} of customers already holding Shop Pay`:''}.` : null,
+    `Activating Shopify Payments as the primary gateway requires no frontend changes, no platform migration, and no additional customer acquisition spend. It is a structural change to the infrastructure that processes every transaction — delivering measurably higher authorisation rates, lower fraud exposure, and native one-tap checkout for an existing customer base that already expects it.`,
+    D.redirectGateway?`The current redirect-based gateway introduces friction at the final step of purchase for a predominantly mobile audience. Shopify Payments eliminates the redirect entirely, processing within the native checkout flow.`:null,
+  ].filter(Boolean).join(' ');
 
-    <div class="story-block">
-      <div class="story-label">Act 1 — What's actually happening</div>
-      <div class="story-lead">${act1Lead}</div>
-      <div class="story-body">${act1Body}</div>
-    </div>
+  const recAsk = D.spCust
+    ? `Activate Shopify Payments as primary gateway and enable Shop Pay express checkout at product and cart level. <strong>${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay — this is not about acquiring a new audience. It's about converting the one that already exists.</strong>`
+    : `Activate Shopify Payments as primary gateway and enable Shop Pay express checkout at product and cart level. The infrastructure change that makes every transaction perform better — higher auth rates, lower friction, native one-tap checkout.`;
 
-    ${evidenceHTML}
-    ${gapHTML}
-    ${authHTML}
-    ${proofHTML}
-    ${redirectHTML}
-    ${projHTML}
-    ${act2HTML}
-    ${dqHTML}
-    ${objHTML}
-    ${compHTML}
-    ${nextHTML}`;
+  const sec05 = `
+    <div class="bc-rec">
+      <div class="bc-rec-label">Recommendation</div>
+      <div class="bc-rec-title">The case is clear. The action is straightforward.</div>
+      <div class="bc-rec-body">${recBodyParts}</div>
+      <div class="bc-rec-ask">${recAsk}</div>
+    </div>`;
+
+  const html = `${coverHTML}${sec01}${sec02}${sec03}${sec04}${sec05}`;
 
   document.getElementById('pitch-body').innerHTML = html;
   document.getElementById('pitch-out').style.display = 'block';
@@ -907,165 +975,285 @@ async function downloadPDF(){
   }
 
   // ── PAGE 1: COVER ──
-  darkHeader(D.merchantName.toUpperCase(), D.shopId ? 'Shop ID: '+D.shopId : '');
-
-  doc.setFillColor(240,247,244);
-  doc.rect(0,33,W,H-33,'F');
-
-  doc.setFontSize(32); doc.setFont('helvetica','bold');
-  doc.setTextColor(26,26,26);
-  doc.text('Your Conversion', M, 68);
-  doc.text('Gap Report.', M, 84);
-
+  // Full dark background
+  doc.setFillColor(17,17,17);
+  doc.rect(0,0,W,H,'F');
+  // Green accent bar top
   doc.setFillColor(0,128,96);
-  doc.rect(M,90,50,1.5,'F');
+  doc.rect(0,0,W,3,'F');
+  // Subtle green stripe at bottom of cover
+  doc.setFillColor(149,191,71);
+  doc.rect(0,H-2,W,2,'F');
 
-  doc.setFontSize(11); doc.setFont('helvetica','normal');
-  doc.setTextColor(80,80,80);
-  const intro = `Based on your purchase funnel and Shop Pay data vs comparable merchants on Shopify — ${D.vertical}.`;
-  const introLines = doc.splitTextToSize(intro, W-M*2);
-  doc.text(introLines, M, 100);
+  // Eyebrow
+  doc.setFontSize(8); doc.setFont('helvetica','bold');
+  doc.setTextColor(0,128,96);
+  doc.text('BUSINESS CASE · SHOPIFY PAYMENTS', M, 28);
 
-  // 3 stat boxes on cover
-  const bw=54, bh=42, by=118;
-  statBox(M,       by, bw, bh, 'Cart Add Rate',         pct(D.cartRate), `Benchmark: ${pct(D.cartBm)}`,
-          D._cartGap&&D._cartGap>0?`↓ ${fmt(D._cartGap)}% below benchmark`:D._cartGap&&D._cartGap<0?`↑ ${fmt(Math.abs(D._cartGap))}% above benchmark`:null,
-          D._cartGap&&D._cartGap>0?[192,57,43]:[0,128,96]);
-  statBox(M+bw+5,  by, bw, bh, 'Checkout Completion',   pct(D.chkRate),  `Benchmark: ${pct(D.chkBm)}`,
-          D._chkGap&&D._chkGap>5?`↑ ${fmt(D._chkGap)}% above benchmark`:D._chkGap&&D._chkGap<0?`↓ ${fmt(Math.abs(D._chkGap))}% below benchmark`:null,
-          D._chkGap&&D._chkGap<0?[192,57,43]:[0,128,96]);
-  statBox(M+bw*2+10,by,bw, bh, '90d Revenue Opportunity', D._totalRevOpp>0?fmtC(D._totalRevOpp):'—', 'At 5% funnel improvement', D._totalRevOpp>0?'Based on your actual data':null,[0,128,96]);
+  // Merchant name — large
+  doc.setFontSize(38); doc.setFont('helvetica','bold');
+  doc.setTextColor(255,255,255);
+  const nameLines = doc.splitTextToSize(D.merchantName, W-M*2);
+  doc.text(nameLines, M, 52);
 
-  // Activation gap visual on cover
+  // Divider line
+  const divY = 52 + nameLines.length * 16;
+  doc.setDrawColor(40,40,40);
+  doc.line(M, divY, W-M, divY);
+
+  // Meta row
+  const metaY = divY + 10;
+  const metaItems = [
+    ['VERTICAL', D.vertical],
+    ['SHOP ID',  D.shopId||'—'],
+    ['PREPARED BY', D.aeName],
+    ['DATE', new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})],
+  ];
+  const mColW = (W-M*2)/4;
+  metaItems.forEach((m,i)=>{
+    const mx = M + i*mColW;
+    doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60);
+    doc.text(m[0], mx, metaY);
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(150,150,150);
+    doc.text(m[1], mx, metaY+8);
+  });
+
+  // Executive Summary box
+  const esY = metaY + 24;
+  doc.setFillColor(25,25,25);
+  doc.roundedRect(M, esY, W-M*2, 60, 4,4,'F');
+  doc.setDrawColor(0,128,96);
+  doc.roundedRect(M, esY, W-M*2, 60, 4,4,'S');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+  doc.text('EXECUTIVE SUMMARY', M+6, esY+9);
+  const esText = D._totalRevOpp > 0
+    ? `${mn} has a ${fmtC(D._totalRevOpp)} 90-day revenue opportunity identified from purchase funnel and payments data. With a 243 basis point authorisation rate advantage over any alternative processor and ${D.spCust?pct(D.spCust)+' of customers already holding Shop Pay, the':'a significant proportion of the customer base holding Shop Pay — the'} case for activating Shopify Payments is structural, not speculative.`
+    : `This analysis identifies material conversion and authorisation performance gaps in ${mn}'s current payment infrastructure. Activating Shopify Payments as the primary gateway addresses checkout friction, false decline leakage, and a dormant Shop Pay audience simultaneously.`;
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(180,180,180);
+  const esLines = doc.splitTextToSize(esText, W-M*2-12);
+  doc.text(esLines, M+6, esY+18);
+
+  // 4-metric summary row
+  const smY = esY + 72;
+  const smW = (W-M*2-18)/4;
+  const smMetrics = [
+    ['Cart Add Rate', pct(D.cartRate), D._cartGap&&D._cartGap>0?'↓ below benchmark':null, D._cartGap&&D._cartGap>0],
+    ['Checkout Completion', pct(D.chkRate), D._chkGap&&D._chkGap<0?'↓ below benchmark':null, D._chkGap&&D._chkGap<0],
+    ['SP Activation Gap', D._actGap?fmt(D._actGap)+'pt':'—', D._actGap?'Untapped audience':null, !!D._actGap],
+    ['90d Revenue Opp.', D._totalRevOpp>0?fmtC(D._totalRevOpp):'—', D._totalRevOpp>0?'Conversion uplift':null, false],
+  ];
+  smMetrics.forEach((m,i)=>{
+    const sx = M + i*(smW+6);
+    const isRed = m[3];
+    doc.setFillColor(isRed?40:25, isRed?20:35, isRed?20:25);
+    doc.roundedRect(sx, smY, smW, 32, 3,3,'F');
+    doc.setFontSize(7); doc.setFont('helvetica','bold');
+    doc.setTextColor(isRed?192:100,isRed?57:100,isRed?43:100);
+    doc.text(m[0].toUpperCase(), sx+4, smY+8);
+    doc.setFontSize(14); doc.setFont('helvetica','bold');
+    doc.setTextColor(isRed?220:255, isRed?80:255, isRed?80:255);
+    doc.text(m[1], sx+4, smY+20);
+    if(m[2]){
+      doc.setFontSize(7); doc.setFont('helvetica','normal');
+      doc.setTextColor(isRed?192:100,isRed?57:150,isRed?43:100);
+      doc.text(m[2], sx+4, smY+28);
+    }
+  });
+
+  // Activation gap bars (if data)
   if(D.spCust && D.spGmv){
-    const ay = 175;
-    doc.setFillColor(255,255,255);
-    doc.roundedRect(M, ay, W-M*2, 52, 4,4,'F');
-    doc.setDrawColor(200,200,200);
-    doc.roundedRect(M, ay, W-M*2, 52, 4,4,'S');
-
-    doc.setFontSize(8); doc.setFont('helvetica','bold');
-    doc.setTextColor(26,26,26);
-    doc.text('SHOP PAY ACTIVATION GAP', M+6, ay+9);
-
+    const agY = smY + 44;
+    doc.setFillColor(25,25,25); doc.roundedRect(M,agY,W-M*2,40,3,3,'F');
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(100,100,100);
+    doc.text(`Customers holding Shop Pay: ${pct(D.spCust)}`, M+6, agY+10);
     const bw2 = W-M*2-12;
-    // SP customers bar
-    doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
-    doc.text(`Customers with Shop Pay: ${pct(D.spCust)}`, M+6, ay+18);
-    doc.setFillColor(230,230,230); doc.roundedRect(M+6, ay+20, bw2, 5, 2,2,'F');
-    doc.setFillColor(149,191,71);  doc.roundedRect(M+6, ay+20, bw2*(D.spCust/100), 5, 2,2,'F');
-
-    doc.text(`GMV via Shop Pay: ${pct(D.spGmv)}`, M+6, ay+33);
-    doc.setFillColor(230,230,230); doc.roundedRect(M+6, ay+35, bw2, 5, 2,2,'F');
-    doc.setFillColor(192,57,43);   doc.roundedRect(M+6, ay+35, bw2*(D.spGmv/100), 5, 2,2,'F');
-
-    doc.setFontSize(8); doc.setFont('helvetica','bold');
-    doc.setTextColor(192,57,43);
-    doc.text(`${fmt(D._actGap)}pt gap — customers who have Shop Pay but aren't using it at checkout`, M+6, ay+48);
+    doc.setFillColor(40,40,40); doc.roundedRect(M+6,agY+12,bw2,4,2,2,'F');
+    doc.setFillColor(149,191,71); doc.roundedRect(M+6,agY+12,bw2*(D.spCust/100),4,2,2,'F');
+    doc.text(`GMV currently via Shop Pay gateway: ${pct(D.spGmv)}`, M+6, agY+24);
+    doc.setFillColor(40,40,40); doc.roundedRect(M+6,agY+26,bw2,4,2,2,'F');
+    doc.setFillColor(192,57,43); doc.roundedRect(M+6,agY+26,bw2*(D.spGmv/100),4,2,2,'F');
   }
 
-  footer(1,3);
+  // Footer
+  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(50,50,50);
+  doc.text(`Prepared by ${D.aeName} · Shopify Growth Services · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
+  doc.text('1/3', W-M, H-6, {align:'right'});
 
-  // ── PAGE 2: THE STORY ──
+  // ── PAGE 2: LEAKAGE + PROJECTIONS ──
   doc.addPage();
-  darkHeader('WHY SHOP PAY CLOSES THIS GAP', D.merchantName);
-  doc.setFillColor(250,252,251);
-  doc.rect(0,33,W,H-33,'F');
+  doc.setFillColor(248,250,249);
+  doc.rect(0,0,W,H,'F');
+  doc.setFillColor(0,128,96); doc.rect(0,0,W,3,'F');
 
-  let y = 46;
-  const pts = [];
-  if(D.mobilePct) pts.push([`${pct(D.mobilePct)} of traffic is mobile`,`Shop Pay removes 12 form fields from the mobile checkout — one tap, Face ID, done. No card re-entry, no address fields. Mobile checkout friction is the primary driver of your cart-to-order gap.`]);
-  if(D.socialPct) pts.push([`${pct(D.socialPct)} sessions from social (Facebook + Instagram)`,`Shop Pay converts social-referred buyers at up to 18% higher rates. Buyers coming via ads don't want forms — Shop Pay keeps them in flow at exactly the moment of purchase intent.`]);
-  if(D.spCust&&D.spGmv) pts.push([`${pct(D.spCust)} of customers have Shop Pay · Only ${pct(D.spGmv)} of GMV uses it`,`That's a ${fmt(D._actGap)}-point activation gap. These buyers have the fastest checkout on their phone. They're just not being offered it.`]);
-  if(D.spOrders) pts.push([`${pct(D.spOrders)} of orders already come from Shop Pay users`,`Your highest-intent, highest-frequency buyers default to SP. The checkout experience should match what they expect everywhere else.`]);
-  if(D.spRev) pts.push([`Estimated ${fmtC(D.spRev)} incremental revenue from Shop Pay`,`Modelled on a 5% checkout conversion improvement using actual transaction data — not a projection.`]);
+  // Header
+  doc.setFillColor(26,26,26); doc.rect(0,3,W,24,'F');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
+  doc.text('REVENUE LEAKAGE ANALYSIS', M, 13);
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
+  doc.text(D.merchantName, W-M, 13, {align:'right'});
+  doc.setFontSize(7.5); doc.setTextColor(70,70,70);
+  doc.text('Quantified and unquantified revenue loss attributable to current payment infrastructure', M, 22);
 
-  pts.forEach((p,i)=>{
-    doc.setFillColor(0,128,96); doc.circle(M+2.5, y+2.5, 2.5,'F');
-    doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(26,26,26);
-    doc.text(p[0], M+8, y+5);
-    y += 10;
-    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
-    const ls = doc.splitTextToSize(p[1], W-M*2-8);
-    doc.text(ls, M+8, y);
-    y += ls.length*5+8;
-    if(i<pts.length-1){ doc.setDrawColor(230,230,230); doc.line(M,y,W-M,y); y+=6; }
-  });
+  let py = 36;
 
-  // Objection box
-  y += 4;
-  const objH = 52;
-  doc.setFillColor(255,248,232); doc.roundedRect(M,y,W-M*2,objH,4,4,'F');
-  doc.setFillColor(243,156,18);  doc.rect(M,y,3,objH,'F');
-  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(230,126,0);
-  doc.text('"IT\'S TOO EXPENSIVE" — THE REFRAME', M+8, y+10);
-  doc.setFontSize(9); doc.setFont('helvetica','italic'); doc.setTextColor(60,60,60);
-  const obj = `"The question isn't whether Shop Pay has a cost. It's whether your current checkout is costing you more. ${D.revCart?`Moving just 5% more sessions to cart is worth ${fmtC(D.revCart)} in 90 days — from your own data.`:''} ${D.spCust&&D.spGmv?`${pct(D.spCust)} of your customers already have Shop Pay. They're not being offered it.`:''} Shop Pay isn't a payment provider. It's a conversion tool that happens to process payments."`;
-  const objL = doc.splitTextToSize(obj, W-M*2-14);
-  doc.text(objL, M+8, y+18);
+  // Auth rate leakage
+  doc.setFillColor(255,245,245); doc.roundedRect(M,py,W-M*2,authRevLoss?38:32,3,3,'F');
+  doc.setFillColor(220,38,38); doc.rect(M,py,3,authRevLoss?38:32,'F');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(220,38,38);
+  doc.text(authRevLoss ? `FALSE DECLINE LEAKAGE — ${fmtC(authRevLoss)}/QUARTER` : 'FALSE DECLINE LEAKAGE — +243BPS AUTH RATE GAP', M+7, py+9);
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+  const authText = authRevLoss
+    ? `Shopify Payments has a 243bps higher authorisation rate than any alternative on Shopify. Based on ${fmtN(_curChkN)} orders at ${fmtC(D.aov)} AOV, ${D.currentProcessor||'your processor'} is declining ~${fmtC(authRevLoss)}/quarter in legitimate transactions SP would have approved. This revenue is invisible in reporting — the sale never completed.`
+    : `Shopify Payments carries a 243 basis point higher authorisation rate than any alternative processor on Shopify. Your current processor is declining legitimate buyers that SP would approve. Enter AOV above to quantify the exact quarterly impact.`;
+  const authLines = doc.splitTextToSize(authText, W-M*2-12);
+  doc.text(authLines, M+7, py+17);
+  py += authRevLoss ? 46 : 40;
 
-  footer(2,3);
+  // Checkout friction
+  if(D._totalRevOpp > 0 && sessNoCart){
+    doc.setFillColor(255,245,245); doc.roundedRect(M,py,W-M*2,32,3,3,'F');
+    doc.setFillColor(220,38,38); doc.rect(M,py,3,32,'F');
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(220,38,38);
+    doc.text(`CHECKOUT FRICTION DROP-OFF — ${fmtC(D._totalRevOpp)} 90-DAY OPPORTUNITY`, M+7, py+9);
+    doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+    const frText = `${fmtN(sessNoCart)} sessions per quarter exit before adding to cart.${D.revCart?` A conservative 5% improvement represents ${fmtC(D.revCart)} in 90-day revenue — from ${mn}'s actual data.`:''} Shop Pay express checkout activates one-tap purchasing for customers who already hold SP.`;
+    doc.text(doc.splitTextToSize(frText, W-M*2-12), M+7, py+17);
+    py += 40;
+  }
 
-  // ── PAGE 3: COMPETITORS + CTA ──
+  // Activation gap
+  if(D._actGap && D._actGap > 10){
+    doc.setFillColor(255,251,235); doc.roundedRect(M,py,W-M*2,32,3,3,'F');
+    doc.setFillColor(245,158,11); doc.rect(M,py,3,32,'F');
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(180,120,0);
+    doc.text(`DORMANT SP AUDIENCE — ${fmt(D._actGap)}PT ACTIVATION GAP`, M+7, py+9);
+    doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+    const actText = `${pct(D.spCust)} of ${mn}'s customers hold Shop Pay. Only ${pct(D.spGmv)} of GMV uses it. Shop Pay users convert at 36% higher rates — this audience is already pre-qualified. They just haven't been offered the checkout experience they expect.`;
+    doc.text(doc.splitTextToSize(actText, W-M*2-12), M+7, py+17);
+    py += 40;
+  }
+
+  // Financial model table (if data)
+  if(D.sessions && D.cartRate && D.chkRate && spChkN){
+    py += 4;
+    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+    doc.text('FINANCIAL IMPACT MODEL — CONSERVATIVE PROJECTION · 90-DAY HORIZON', M, py+4);
+    py += 10;
+
+    // Table header
+    doc.setFillColor(26,26,26); doc.rect(M,py,W-M*2,10,'F');
+    const cols4 = ['METRIC','CURRENT STATE','WITH SHOPIFY PAYMENTS','CHANGE'];
+    const cw4 = [(W-M*2)*0.3,(W-M*2)*0.23,(W-M*2)*0.27,(W-M*2)*0.2];
+    let cx = M;
+    cols4.forEach((c,i)=>{
+      doc.setFontSize(6.5); doc.setFont('helvetica','bold');
+      doc.setTextColor(i===2?149:i===0?255:130,i===2?191:130,i===2?71:130);
+      doc.text(c, cx+3, py+7);
+      cx += cw4[i];
+    });
+    py += 10;
+
+    const tRows = [
+      ['Cart Add Rate', pct(D.cartRate), pct(fmt(spCartRate,2)), `+${fmt(spCartRate-D.cartRate,2)}pt`],
+      ['Checkout Completion', pct(D.chkRate), pct(fmt(spChkRate,2)), `+${fmt(spChkRate-D.chkRate,2)}pt`],
+      ['Completed Orders (90d)', fmtN(curChkNCalc), fmtN(spChkN), `+${fmtN(addedOrders)}`],
+    ];
+    if(revLift>0) tRows.push(['Revenue Uplift (90d)', 'Baseline', fmtC(revLift), `+${fmtC(revLift)}`]);
+
+    tRows.forEach((r,ri)=>{
+      const isLast = ri === tRows.length-1 && revLift > 0;
+      doc.setFillColor(ri%2===0?255:248,ri%2===0?255:250,ri%2===0?255:249);
+      doc.rect(M,py,W-M*2,9,'F');
+      if(isLast){ doc.setDrawColor(0,128,96); doc.line(M,py,M+W-M*2,py); }
+      cx = M;
+      r.forEach((v,vi)=>{
+        doc.setFontSize(vi===0?8:8.5);
+        doc.setFont('helvetica', vi===0||isLast?'bold':'normal');
+        doc.setTextColor(vi===2?0:vi===3&&isLast?0:60, vi===2?128:vi===3&&isLast?128:60, vi===2?96:vi===3&&isLast?96:60);
+        doc.text(v, cx+3, py+6.5);
+        cx += cw4[vi];
+      });
+      py += 9;
+    });
+    doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
+    doc.text('Assumptions: +5% checkout conversion (BCG/Shopify) · +15% cart add rate (Shop Pay express) · Auth rate uplift additive, not included above', M, py+8);
+    py += 16;
+  }
+
+  // Footer p2
+  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
+  doc.text(`Prepared by ${D.aeName} · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
+  doc.text('Optimised for conversion, not cost.', W/2, H-6, {align:'center'});
+  doc.text('2/3', W-M, H-6, {align:'right'});
+
+  // ── PAGE 3: PLATFORM + RECOMMENDATION ──
   doc.addPage();
-  darkHeader('YOUR COMPETITORS ARE ALREADY WINNING WITH THIS', D.merchantName);
-  doc.setFillColor(240,247,244);
-  doc.rect(0,33,W,H-33,'F');
+  doc.setFillColor(248,250,249); doc.rect(0,0,W,H,'F');
+  doc.setFillColor(0,128,96); doc.rect(0,0,W,3,'F');
+  doc.setFillColor(26,26,26); doc.rect(0,3,W,24,'F');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
+  doc.text('THE SHOPIFY PAYMENTS ADVANTAGE', M, 13);
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
+  doc.text(D.merchantName, W-M, 13, {align:'right'});
+  doc.setFontSize(7.5); doc.setTextColor(70,70,70);
+  doc.text('Performance data behind the recommendation', M, 22);
 
-  doc.setFontSize(18); doc.setFont('helvetica','bold'); doc.setTextColor(26,26,26);
-  doc.text(`Brands in ${D.vertical}`, M, 54);
-  doc.text('using Shop Pay:', M, 66);
-  doc.setFontSize(10); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
-  doc.text(`These merchants are converting more of your shared audience.`, M, 75);
-
-  // Logo boxes with brand names
-  const brands = BRANDS[D.vertical]||[];
-  const cols=3, bxW=52, bxH=22, gx=8, gy=10;
-  let lx = M, ly = 84;
-  brands.forEach((domain,i)=>{
-    const col=i%cols, row=Math.floor(i/cols);
-    const bx = M+col*(bxW+gx), by2 = ly+row*(bxH+gy+6);
-    doc.setFillColor(255,255,255); doc.setDrawColor(215,215,215);
-    doc.roundedRect(bx,by2,bxW,bxH,3,3,'FD');
-    const brand = domain.split('.')[0].toUpperCase();
-    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60);
-    doc.text(brand, bx+bxW/2, by2+bxH/2+1.5, {align:'center'});
+  // 4 proof point boxes
+  const ppY = 35;
+  const ppW = (W-M*2-18)/4;
+  const pps = [['+243bps','Higher auth rate than any alternative processor on Shopify'],[`99.7%`,'Transaction acceptance rate'],[`10B+`,'ML-trained transactions in fraud model'],[`200M+`,'Shop Pay users worldwide']];
+  pps.forEach((p,i)=>{
+    const px2 = M + i*(ppW+6);
+    doc.setFillColor(240,250,245); doc.roundedRect(px2,ppY,ppW,30,3,3,'F');
+    doc.setDrawColor(187,247,208); doc.roundedRect(px2,ppY,ppW,30,3,3,'S');
+    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+    doc.text(p[0], px2+4, ppY+13);
+    doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
+    const pl = doc.splitTextToSize(p[1], ppW-8);
+    doc.text(pl, px2+4, ppY+20);
   });
 
-  // Summary data strip
-  const stripY = 175;
-  doc.setFillColor(255,255,255); doc.roundedRect(M,stripY,W-M*2,36,4,4,'F');
-  doc.setDrawColor(200,200,200); doc.roundedRect(M,stripY,W-M*2,36,4,4,'S');
-  const metrics = [
-    ['% Customers with Shop Pay', D.spCust?pct(D.spCust):'—'],
-    ['% GMV via Shop Pay today',  D.spGmv?pct(D.spGmv):'—'],
-    ['Activation gap',            D._actGap?fmt(D._actGap)+'pt':'—'],
-    ['90d revenue opportunity',   D._totalRevOpp>0?fmtC(D._totalRevOpp):'—']
-  ];
-  const mw = (W-M*2)/4;
-  metrics.forEach((m,i)=>{
-    const mx=M+i*mw;
-    doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120);
-    doc.text(m[0].toUpperCase(), mx+3, stripY+10);
-    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(i===2?192:i===3?0:26,i===2?57:i===3?128:26,i===2?43:i===3?96:26);
-    doc.text(m[1], mx+3, stripY+22);
-    if(i<3){ doc.setDrawColor(230,230,230); doc.line(mx+mw,stripY+5,mx+mw,stripY+32); }
-  });
+  // Competitors
+  const brands3 = BRANDS[D.vertical]||[];
+  if(brands3.length > 0){
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120);
+    doc.text(`BRANDS IN ${D.vertical.toUpperCase()} ALREADY ON SHOPIFY PAYMENTS`, M, ppY+42);
+    doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(130,130,130);
+    doc.text('These merchants share your customer base. Their buyers checkout in one tap.', M, ppY+50);
+    const bxW2=44, bxH2=18, bxG=6;
+    brands3.forEach((domain,i)=>{
+      const bx2 = M + (i%(Math.floor((W-M*2)/(bxW2+bxG))))*(bxW2+bxG);
+      const bRow = Math.floor(i/(Math.floor((W-M*2)/(bxW2+bxG))));
+      const by2 = ppY+55+bRow*(bxH2+5);
+      doc.setFillColor(255,255,255); doc.setDrawColor(215,215,215);
+      doc.roundedRect(bx2,by2,bxW2,bxH2,2,2,'FD');
+      doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(70,70,70);
+      doc.text(domain.split('.')[0].toUpperCase().substring(0,7), bx2+bxW2/2, by2+bxH2/2+2, {align:'center'});
+    });
+  }
 
-  // CTA box
-  const ctaY = H-65;
-  doc.setFillColor(0,128,96); doc.roundedRect(M,ctaY,W-M*2,38,6,6,'F');
-  doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  doc.text('Ready to close the gap?', W/2, ctaY+14, {align:'center'});
-  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(200,240,225);
-  doc.text('Activate Shop Pay · One tap · Built for mobile · Converts your existing customers', W/2, ctaY+23, {align:'center'});
-  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  doc.text('Optimised for conversion, not cost.', W/2, ctaY+32, {align:'center'});
+  // Recommendation box
+  const recY = H - 80;
+  doc.setFillColor(17,17,17); doc.roundedRect(M,recY,W-M*2,64,5,5,'F');
+  doc.setFillColor(0,128,96); doc.rect(M,recY,W-M*2,3,'F');
+  doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
+  doc.text('RECOMMENDATION', M+6, recY+12);
+  doc.setFontSize(12); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  doc.text('Activate Shopify Payments as primary gateway.', M+6, recY+23);
+  const recText2 = D.spCust
+    ? `${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. This is not about acquiring a new audience — it's about converting the one that already exists. Higher auth rates, no redirect friction, native 1-tap checkout. No platform migration required.`
+    : `Higher authorisation rates, native 1-tap checkout, no redirect friction, $745M in fraud blocked without false declines. The infrastructure change that makes every transaction perform better — without acquiring a single new customer.`;
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(140,140,140);
+  doc.text(doc.splitTextToSize(recText2, W-M*2-12), M+6, recY+33);
 
-  footer(3,3);
+  // Footer p3
+  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
+  doc.text(`Prepared by ${D.aeName} · Shopify Growth Services · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
+  doc.text('Optimised for conversion, not cost.', W/2, H-6, {align:'center'});
+  doc.text('3/3', W-M, H-6, {align:'right'});
 
   const slug = D.merchantName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-  doc.save(`shop-pay-opportunity-${slug}.pdf`);
+  doc.save(`shopify-payments-business-case-${slug}.pdf`);
 }
 
 function copyBrief(){
