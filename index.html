@@ -1,593 +1,552 @@
-11<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Pay Pitch Builder — Growth Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Shop Pay Business Case Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#f0f0f0;color:#1a1a1a;min-height:100vh}
+:root{
+  --green:#008060;--green-light:#e6f4f1;--green-mid:#b3d9cf;
+  --lime:#95bf47;--lime-light:#f0f7e0;
+  --red:#d72c0d;--red-light:#fff4f2;
+  --amber:#b54708;--amber-light:#fff6e5;
+  --dark:#1a1a1a;--dark2:#111;
+  --grey-1:#f6f6f7;--grey-2:#f0f0f0;--grey-3:#e3e3e3;
+  --grey-4:#bababa;--grey-5:#6d7175;--grey-6:#3d4246;
+  --text:#202223;--text-sub:#6d7175;
+  --border:#e1e3e5;--shadow:0 1px 3px rgba(0,0,0,.07),0 4px 12px rgba(0,0,0,.04);
+  --radius:8px;--radius-lg:12px;
+}
+body{font-family:'Inter',sans-serif;background:#f6f6f7;color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* ── HEADER ── */
-.hdr{background:#1a1a1a;padding:14px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
-.hdr-logo{display:flex;align-items:center;gap:9px}
-.hdr-logo svg{width:26px;height:26px}
-.hdr-name{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
-.hdr-name span{color:#95bf47}
-.hdr-tag{background:#008060;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.6px}
-.hdr-right{margin-left:auto;font-size:12px;color:#666}
+/* ── TOP NAV ── */
+.nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-logo svg{width:18px;height:18px}
+.nav-name{font-size:14px;font-weight:700;color:var(--dark);letter-spacing:-.2px}
+.nav-div{width:1px;height:20px;background:var(--border)}
+.nav-tag{font-size:12px;color:var(--text-sub)}
+.nav-pill{margin-left:auto;background:var(--lime-light);color:#3d5a15;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.2px}
 
 /* ── LAYOUT ── */
-.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+.page{max-width:780px;margin:0 auto;padding:28px 16px 80px}
+.page-title{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px;color:var(--dark)}
+.page-sub{font-size:14px;color:var(--text-sub);margin-bottom:28px}
 
-/* ── CARDS ── */
-.card{background:#fff;border-radius:14px;padding:26px;margin-bottom:18px;border:1px solid #e5e5e5;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.card-hdr{display:flex;align-items:flex-start;gap:12px;margin-bottom:22px}
-.step{background:#008060;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px}
-.card-title{font-size:17px;font-weight:800;line-height:1.2}
-.card-sub{font-size:13px;color:#777;margin-top:3px}
+/* ── STEPS ── */
+.steps{display:flex;gap:0;margin-bottom:28px;background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden}
+.step-item{flex:1;padding:14px 18px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text-sub);border-right:1px solid var(--border)}
+.step-item:last-child{border-right:none}
+.step-item.active{color:var(--green)}
+.step-item.done{color:var(--green)}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--grey-2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:var(--text-sub)}
+.step-item.active .step-num{background:var(--green);color:#fff}
+.step-item.done .step-num{background:var(--green);color:#fff}
+
+/* ── CARD ── */
+.card{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:16px}
+.card-body{padding:24px}
+.card-foot{padding:16px 24px;border-top:1px solid var(--grey-1);background:var(--grey-1);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+
+/* ── CARD HEADER ── */
+.ch{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.ch-num{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;font-variant-numeric:tabular-nums}
+.ch-title{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.ch-sub{font-size:12px;color:var(--text-sub);margin-top:2px}
 
 /* ── INPUTS ── */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
-.grid-1{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
-.f{display:flex;flex-direction:column;gap:5px}
-.f label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px}
-.f input,.f select{padding:10px 13px;border:1.5px solid #e0e0e0;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#1a1a1a;transition:border-color .15s;background:#fff}
-.f input:focus,.f select:focus{outline:none;border-color:#008060;background:#fafffe}
-.f .hint{font-size:11px;color:#aaa;margin-top:1px}
-.f input[type=number]{-moz-appearance:textfield}
-.f input[type=number]::-webkit-inner-spin-button{opacity:.4}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.field label{font-size:12px;font-weight:600;color:var(--grey-6)}
+.field input,.field select{height:36px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:#fff;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(0,128,96,.1)}
+.field .hint{font-size:11px;color:var(--grey-4)}
+.field input[type=number]{-moz-appearance:textfield;appearance:textfield}
+.field input[type=number]::-webkit-inner-spin-button{opacity:.4}
 
-/* ── SHOP ID ROW ── */
-.id-row{display:flex;gap:10px;margin-bottom:16px}
-.id-row input{flex:1;padding:13px 16px;border:1.5px solid #e0e0e0;border-radius:10px;font-family:'Inter',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px}
-.id-row input:focus{outline:none;border-color:#008060}
-
-/* ── BUTTONS ── */
-.btn{padding:11px 20px;border-radius:9px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.btn-green{background:#008060;color:#fff}
-.btn-green:hover{background:#006e52;transform:translateY(-1px)}
-.btn-dark{background:#1a1a1a;color:#fff}
-.btn-dark:hover{background:#333;transform:translateY(-1px)}
-.btn-ghost{background:#f5f5f5;color:#333;border:1.5px solid #e0e0e0}
-.btn-ghost:hover{background:#eee}
-.btn-block{width:100%;justify-content:center;padding:13px}
+/* ── SHOP ID INPUT ── */
+.shopid-row{display:flex;gap:10px;margin-bottom:0}
+.shopid-row input{flex:1;height:44px;padding:0 16px;border:1.5px solid var(--border);border-radius:var(--radius-lg);font-family:'Inter',sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;background:#fff;color:var(--dark);transition:border-color .15s,box-shadow .15s}
+.shopid-row input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(0,128,96,.12)}
 
 /* ── MERCHANT BANNER ── */
-.mbanner{background:linear-gradient(135deg,#f0faf6 0%,#e8f5ef 100%);border:1.5px solid #95bf47;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;display:none}
-.mbanner .mname{font-size:16px;font-weight:800}
-.mbanner .mdomain{font-size:13px;color:#555;margin-top:2px}
-.mbanner .mid{font-size:11px;color:#888;font-family:monospace;background:#fff;padding:4px 9px;border-radius:6px;border:1px solid #ddd}
+.mbanner{background:var(--green-light);border:1px solid var(--green-mid);border-radius:var(--radius);padding:12px 16px;display:none;align-items:center;justify-content:space-between;margin-top:14px}
+.mbanner-name{font-size:14px;font-weight:700;color:var(--dark)}
+.mbanner-id{font-size:11px;color:var(--text-sub);font-family:monospace;background:#fff;padding:3px 8px;border-radius:4px;border:1px solid var(--border)}
 
 /* ── REPORT LINKS ── */
-.rlinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;display:none}
-.rlink{background:#f8faf9;border:1.5px solid #c8e6c9;border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:all .15s;cursor:pointer}
-.rlink:hover{background:#edf7ef;border-color:#95bf47;transform:translateY(-1px)}
-.rlink-icon{font-size:24px;flex-shrink:0}
-.rlink-name{font-size:13px;font-weight:700;color:#1a1a1a;display:block}
-.rlink-desc{font-size:11px;color:#777;display:block;margin-top:2px}
+.rlinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;display:none}
+.rlink{border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:flex-start;gap:12px;text-decoration:none;background:#fff;transition:border-color .15s,background .15s;cursor:pointer}
+.rlink:hover{border-color:var(--green);background:var(--green-light)}
+.rlink-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.rlink-name{font-size:13px;font-weight:700;color:var(--text);display:block}
+.rlink-desc{font-size:11px;color:var(--text-sub);display:block;margin-top:2px;line-height:1.4}
 
-/* ── SECTION DIVIDERS ── */
-.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#008060;margin-bottom:12px;margin-top:4px;display:flex;align-items:center;gap:7px}
-.sec-label::after{content:'';flex:1;height:1px;background:#e8f5ef}
-hr.div{border:none;border-top:1px solid #f0f0f0;margin:18px 0}
+/* ── SECTION LABEL ── */
+.slabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-sub);margin:22px 0 14px;display:flex;align-items:center;gap:8px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--grey-2)}
+hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
 
-/* ── PITCH OUTPUT ── */
-#pitch-out{display:none}
+/* ── CHECKBOX FIELD ── */
+.check-field{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .15s}
+.check-field:hover{border-color:var(--green)}
+.check-field input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);flex-shrink:0}
+.check-field span{font-size:13px;font-weight:600;color:var(--grey-6)}
 
-/* money moment */
-.money-moment{background:#1a1a1a;border-radius:14px;padding:28px;margin:20px 0;text-align:center;position:relative;overflow:hidden}
-.money-moment::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#008060,#95bf47)}
-.money-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#666;margin-bottom:8px}
-.money-val{font-size:52px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1}
-.money-val span{color:#95bf47}
-.money-sub{font-size:14px;color:#888;margin-top:8px;line-height:1.5}
-.money-sub strong{color:#ccc}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--radius);font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;border:none;transition:all .15s;white-space:nowrap;letter-spacing:-.1px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:#006e52;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,128,96,.3)}
+.btn-primary:active{transform:translateY(0)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:var(--grey-6);transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--grey-4)}
+.btn-lg{height:44px;font-size:14px;padding:0 24px;width:100%;justify-content:center}
+.btn-generate{background:var(--green);color:#fff;height:48px;font-size:15px;font-weight:800;border-radius:var(--radius-lg);width:100%;justify-content:center;letter-spacing:-.2px}
+.btn-generate:hover{background:#006e52;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,128,96,.35)}
 
-/* story sections */
-.story-block{margin:22px 0}
-.story-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#008060;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.story-label::after{content:'';flex:1;height:1px;background:#e8f5ef}
-.story-lead{font-size:20px;font-weight:800;color:#1a1a1a;line-height:1.3;margin-bottom:8px;letter-spacing:-.3px}
-.story-lead .lo{color:#c0392b}
-.story-lead .hi{color:#008060}
-.story-body{font-size:14px;line-height:1.75;color:#444}
-.story-body strong{color:#1a1a1a}
+/* ── OUTPUT: full-bleed document ── */
+#output{display:none}
+.doc{background:#fff;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.08);overflow:hidden;margin-bottom:16px}
 
-/* evidence row */
-.evidence-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-.ev{background:#f8f8f8;border-radius:11px;padding:14px;border-top:3px solid #e0e0e0}
-.ev.red{border-top-color:#c0392b}
-.ev.green{border-top-color:#008060}
-.ev.amber{border-top-color:#f39c12}
-.ev-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#888;margin-bottom:6px}
-.ev-val{font-size:22px;font-weight:900;color:#1a1a1a;letter-spacing:-.5px}
-.ev-bm{font-size:11px;color:#aaa;margin-top:3px}
-.ev-badge{font-size:11px;font-weight:700;margin-top:6px;display:inline-block;padding:2px 8px;border-radius:4px}
-.ev-badge.down{background:#fdecea;color:#c0392b}
-.ev-badge.up{background:#e8f5ee;color:#008060}
-.ev-badge.neutral{background:#fff3e0;color:#e67e00}
+/* Cover */
+.doc-cover{background:var(--dark2);padding:48px 48px 40px;position:relative;overflow:hidden}
+.doc-cover::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--lime))}
+.doc-cover::after{content:'';position:absolute;bottom:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(0,128,96,.08)}
+.doc-eyebrow{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--lime);margin-bottom:16px}
+.doc-merchant{font-size:42px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;margin-bottom:28px}
+.doc-meta{display:flex;gap:0;padding-top:24px;border-top:1px solid rgba(255,255,255,.08)}
+.doc-meta-item{padding-right:32px;margin-right:32px;border-right:1px solid rgba(255,255,255,.08)}
+.doc-meta-item:last-child{border-right:none}
+.doc-meta-label{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#444;font-weight:700;margin-bottom:3px}
+.doc-meta-val{font-size:13px;font-weight:600;color:#888}
 
-/* activation gap */
-.gap-wrap{background:#f8f8f8;border-radius:12px;padding:18px;margin:16px 0;border:1px solid #eee}
-.gap-row{margin-bottom:14px}
-.gap-row:last-of-type{margin-bottom:0}
-.gap-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.gap-header span:first-child{font-size:12px;font-weight:600;color:#555}
-.gap-header span:last-child{font-size:14px;font-weight:900}
-.gap-track{height:10px;background:#e8e8e8;border-radius:5px;overflow:hidden}
-.gap-fill{height:100%;border-radius:5px;transition:width 1s ease}
-.gap-callout{margin-top:12px;background:#fdecea;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:700;color:#c0392b;text-align:center}
+/* Exec Summary */
+.doc-exec{padding:28px 48px;background:#f9fafb;border-bottom:1px solid var(--border)}
+.doc-exec-number{font-size:52px;font-weight:900;letter-spacing:-3px;color:var(--green);line-height:1;margin-bottom:6px}
+.doc-exec-number span{font-size:24px;font-weight:700;letter-spacing:-.5px;vertical-align:super;margin-right:2px}
+.doc-exec-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-sub);margin-bottom:14px}
+.doc-exec-headline{font-size:17px;font-weight:700;color:var(--dark);line-height:1.5;margin-bottom:12px;letter-spacing:-.2px}
+.doc-exec-body{font-size:13px;color:var(--text-sub);line-height:1.85}
+.doc-exec-body strong{color:var(--text);font-weight:600}
+.exec-split{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start}
 
-/* discovery questions */
-.dq-list{list-style:none;counter-reset:dq}
-.dq-list li{counter-increment:dq;display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px;line-height:1.55;color:#333;align-items:flex-start}
-.dq-list li:last-child{border-bottom:none}
-.dq-list li::before{content:counter(dq);background:#1a1a1a;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px}
-.dq-list li em{color:#008060;font-style:normal;font-weight:700}
+/* Sections */
+.doc-section{padding:36px 48px;border-bottom:1px solid var(--grey-2)}
+.doc-section:last-child{border-bottom:none}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.sec-n{font-size:10px;font-weight:900;color:var(--green);background:var(--green-light);padding:5px 9px;border-radius:5px;letter-spacing:.4px;flex-shrink:0;font-family:monospace;margin-top:3px}
+.sec-title{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--dark)}
+.sec-desc{font-size:12px;color:var(--text-sub);margin-top:4px;line-height:1.5}
 
-/* objection reframe */
-.objbox{background:#fff8ec;border-left:4px solid #f39c12;border-radius:0 12px 12px 0;padding:18px 20px;margin:20px 0}
-.obj-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#e67e00;margin-bottom:10px}
-.obj-script{font-size:14px;line-height:1.75;color:#333;font-style:italic}
-.obj-script strong{color:#1a1a1a;font-style:normal}
-.obj-script .punchline{font-style:normal;font-weight:800;color:#1a1a1a;font-size:15px;display:block;margin-top:10px;padding-top:10px;border-top:1px solid #f0d9a8}
+/* KPI Cards */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.kpi{border-radius:var(--radius-lg);padding:20px;border:1px solid var(--border)}
+.kpi.bad{background:var(--red-light);border-color:#fca5a5}
+.kpi.good{background:var(--green-light);border-color:var(--green-mid)}
+.kpi.warn{background:var(--amber-light);border-color:#fde68a}
+.kpi.neutral{background:var(--grey-1)}
+.kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-sub);margin-bottom:10px}
+.kpi-value{font-size:36px;font-weight:900;letter-spacing:-2px;line-height:1}
+.kpi.bad .kpi-value{color:var(--red)}
+.kpi.good .kpi-value{color:var(--green)}
+.kpi.warn .kpi-value{color:var(--amber)}
+.kpi-bm{font-size:11px;color:var(--text-sub);margin-top:6px}
+.kpi-delta{font-size:11px;font-weight:700;margin-top:8px;padding:3px 8px;border-radius:4px;display:inline-flex;align-items:center;gap:4px}
+.kpi.bad .kpi-delta{background:#fee2e2;color:var(--red)}
+.kpi.good .kpi-delta{background:#dcfce7;color:#15803d}
+.kpi.warn .kpi-delta{background:#fef3c7;color:var(--amber)}
 
-/* with vs without SP projection */
-.projection{margin:22px 0}
-.proj-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;border:1px solid #e5e5e5;font-size:14px}
-.proj-table thead tr{background:#1a1a1a}
-.proj-table thead th{padding:12px 16px;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#aaa}
-.proj-table thead th:first-child{color:#fff}
-.proj-table thead th.col-now{color:#f39c12}
-.proj-table thead th.col-sp{color:#95bf47}
-.proj-table thead th.col-lift{color:#aaa}
-.proj-table tbody tr{border-bottom:1px solid #f0f0f0}
-.proj-table tbody tr:last-child{border-bottom:none}
-.proj-table tbody tr:nth-child(even){background:#fafafa}
-.proj-table td{padding:11px 16px;color:#333;vertical-align:middle}
-.proj-table td:first-child{font-weight:700;color:#1a1a1a;font-size:13px}
-.proj-table td.val-now{font-weight:700;color:#666}
-.proj-table td.val-sp{font-weight:800;color:#008060;font-size:15px}
-.proj-table td.val-lift{font-weight:700}
-.lift-pill{display:inline-block;background:#e8f5ee;color:#008060;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
-.lift-pill.rev{background:#1a1a1a;color:#95bf47;font-size:13px;padding:3px 10px}
+/* Funnel narrative */
+.funnel-text{font-size:14px;line-height:1.85;color:var(--text-sub);margin-bottom:20px}
+.funnel-text strong{color:var(--text);font-weight:600}
 
-/* auth rate danger block */
-.auth-danger{background:#fff0ef;border:1.5px solid #f5a1a0;border-radius:12px;padding:20px;margin:22px 0}
-.auth-danger-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.auth-danger-icon{font-size:26px;flex-shrink:0}
-.auth-danger-title{font-size:15px;font-weight:800;color:#c0392b}
-.auth-danger-sub{font-size:12px;color:#888;margin-top:3px}
-.auth-stat{display:flex;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid #fde8e7;font-size:14px;color:#444;line-height:1.6}
-.auth-stat:last-child{border-bottom:none}
-.auth-stat .as-num{font-size:21px;font-weight:900;color:#c0392b;min-width:64px;flex-shrink:0;line-height:1.2}
+/* Progress bars */
+.bar-group{background:var(--grey-1);border-radius:var(--radius);padding:20px 22px;border:1px solid var(--grey-2)}
+.bar-label-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.bar-label{font-size:12px;font-weight:600;color:var(--grey-6)}
+.bar-value{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.bar-track{height:8px;background:var(--grey-3);border-radius:4px;overflow:hidden;margin-bottom:20px}
+.bar-track:last-child{margin-bottom:0}
+.bar-fill{height:100%;border-radius:4px}
+.bar-gap-callout{margin-top:16px;background:#fee2e2;border-radius:6px;padding:10px 14px;font-size:13px;font-weight:700;color:var(--red);text-align:center}
 
-/* SP proof points */
-.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
-.proof-pt{background:#f0faf5;border:1.5px solid #c8e6c9;border-radius:10px;padding:14px 12px;text-align:center}
-.proof-pt-val{font-size:18px;font-weight:900;color:#008060;letter-spacing:-.5px}
-.proof-pt-label{font-size:10px;color:#555;margin-top:5px;line-height:1.45;font-weight:600}
-@media(max-width:600px){.proof-grid{grid-template-columns:1fr 1fr}}
+/* Leakage */
+.leakage-list{display:flex;flex-direction:column;gap:0}
+.leakage-row{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--grey-1);align-items:flex-start}
+.leakage-row:last-child{border-bottom:none;padding-bottom:0}
+.leakage-row:first-child{padding-top:0}
+.leakage-badge{min-width:80px;border-radius:var(--radius);padding:12px 10px;text-align:center;flex-shrink:0}
+.leakage-badge.red{background:var(--red-light);border:1px solid #fca5a5}
+.leakage-badge.amber{background:var(--amber-light);border:1px solid #fde68a}
+.leakage-num{font-size:16px;font-weight:900;line-height:1.1}
+.leakage-badge.red .leakage-num{color:var(--red)}
+.leakage-badge.amber .leakage-num{color:var(--amber)}
+.leakage-tag{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--grey-4);margin-top:4px}
+.leakage-content{flex:1}
+.leakage-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.leakage-body{font-size:13px;color:var(--text-sub);line-height:1.75}
+.leakage-body strong{color:var(--text);font-weight:600}
+.leakage-source{font-size:11px;color:var(--grey-4);margin-top:8px;line-height:1.5;display:block}
 
-/* redirect gateway warning */
-.redirect-warn{background:#fff8ec;border:1.5px solid #f7c36e;border-radius:12px;padding:20px;margin:22px 0}
-.redirect-warn-title{font-size:15px;font-weight:800;color:#b45309;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.redirect-stat{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f7e9c5;font-size:14px;line-height:1.65;color:#444}
-.redirect-stat:last-child{border-bottom:none}
-.redirect-stat .rs-arr{color:#b45309;font-weight:900;font-size:16px;flex-shrink:0;line-height:1.3}
-
-/* next step */
-.next-step{background:linear-gradient(135deg,#008060 0%,#005c44 100%);border-radius:12px;padding:20px;margin-top:20px;color:#fff}
-.next-step-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#95bf47;margin-bottom:8px}
-.next-step-text{font-size:15px;font-weight:700;line-height:1.5;color:#fff}
-.next-step-text em{font-style:italic;color:#c8f0e0}
-
-/* competitors */
-.comp-section{margin-top:22px}
-.comp-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.comp-chip{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;width:76px;height:50px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
-.comp-chip:hover{border-color:#95bf47;background:#f0faf6}
-.comp-chip img{max-width:62px;max-height:38px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:all .2s}
-.comp-chip:hover img{filter:grayscale(0);opacity:1}
-.comp-chip .fallback{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px;display:none}
-
-.pitch-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
-.pitch-actions .btn{flex:1;justify-content:center}
-
-/* ── BUSINESS CASE OUTPUT ── */
-.bc-cover{background:linear-gradient(160deg,#1a1a1a 0%,#111 100%);border-radius:14px 14px 0 0;padding:36px 36px 28px;position:relative;overflow:hidden}
-.bc-cover::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#008060,#95bf47)}
-.bc-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#95bf47;margin-bottom:14px}
-.bc-title{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.05;margin-bottom:0}
-.bc-cover-meta{display:flex;gap:0;margin-top:22px;padding-top:20px;border-top:1px solid #252525}
-.bc-meta-item{flex:1;display:flex;flex-direction:column;gap:4px;padding-right:20px}
-.bc-meta-item:not(:last-child){border-right:1px solid #252525;margin-right:20px}
-.bc-meta-label{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#3a3a3a;font-weight:700}
-.bc-meta-val{font-size:13px;font-weight:700;color:#888}
-.bc-exec{background:#f0faf5;border:1.5px solid #95bf47;border-top:none;border-radius:0 0 14px 14px;padding:24px 36px;margin-bottom:24px}
-.bc-exec-headline{font-size:17px;font-weight:800;color:#1a1a1a;line-height:1.5;margin-bottom:10px;letter-spacing:-.2px}
-.bc-exec-headline .green{color:#008060}
-.bc-exec-headline .red{color:#c0392b}
-.bc-exec-body{font-size:13px;color:#555;line-height:1.85}
-.bc-section{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:16px;border:1px solid #eaeaea;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.bc-section-hdr{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;padding-bottom:18px;border-bottom:2px solid #f5f5f5}
-.bc-num{font-size:10px;font-weight:900;color:#008060;background:#e8f5ee;padding:4px 9px;border-radius:5px;letter-spacing:.6px;flex-shrink:0;margin-top:3px;font-family:monospace}
-.bc-sec-title{font-size:16px;font-weight:800;color:#1a1a1a;letter-spacing:-.2px}
-.bc-sec-desc{font-size:12px;color:#888;margin-top:3px;line-height:1.55}
-/* KPI cards */
-.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-.kpi-card{border-radius:10px;padding:18px 16px;border:1px solid #e8e8e8}
-.kpi-card.bad{background:#fff5f5;border-color:#fca5a5}
-.kpi-card.good{background:#f0faf5;border-color:#86efac}
-.kpi-card.warn{background:#fffbeb;border-color:#fde68a}
-.kpi-card.neutral{background:#fafafa}
-.kpi-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#aaa;margin-bottom:9px}
-.kpi-val{font-size:30px;font-weight:900;letter-spacing:-1.5px;line-height:1;color:#1a1a1a}
-.kpi-card.bad .kpi-val{color:#dc2626}
-.kpi-card.good .kpi-val{color:#008060}
-.kpi-bm{font-size:11px;color:#aaa;margin-top:6px}
-.kpi-delta{font-size:11px;font-weight:700;margin-top:8px;padding:2px 8px;border-radius:4px;display:inline-block}
-.kpi-card.bad .kpi-delta{background:#fee2e2;color:#dc2626}
-.kpi-card.good .kpi-delta{background:#dcfce7;color:#15803d}
-.kpi-card.warn .kpi-delta{background:#fef9c3;color:#92400e}
-/* leakage items */
-.leakage-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #f5f5f5;align-items:flex-start}
-.leakage-item:last-child{border-bottom:none}
-.leakage-badge{min-width:72px;border-radius:8px;padding:10px 8px;text-align:center;flex-shrink:0}
-.leakage-badge.red{background:#fee2e2}
-.leakage-badge.amber{background:#fef9c3}
-.leakage-badge.green{background:#dcfce7}
-.leakage-num{font-size:18px;font-weight:900;line-height:1}
-.leakage-badge.red .leakage-num{color:#dc2626}
-.leakage-badge.amber .leakage-num{color:#92400e}
-.leakage-badge.green .leakage-num{color:#008060}
-.leakage-badge-label{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#aaa;margin-top:4px}
-.leakage-body{font-size:14px;line-height:1.72;color:#444}
-.leakage-body strong{color:#1a1a1a}
-.leakage-body .lsub{font-size:12px;color:#888;margin-top:5px;display:block;line-height:1.5}
-/* financial table */
-.fi-table{width:100%;border-collapse:collapse;font-size:14px;border-radius:10px;overflow:hidden}
-.fi-table thead tr{background:#1a1a1a}
-.fi-table thead th{padding:12px 16px;text-align:left;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#555}
+/* Financial model */
+.fi-table{width:100%;border-collapse:collapse;font-size:13px}
+.fi-table thead tr{background:var(--dark)}
+.fi-table thead th{padding:12px 16px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#555}
 .fi-table thead th:first-child{color:#fff}
-.fi-table thead th.th-now{color:#f59e0b}
-.fi-table thead th.th-sp{color:#95bf47}
-.fi-table tbody tr:nth-child(even){background:#fafafa}
-.fi-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#444;vertical-align:middle}
-.fi-table td:first-child{font-weight:700;color:#1a1a1a;font-size:13px}
-.fi-table td.td-now{font-weight:600;color:#666}
-.fi-table td.td-sp{font-weight:900;color:#008060;font-size:15px}
-.fi-chip{display:inline-block;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700}
-.fi-chip.big{background:#1a1a1a;color:#95bf47;font-size:13px;padding:3px 10px}
-.fi-total td{border-top:2px solid #1a1a1a !important;border-bottom:none !important;padding-top:16px !important;font-weight:900 !important;font-size:15px;color:#1a1a1a !important}
-.fi-total td.td-sp{color:#008060 !important;font-size:18px !important}
-.fi-note{font-size:11px;color:#bbb;margin-top:10px;line-height:1.6}
-/* proof points */
-.sp-proof{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.sp-proof-item{background:#f0faf5;border:1px solid #bbf7d0;border-radius:10px;padding:16px 12px;text-align:center}
-.sp-proof-val{font-size:20px;font-weight:900;color:#008060;letter-spacing:-.5px}
-.sp-proof-label{font-size:10px;color:#444;margin-top:6px;line-height:1.45;font-weight:600}
-/* brands */
-.bc-brand-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.bc-brand-chip{background:#f5f5f5;border:1px solid #e5e5e5;border-radius:8px;width:78px;height:52px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all .2s}
-.bc-brand-chip:hover{border-color:#86efac;background:#f0faf5}
-.bc-brand-chip img{max-width:64px;max-height:38px;object-fit:contain;filter:grayscale(1);opacity:.5;transition:all .2s}
-.bc-brand-chip:hover img{filter:grayscale(0);opacity:1}
-.bc-brand-chip .fb{font-size:8px;font-weight:800;color:#888;text-align:center;padding:4px;display:none}
-/* recommendation */
-.bc-rec{background:linear-gradient(160deg,#1a1a1a 0%,#111 100%);border-radius:14px;padding:32px 36px;margin-top:6px;position:relative;overflow:hidden}
-.bc-rec::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#95bf47,#008060)}
-.bc-rec-label{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#95bf47;margin-bottom:10px}
-.bc-rec-title{font-size:22px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}
-.bc-rec-body{font-size:14px;color:#777;line-height:1.85;margin-bottom:20px}
-.bc-rec-ask{background:#008060;border-radius:10px;padding:16px 20px;font-size:14px;font-weight:700;color:#fff;line-height:1.65}
-.bc-rec-ask strong{color:#cbf3e0}
-/* ── ANIM ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fi-table thead th.now-col{color:#f59e0b}
+.fi-table thead th.sp-col{color:var(--lime)}
+.fi-table tbody tr{border-bottom:1px solid var(--grey-2)}
+.fi-table tbody tr:nth-child(even){background:var(--grey-1)}
+.fi-table td{padding:13px 16px;color:var(--text-sub);vertical-align:middle}
+.fi-table td:first-child{font-weight:700;color:var(--text);font-size:12px}
+.fi-table td.now{font-weight:600;color:var(--grey-5)}
+.fi-table td.with-sp{font-weight:900;color:var(--green);font-size:15px}
+.fi-chip{display:inline-block;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.fi-chip.hero{background:var(--dark);color:var(--lime);font-size:13px;padding:3px 10px}
+.fi-total td{border-top:2px solid var(--dark)!important;border-bottom:none!important;padding-top:16px!important;font-weight:900!important;font-size:14px!important;color:var(--text)!important}
+.fi-total td.with-sp{color:var(--green)!important;font-size:18px!important}
+.fi-note{font-size:11px;color:var(--grey-4);margin-top:12px;line-height:1.7}
+
+/* Proof points */
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.proof-item{background:var(--green-light);border:1px solid var(--green-mid);border-radius:var(--radius-lg);padding:18px 14px;text-align:center}
+.proof-val{font-size:22px;font-weight:900;color:var(--green);letter-spacing:-.5px}
+.proof-label{font-size:10px;color:var(--grey-6);margin-top:6px;line-height:1.45;font-weight:600}
+
+/* Brands */
+.brand-grid{display:flex;flex-wrap:wrap;gap:8px}
+.brand-chip{width:80px;height:48px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.brand-chip img{max-width:64px;max-height:34px;object-fit:contain;filter:grayscale(1);opacity:.5}
+.brand-chip .fb{font-size:8px;font-weight:800;color:#999;text-align:center;display:none}
+
+/* Recommendation */
+.doc-rec{background:var(--dark2);padding:40px 48px;position:relative;overflow:hidden}
+.doc-rec::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),var(--green))}
+.rec-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--lime);margin-bottom:12px}
+.rec-title{font-size:26px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:16px;letter-spacing:-.5px}
+.rec-body{font-size:14px;color:#777;line-height:1.85;margin-bottom:24px}
+.rec-cta{background:#fff;border-radius:var(--radius-lg);padding:20px 24px;font-size:14px;font-weight:700;color:var(--dark);line-height:1.65}
+.rec-cta strong{color:var(--green)}
+
+/* Output actions */
+.output-actions{display:flex;gap:10px;padding:20px 48px;background:#fff;border-top:1px solid var(--border);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp .4s ease}
+
 /* ── RESPONSIVE ── */
-@media(max-width:600px){
+@media(max-width:640px){
+  .page{padding:16px 12px 60px}
   .grid-2,.grid-3{grid-template-columns:1fr}
-  .rlinks{grid-template-columns:1fr}
-  .kpi-row,.sp-proof{grid-template-columns:1fr 1fr}
-  .bc-title{font-size:26px}
-  .bc-cover-meta{flex-wrap:wrap}
-  .bc-meta-item{flex:none;width:calc(50% - 10px);border-right:none !important;margin-right:0 !important}
-  .bc-section{padding:20px 18px}
-  .bc-cover,.bc-exec,.bc-rec{padding-left:20px;padding-right:20px}
+  .kpi-grid,.proof-grid{grid-template-columns:1fr 1fr}
+  .doc-cover,.doc-exec,.doc-section,.doc-rec{padding-left:20px;padding-right:20px}
+  .doc-merchant{font-size:28px;letter-spacing:-1px}
+  .doc-meta{flex-wrap:wrap;gap:16px}
+  .doc-meta-item{border-right:none;padding-right:0;margin-right:0}
+  .exec-split{grid-template-columns:1fr}
+  .output-actions{padding:16px 20px}
+  .steps{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div class="hdr-logo">
-    <svg viewBox="0 0 28 28" fill="none">
-      <path d="M14 2C7.37 2 2 7.37 2 14s5.37 12 12 12 12-5.37 12-12S20.63 2 14 2z" fill="#95BF47"/>
-      <path d="M19.2 8.8c-.08-.08-.2-.1-.3-.08l-2.4.74-.7-2.1a.4.4 0 00-.38-.28h-.02c-.18 0-.34.12-.4.3L14 10.5l-1.8.56V9.6a.4.4 0 00-.4-.4h-1.6a.4.4 0 00-.4.4v1.9l-1.4.43a.4.4 0 00-.28.5l2.2 7.1c.07.2.28.32.48.26l8-2.46a.4.4 0 00.28-.5L19.5 9.1a.4.4 0 00-.3-.3z" fill="white"/>
-    </svg>
-    <span class="hdr-name">Shop Pay <span>Pitch Builder</span></span>
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg viewBox="0 0 18 18" fill="none"><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9S13.97 0 9 0z" fill="white" fill-opacity=".9"/><path d="M12.3 4.8c-.06-.06-.15-.07-.22-.06l-1.8.56-.53-1.58a.3.3 0 00-.28-.2h-.02c-.13 0-.25.09-.3.22L8.5 5.6l-1.35.42V4.8a.3.3 0 00-.3-.3h-1.2a.3.3 0 00-.3.3v1.43l-1.05.32a.3.3 0 00-.21.38l1.65 5.32c.05.15.21.24.36.2l6-1.85a.3.3 0 00.21-.38L12.5 5.1a.3.3 0 00-.2-.3z" fill="#008060"/></svg>
+    </div>
+    <span class="nav-name">Shop Pay Business Case Builder</span>
   </div>
-  <span class="hdr-tag">Growth Services</span>
-  <span class="hdr-right">Optimised for conversion, not cost</span>
-</div>
+  <div class="nav-div"></div>
+  <span class="nav-tag">Growth Services</span>
+  <span class="nav-pill">Optimised for conversion, not cost</span>
+</nav>
 
-<div class="wrap">
+<div class="page">
 
-  <!-- ── STEP 1 ── -->
+  <h1 class="page-title">Build a merchant business case</h1>
+  <p class="page-sub">Enter a Shop ID to open the Looker reports, then enter the merchant's data to generate a downloadable business case PDF.</p>
+
+  <div class="steps" id="progress-steps">
+    <div class="step-item active" id="step1-ind"><div class="step-num">1</div>Enter Shop ID</div>
+    <div class="step-item" id="step2-ind"><div class="step-num">2</div>Enter Metrics</div>
+    <div class="step-item" id="step3-ind"><div class="step-num">3</div>View Business Case</div>
+  </div>
+
+  <!-- STEP 1 -->
   <div class="card">
-    <div class="card-hdr">
-      <div class="step">1</div>
-      <div>
-        <div class="card-title">Enter Shop ID</div>
-        <div class="card-sub">Loads both Looker reports for the merchant — enter the same ID in each report's filter</div>
+    <div class="card-body">
+      <div class="ch">
+        <div class="ch-num">1</div>
+        <div>
+          <div class="ch-title">Enter Shop ID</div>
+          <div class="ch-sub">Opens both Looker reports pre-filtered for this merchant</div>
+        </div>
       </div>
-    </div>
-    <div class="id-row">
-      <input type="text" id="shop-id" placeholder="e.g. 55472324767" onkeydown="if(event.key==='Enter')loadMerchant()">
-      <button class="btn btn-green" onclick="loadMerchant()">Load Merchant →</button>
-    </div>
-    <div class="mbanner" id="mbanner">
-      <div>
-        <div class="mname" id="m-name">Merchant Name</div>
-        <div class="mdomain" id="m-domain">domain.com</div>
+      <div class="shopid-row">
+        <input type="text" id="shop-id" placeholder="e.g. 55472324767" autocomplete="off" onkeydown="if(event.key==='Enter')loadMerchant()">
+        <button class="btn btn-primary" style="height:44px;padding:0 20px;font-size:14px" onclick="loadMerchant()">Load Merchant →</button>
       </div>
-      <div class="mid" id="m-id">—</div>
-    </div>
-    <div class="rlinks" id="rlinks">
-      <a class="rlink" id="link1" href="#" target="_blank" rel="noopener">
-        <span class="rlink-icon">📊</span>
-        <span>
-          <span class="rlink-name">Purchase Funnel &amp; CRO Report</span>
-          <span class="rlink-desc">Cart adds · Checkouts · Completions · Benchmarks · Devices</span>
-        </span>
-      </a>
-      <a class="rlink" id="link2" href="#" target="_blank" rel="noopener">
-        <span class="rlink-icon">💳</span>
-        <span>
-          <span class="rlink-name">Shop Pay &amp; Payments Report</span>
-          <span class="rlink-desc">SP user % · App coverage · GMV by gateway · AOV lift</span>
-        </span>
-      </a>
+      <div class="mbanner" id="mbanner">
+        <span class="mbanner-name" id="m-name">Merchant</span>
+        <span class="mbanner-id" id="m-id">—</span>
+      </div>
+      <div class="rlinks" id="rlinks">
+        <a class="rlink" id="link1" href="#" target="_blank" rel="noopener">
+          <span class="rlink-icon">📊</span>
+          <div>
+            <span class="rlink-name">Purchase Funnel &amp; CRO Report</span>
+            <span class="rlink-desc">Cart rates · Checkout rates · Benchmarks · Device split</span>
+          </div>
+        </a>
+        <a class="rlink" id="link2" href="#" target="_blank" rel="noopener">
+          <span class="rlink-icon">💳</span>
+          <div>
+            <span class="rlink-name">Shop Pay &amp; Payments Report</span>
+            <span class="rlink-desc">SP users · App coverage · GMV by gateway · Incremental revenue</span>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- ── STEP 2 ── -->
+  <!-- STEP 2 -->
   <div class="card" id="card2" style="display:none">
-    <div class="card-hdr">
-      <div class="step">2</div>
-      <div>
-        <div class="card-title">Enter Key Metrics</div>
-        <div class="card-sub">Pull these numbers from the two reports — takes about 60 seconds</div>
+    <div class="card-body">
+      <div class="ch">
+        <div class="ch-num">2</div>
+        <div>
+          <div class="ch-title">Enter key metrics</div>
+          <div class="ch-sub">Pull these numbers from the two Looker reports — takes under two minutes</div>
+        </div>
       </div>
-    </div>
 
-    <div class="sec-label">📊 Purchase Funnel — Report 1 (Summary view, all devices)</div>
-    <div class="grid-3">
-      <div class="f">
-        <label>Sessions (90d)</label>
-        <input type="number" id="sessions" placeholder="83410">
-        <span class="hint">Total sessions shown</span>
+      <div class="slabel">Report 1 — Purchase Funnel (90-day, all devices)</div>
+      <div class="grid-3">
+        <div class="field">
+          <label>Total Sessions (90d)</label>
+          <input type="number" id="sessions" placeholder="83,410">
+        </div>
+        <div class="field">
+          <label>Mobile Traffic %</label>
+          <input type="number" step="0.1" id="mobile-pct" placeholder="77.7">
+          <span class="hint">From the Devices page</span>
+        </div>
+        <div class="field">
+          <label>Social Traffic % (FB + IG)</label>
+          <input type="number" step="0.1" id="social-pct" placeholder="41.9">
+          <span class="hint">Facebook % + Instagram % combined</span>
+        </div>
       </div>
-      <div class="f">
-        <label>Mobile Traffic %</label>
-        <input type="number" step="0.1" id="mobile-pct" placeholder="77.7">
-        <span class="hint">From Devices overview page</span>
+      <div class="grid-2">
+        <div class="field">
+          <label>Cart Add Rate — Store %</label>
+          <input type="number" step="0.01" id="cart-rate" placeholder="3.48">
+        </div>
+        <div class="field">
+          <label>Cart Add Rate — Benchmark %</label>
+          <input type="number" step="0.01" id="cart-bm" placeholder="5.42">
+          <span class="hint">Benchmark median (50th percentile)</span>
+        </div>
       </div>
-      <div class="f">
-        <label>Social Traffic % (FB + IG)</label>
-        <input type="number" step="0.1" id="social-pct" placeholder="41.9">
-        <span class="hint">Facebook % + Instagram % combined</span>
+      <div class="grid-2">
+        <div class="field">
+          <label>Checkout Completion — Store %</label>
+          <input type="number" step="0.01" id="chk-rate" placeholder="60.14">
+        </div>
+        <div class="field">
+          <label>Checkout Completion — Benchmark %</label>
+          <input type="number" step="0.01" id="chk-bm" placeholder="40.10">
+        </div>
       </div>
-    </div>
-    <div class="grid-2">
-      <div class="f">
-        <label>Cart Add Rate — Your Store %</label>
-        <input type="number" step="0.01" id="cart-rate" placeholder="3.48">
+      <div class="grid-2">
+        <div class="field">
+          <label>+5% Cart Uplift Revenue (90d) $</label>
+          <input type="number" id="rev-cart" placeholder="72,381">
+          <span class="hint">"If we moved 5% more…" → Sessions without carts row</span>
+        </div>
+        <div class="field">
+          <label>+5% Checkout Uplift Revenue (90d) $</label>
+          <input type="number" id="rev-chk" placeholder="1,699">
+          <span class="hint">"If we moved 5% more…" → Checkout drop-offs row</span>
+        </div>
       </div>
-      <div class="f">
-        <label>Cart Add Rate — Benchmark %</label>
-        <input type="number" step="0.01" id="cart-bm" placeholder="5.42">
-        <span class="hint">Benchmark Median (50th percentile)</span>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="f">
-        <label>Checkout Completion — Your Store %</label>
-        <input type="number" step="0.01" id="chk-rate" placeholder="60.14">
-      </div>
-      <div class="f">
-        <label>Checkout Completion — Benchmark %</label>
-        <input type="number" step="0.01" id="chk-bm" placeholder="40.10">
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="f">
-        <label>5% Cart Uplift — Revenue (90d) $</label>
-        <input type="number" id="rev-cart" placeholder="72381">
-        <span class="hint">"If we moved 5% more…" panel — Sessions without carts row</span>
-      </div>
-      <div class="f">
-        <label>5% Checkout Uplift — Revenue (90d) $</label>
-        <input type="number" id="rev-chk" placeholder="1699">
-        <span class="hint">"If we moved 5% more…" panel — Checkout drop-offs row</span>
-      </div>
-    </div>
 
-    <hr class="div">
-    <div class="sec-label">💳 Shop Pay &amp; Payments — Report 2</div>
-    <div class="grid-3">
-      <div class="f">
-        <label>% Orders from Shop Pay Users</label>
-        <input type="number" step="0.01" id="sp-orders" placeholder="70.72">
-        <span class="hint">Shop Pay Stats → top metric</span>
+      <hr class="d">
+      <div class="slabel">Report 2 — Shop Pay &amp; Payments</div>
+      <div class="grid-3">
+        <div class="field">
+          <label>% Orders from Shop Pay Users</label>
+          <input type="number" step="0.01" id="sp-orders" placeholder="70.72">
+        </div>
+        <div class="field">
+          <label>% GMV via Shop Pay Gateway</label>
+          <input type="number" step="0.1" id="sp-gmv" placeholder="32">
+        </div>
+        <div class="field">
+          <label>Estimated Incremental Revenue (SP) $</label>
+          <input type="number" id="sp-rev" placeholder="1,483">
+          <span class="hint">Estimated Revenue Boost section</span>
+        </div>
       </div>
-      <div class="f">
-        <label>% GMV via Shop Pay gateway</label>
-        <input type="number" step="0.1" id="sp-gmv" placeholder="32">
-        <span class="hint">% GMV by Gateway chart</span>
+      <div class="grid-3">
+        <div class="field">
+          <label>% Customers with Shop Pay</label>
+          <input type="number" step="0.1" id="sp-cust" placeholder="57.6">
+        </div>
+        <div class="field">
+          <label>% Customers with Shop App</label>
+          <input type="number" step="0.1" id="app-cust" placeholder="44.7">
+        </div>
+        <div class="field">
+          <label>2nd Largest Gateway</label>
+          <input type="text" id="gateway2" placeholder="Apple Pay">
+        </div>
       </div>
-      <div class="f">
-        <label>Estimated Incremental Rev (SP) $</label>
-        <input type="number" id="sp-rev" placeholder="1483">
-        <span class="hint">Estimated Revenue Boost section</span>
-      </div>
-    </div>
-    <div class="grid-3">
-      <div class="f">
-        <label>% Customers with Shop Pay (all-time)</label>
-        <input type="number" step="0.1" id="sp-cust" placeholder="57.6">
-        <span class="hint">% Customers Who Are Shop Pay Users</span>
-      </div>
-      <div class="f">
-        <label>% Customers with Shop App (all-time)</label>
-        <input type="number" step="0.1" id="app-cust" placeholder="44.7">
-        <span class="hint">% Customers Who Are Shop App Users</span>
-      </div>
-      <div class="f">
-        <label>2nd Largest Gateway</label>
-        <input type="text" id="gateway2" placeholder="Apple Pay">
-        <span class="hint">From GMV by Gateway chart</span>
-      </div>
-    </div>
 
-    <hr class="div">
-    <div class="sec-label">⚡ Processor &amp; Checkout Setup <span style="font-weight:400;color:#aaa;font-size:10px;text-transform:none;letter-spacing:0">(optional — unlocks auth rate + redirect calculators)</span></div>
-    <div class="grid-3">
-      <div class="f">
-        <label>Current Payment Processor</label>
-        <input type="text" id="current-processor" placeholder="Stripe / PayPal / Adyen…">
-        <span class="hint">Non-SP processor — triggers 243bps auth rate analysis</span>
+      <hr class="d">
+      <div class="slabel">Processor &amp; Checkout Setup <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--grey-4);margin-left:4px">(optional — unlocks auth rate calculator)</span></div>
+      <div class="grid-3">
+        <div class="field">
+          <label>Current Payment Processor</label>
+          <input type="text" id="current-processor" placeholder="Stripe / PayPal / Adyen…">
+        </div>
+        <div class="field">
+          <label>Average Order Value (AOV) $</label>
+          <input type="number" id="aov" placeholder="85">
+        </div>
+        <div class="field" style="justify-content:flex-end">
+          <label>3rd party redirect gateway?</label>
+          <label class="check-field">
+            <input type="checkbox" id="redirect-gateway">
+            <span>Yes — redirects away from Shopify checkout</span>
+          </label>
+        </div>
       </div>
-      <div class="f">
-        <label>Average Order Value (AOV) £/$</label>
-        <input type="number" id="aov" placeholder="85">
-        <span class="hint">Used to calculate false decline revenue loss</span>
-      </div>
-      <div class="f" style="justify-content:flex-start;gap:6px">
-        <label>Redirects away from Shopify checkout?</label>
-        <label style="display:flex;align-items:center;gap:9px;cursor:pointer;margin-top:6px;padding:9px 12px;border:1.5px solid #e0e0e0;border-radius:8px;background:#fff">
-          <input type="checkbox" id="redirect-gateway" style="width:17px;height:17px;accent-color:#c0392b;flex-shrink:0">
-          <span style="font-size:13px;font-weight:600;color:#444">Yes — uses a 3rd party redirect gateway</span>
-        </label>
-        <span class="hint">Triggers mobile drop-off analysis</span>
+
+      <hr class="d">
+      <div class="slabel">Merchant Context</div>
+      <div class="grid-3">
+        <div class="field">
+          <label>Merchant Name</label>
+          <input type="text" id="merch-name" placeholder="e.g. Needs No Label">
+        </div>
+        <div class="field">
+          <label>Industry Vertical</label>
+          <select id="vertical">
+            <option value="Fashion &amp; Apparel">Fashion &amp; Apparel</option>
+            <option value="Streetwear">Streetwear</option>
+            <option value="Beauty &amp; Cosmetics">Beauty &amp; Cosmetics</option>
+            <option value="Sports &amp; Fitness">Sports &amp; Fitness</option>
+            <option value="Home &amp; Living">Home &amp; Living</option>
+            <option value="Food &amp; Drink">Food &amp; Drink</option>
+            <option value="Footwear">Footwear</option>
+            <option value="Jewellery &amp; Accessories">Jewellery &amp; Accessories</option>
+            <option value="Electronics">Electronics</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Your Name (AE)</label>
+          <input type="text" id="ae-name" placeholder="Your name">
+        </div>
       </div>
     </div>
-
-    <hr class="div">
-    <div class="sec-label">🏷️ Merchant Context</div>
-    <div class="grid-3">
-      <div class="f">
-        <label>Merchant Name</label>
-        <input type="text" id="merch-name" placeholder="Needs No Label">
-      </div>
-      <div class="f">
-        <label>Industry Vertical</label>
-        <select id="vertical">
-          <option value="Fashion & Apparel">Fashion &amp; Apparel</option>
-          <option value="Streetwear">Streetwear</option>
-          <option value="Beauty & Cosmetics">Beauty &amp; Cosmetics</option>
-          <option value="Sports & Fitness">Sports &amp; Fitness</option>
-          <option value="Home & Living">Home &amp; Living</option>
-          <option value="Food & Drink">Food &amp; Drink</option>
-          <option value="Footwear">Footwear</option>
-          <option value="Jewellery & Accessories">Jewellery &amp; Accessories</option>
-          <option value="Electronics">Electronics</option>
-        </select>
-      </div>
-      <div class="f">
-        <label>Your Name (AE)</label>
-        <input type="text" id="ae-name" placeholder="Dougie Marshall">
-      </div>
-    </div>
-
-    <button class="btn btn-green btn-block" style="margin-top:18px;font-size:15px" onclick="generatePitch()">
-      ✦ &nbsp;Build Business Case
-    </button>
-  </div>
-
-  <!-- ── STEP 3: PITCH OUTPUT ── -->
-  <div class="card fade-up" id="pitch-out">
-    <div class="card-hdr">
-      <div class="step">3</div>
-      <div>
-        <div class="card-title">Business Case</div>
-        <div class="card-sub">Data-led, merchant-ready — built from their own funnel &amp; payments data</div>
-      </div>
-    </div>
-    <div id="pitch-body"></div>
-    <div class="pitch-actions">
-      <button class="btn btn-dark" onclick="downloadPDF()">⬇ &nbsp;Download Business Case PDF</button>
-      <button class="btn btn-ghost" onclick="copyBrief()">📋 &nbsp;Copy to Clipboard</button>
+    <div class="card-foot">
+      <button class="btn btn-generate" onclick="generateCase()">
+        Generate Business Case →
+      </button>
     </div>
   </div>
 
-</div><!-- /wrap -->
+  <!-- STEP 3: OUTPUT -->
+  <div id="output" class="fade-up">
+    <div class="doc" id="doc-body">
+      <!-- Injected by JS -->
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-dark" style="flex:1;justify-content:center;height:44px" onclick="downloadPDF()">⬇ &nbsp;Download PDF</button>
+      <button class="btn btn-outline" style="height:44px;padding:0 18px" onclick="copyCase()">📋 Copy</button>
+      <button class="btn btn-outline" style="height:44px;padding:0 18px" onclick="resetForm()">↩ Start Over</button>
+    </div>
+  </div>
+
+</div>
 
 <script>
 const R1 = 'https://lookerstudio.google.com/reporting/7e958a1f-3d14-4057-8024-d06918174416/page/p_jj8oo1jpwd';
 const R2 = 'https://lookerstudio.google.com/reporting/f4423a60-f1bc-42f6-a548-79f5a45e0074/page/p_ahl9q4zfad';
+const AUTH_RATE_GAP = 0.0243;
+const SP_CHECKOUT_LIFT = 0.05;
+const SP_CART_LIFT = 0.15;
 
 const BRANDS = {
-  'Fashion & Apparel':      ['gymshark.com','fashionnova.com','aloyoga.com','reiss.com','allbirds.com','cos.com'],
-  'Streetwear':             ['supremenewyork.com','palace.co.uk','madhappy.com','stussy.com','humanmade.jp','aimeleondore.com'],
-  'Beauty & Cosmetics':     ['kyliecosmetics.com','colourpop.com','morphe.com','hudabeauty.com','patmcgrath.com','ctilburymakeup.com'],
-  'Sports & Fitness':       ['gymshark.com','rogue.com','aloyoga.com','huel.com','myprotein.com','bulk.com'],
-  'Home & Living':          ['ruggable.com','brooklinen.com','parachutehome.com','casper.com','made.com','loaf.com'],
-  'Food & Drink':           ['bulletproof.com','graze.com','pip-and-nut.com','huel.com','pactcoffee.com','omsom.com'],
-  'Footwear':               ['allbirds.com','grenson.com','veja-store.com','loake.co.uk','clarks.co.uk','trouva.com'],
-  'Jewellery & Accessories':['mejuri.com','monica-vinader.com','missoma.com','pandora.net','anine-bing.com','links.co.uk'],
-  'Electronics':            ['nothing.tech','dbrand.com','anker.com','moment.com','nomadgoods.com','casetify.com']
+  'Fashion & Apparel':       ['gymshark.com','fashionnova.com','aloyoga.com','reiss.com','allbirds.com','cos.com'],
+  'Streetwear':              ['supremenewyork.com','palace.co.uk','madhappy.com','stussy.com','humanmade.jp','aimeleondore.com'],
+  'Beauty & Cosmetics':      ['kyliecosmetics.com','colourpop.com','morphe.com','hudabeauty.com','patmcgrath.com','ctilburymakeup.com'],
+  'Sports & Fitness':        ['gymshark.com','rogue.com','aloyoga.com','huel.com','myprotein.com','bulk.com'],
+  'Home & Living':           ['ruggable.com','brooklinen.com','parachutehome.com','casper.com','made.com','loaf.com'],
+  'Food & Drink':            ['bulletproof.com','graze.com','pip-and-nut.com','huel.com','pactcoffee.com','omsom.com'],
+  'Footwear':                ['allbirds.com','grenson.com','veja-store.com','loake.co.uk','clarks.co.uk','trouva.com'],
+  'Jewellery & Accessories': ['mejuri.com','monica-vinader.com','missoma.com','pandora.net','anine-bing.com','links.co.uk'],
+  'Electronics':             ['nothing.tech','dbrand.com','anker.com','moment.com','nomadgoods.com','casetify.com']
 };
 
 let D = {};
 
 function v(id){ return (document.getElementById(id)||{}).value||''; }
 function fv(id){ return parseFloat(v(id))||null; }
-function iv(id){ return parseInt(v(id))||null; }
 function fmt(n,d=1){ return n==null?'—':parseFloat(n).toFixed(d); }
-function fmtC(n){ return n==null?'—':'$'+parseInt(n).toLocaleString('en-GB'); }
-function fmtN(n){ return n==null?'—':parseInt(n).toLocaleString('en-GB'); }
-function pct(n){ return n==null?'—':fmt(n)+'%'; }
+function fmtC(n,sym='$'){ return n==null?'—':sym+Math.round(n).toLocaleString(); }
+function fmtN(n){ return n==null?'—':Math.round(n).toLocaleString(); }
+function pct(n){ return n==null?'—':fmt(n,1)+'%'; }
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    const el = document.getElementById('step'+i+'-ind');
+    el.className='step-item'+(i===n?' active':i<n?' done':'');
+  });
+}
 
 function loadMerchant(){
   const id = v('shop-id').trim();
-  if(!id){ document.getElementById('shop-id').style.borderColor='#c0392b'; return; }
-  document.getElementById('shop-id').style.borderColor='#008060';
+  if(!id){ document.getElementById('shop-id').focus(); return; }
   document.getElementById('m-id').textContent = 'Shop ID: '+id;
-  document.getElementById('m-name').textContent = v('merch-name')||'Merchant';
-  document.getElementById('m-domain').textContent = 'Enter merchant name in Step 2 below';
+  document.getElementById('m-name').textContent = v('merch-name')||'Merchant loaded';
   document.getElementById('mbanner').style.display='flex';
   document.getElementById('link1').href = R1;
   document.getElementById('link2').href = R2;
   document.getElementById('rlinks').style.display='grid';
   document.getElementById('card2').style.display='block';
-  document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'});
+  setStep(2);
+  setTimeout(()=>document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
-function generatePitch(){
+function generateCase(){
   D = {
-    sessions:   fv('sessions'),
-    mobilePct:  fv('mobile-pct'),
-    socialPct:  fv('social-pct'),
-    cartRate:   fv('cart-rate'),
-    cartBm:     fv('cart-bm'),
-    chkRate:    fv('chk-rate'),
-    chkBm:      fv('chk-bm'),
-    revCart:    fv('rev-cart'),
-    revChk:     fv('rev-chk'),
-    spOrders:   fv('sp-orders'),
-    spGmv:      fv('sp-gmv'),
-    spRev:      fv('sp-rev'),
-    spCust:     fv('sp-cust'),
-    appCust:    fv('app-cust'),
+    sessions:         fv('sessions'),
+    mobilePct:        fv('mobile-pct'),
+    socialPct:        fv('social-pct'),
+    cartRate:         fv('cart-rate'),
+    cartBm:           fv('cart-bm'),
+    chkRate:          fv('chk-rate'),
+    chkBm:            fv('chk-bm'),
+    revCart:          fv('rev-cart'),
+    revChk:           fv('rev-chk'),
+    spOrders:         fv('sp-orders'),
+    spGmv:            fv('sp-gmv'),
+    spRev:            fv('sp-rev'),
+    spCust:           fv('sp-cust'),
+    appCust:          fv('app-cust'),
     gateway2:         v('gateway2')||'Apple Pay',
-    merchantName:     v('merch-name')||'This merchant',
+    merchantName:     v('merch-name')||'This Merchant',
     vertical:         v('vertical'),
     aeName:           v('ae-name')||'Shopify',
     shopId:           v('shop-id'),
@@ -596,672 +555,595 @@ function generatePitch(){
     redirectGateway:  document.getElementById('redirect-gateway').checked
   };
 
-  document.getElementById('m-name').textContent = D.merchantName;
+  // ── DERIVED ──
+  const cartGap     = D.cartRate && D.cartBm ? (D.cartBm - D.cartRate) : null; // absolute pts below bm
+  const cartGapPct  = D.cartRate && D.cartBm ? ((D.cartBm - D.cartRate) / D.cartBm * 100) : null;
+  const chkGap      = D.chkRate  && D.chkBm  ? (D.chkRate - D.chkBm) : null; // positive = above bm
+  const actGap      = D.spCust   && D.spGmv  ? (D.spCust - D.spGmv) : null;
+  const totalRevOpp = (D.revCart||0) + (D.revChk||0);
+  const sessNoCart  = D.sessions && D.cartRate ? Math.round(D.sessions * (1 - D.cartRate/100)) : null;
 
-  // ── DERIVED VALUES ──
-  const cartGap    = D.cartRate && D.cartBm ? ((D.cartBm - D.cartRate) / D.cartBm * 100) : null;
-  const chkGap     = D.chkRate  && D.chkBm  ? ((D.chkRate - D.chkBm)  / D.chkBm  * 100) : null;
-  const actGap     = D.spCust && D.spGmv ? (D.spCust - D.spGmv) : null;
-  const totalRev   = (D.revCart||0) + (D.revChk||0);
-  const sessNoCart = D.sessions && D.cartRate ? Math.round(D.sessions * (1 - D.cartRate / 100)) : null;
-  // "For every 100 visitors, X add to cart"
-  const cartPer100 = D.cartRate ? Math.round(D.cartRate) : null;
-  const bmPer100   = D.cartBm   ? Math.round(D.cartBm)   : null;
-  // SP customers not using it
-  const spCustCount = D.spCust && D.sessions ? Math.round(D.sessions * D.spCust / 100) : null;
+  // Funnel counts
+  let curCartN=null, curChkN=null, spCartRate=null, spChkRate=null, spCartN=null, spChkN=null, addedOrders=null;
+  if(D.sessions && D.cartRate && D.chkRate){
+    curCartN   = Math.round(D.sessions * D.cartRate/100);
+    curChkN    = Math.round(curCartN   * D.chkRate /100);
+    spCartRate = Math.min(D.cartRate*(1+SP_CART_LIFT), 100);
+    spChkRate  = Math.min(D.chkRate *(1+SP_CHECKOUT_LIFT), 100);
+    spCartN    = Math.round(D.sessions * spCartRate/100);
+    spChkN     = Math.round(spCartN    * spChkRate /100);
+    addedOrders = spChkN - curChkN;
+  }
 
-  D._cartGap = cartGap; D._chkGap = chkGap; D._actGap = actGap;
-  D._totalRevOpp = totalRev; D._sessNoCart = sessNoCart;
+  // Auth rate loss
+  const authRevLoss = D.aov && curChkN ? Math.round(curChkN * AUTH_RATE_GAP * D.aov) : null;
 
-  // ── AUTH RATE DERIVED ──
-  const AUTH_RATE_GAP = 0.0243; // 243bps — SP vs any other processor on Shopify
-  const _curChkN      = D.sessions && D.cartRate && D.chkRate
-    ? Math.round(D.sessions * D.cartRate / 100 * D.chkRate / 100) : null;
-  const authRevLoss   = D.aov && _curChkN ? Math.round(_curChkN * AUTH_RATE_GAP * D.aov) : null;
+  // Revenue summary
+  const revLift = totalRevOpp > 0 ? totalRevOpp : (D.spRev || null);
+
+  // Store for PDF
+  D._cartGap = cartGap; D._cartGapPct = cartGapPct; D._chkGap = chkGap;
+  D._actGap = actGap; D._totalRevOpp = totalRevOpp; D._sessNoCart = sessNoCart;
+  D._curCartN = curCartN; D._curChkN = curChkN;
+  D._spCartRate = spCartRate; D._spChkRate = spChkRate;
+  D._spCartN = spCartN; D._spChkN = spChkN;
+  D._addedOrders = addedOrders; D._authRevLoss = authRevLoss; D._revLift = revLift;
 
   const mn = D.merchantName;
+  const dateStr = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   const brands = BRANDS[D.vertical]||[];
-
-  const logoHTML = brands.map(domain=>`
-    <div class="comp-chip" title="${domain}">
-      <img src="https://logo.clearbit.com/${domain}" alt="${domain.split('.')[0]}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="fallback">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
-    </div>`).join('');
-
-  // ─── BUSINESS CASE HTML GENERATION ───────────────────────────
-
-  const dateStr    = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  const totalRevOpp = totalRev > 0 ? totalRev : (D.spRev || 0);
-  const procName   = D.currentProcessor || 'current processor';
-
-  // ── PROJECTION MATH ──
-  const SP_CHECKOUT_LIFT = 0.05;
-  const SP_CART_LIFT     = 0.15;
-  let spCartRate, spChkRate, spCartN, spChkN, curCartN, curChkNCalc, addedOrders, revLift;
-  if(D.sessions && D.cartRate && D.chkRate){
-    curCartN    = Math.round(D.sessions * D.cartRate / 100);
-    curChkNCalc = Math.round(curCartN   * D.chkRate  / 100);
-    spCartRate  = Math.min(D.cartRate * (1 + SP_CART_LIFT),     100);
-    spChkRate   = Math.min(D.chkRate  * (1 + SP_CHECKOUT_LIFT), 100);
-    spCartN     = Math.round(D.sessions * spCartRate / 100);
-    spChkN      = Math.round(spCartN    * spChkRate  / 100);
-    addedOrders = spChkN - curChkNCalc;
-    revLift     = D.spRev ? D.spRev : totalRevOpp;
-  }
+  const procName = D.currentProcessor || 'current processor';
 
   // ── COVER ──
-  const execHeadline = totalRevOpp > 0
-    ? `${mn} has a <span class="green">${fmtC(totalRevOpp)}</span> 90-day revenue opportunity identified directly from purchase funnel and payments data.`
-    : `${mn}'s purchase funnel and payments data reveals a material conversion gap that Shopify Payments is positioned to close.`;
+  const heroNumber = revLift > 0
+    ? `<div class="doc-exec-number"><span>$</span>${Math.round(revLift).toLocaleString()}</div><div class="doc-exec-label">90-day revenue opportunity</div>`
+    : authRevLoss
+    ? `<div class="doc-exec-number"><span>$</span>${Math.round(authRevLoss).toLocaleString()}</div><div class="doc-exec-label">Est. quarterly false decline leakage</div>`
+    : `<div class="doc-exec-number">+243bps</div><div class="doc-exec-label">Authorisation rate advantage</div>`;
 
-  const execBodyParts = [
-    D.cartRate && D.cartBm && cartGap > 5
-      ? `Cart add rate is ${fmt(cartGap,1)}% below benchmark (${pct(D.cartRate)} vs ${pct(D.cartBm)}), with ${sessNoCart ? fmtN(sessNoCart)+' sessions per quarter' : 'the majority of traffic'} exiting without engaging the cart.`
-      : null,
-    D.spCust && actGap > 10
-      ? `${pct(D.spCust)} of customers already hold Shop Pay yet only ${pct(D.spGmv)} of GMV flows through it — a ${fmt(actGap)}-point activation gap representing a pre-qualified audience not being converted.`
-      : null,
-    `With a 243 basis point authorisation rate advantage over any alternative processor on Shopify, activating Shopify Payments also recovers silent revenue lost to false transaction declines that does not appear in standard reporting.`,
-  ].filter(Boolean).join(' ');
+  const execHeadline = buildExecHeadline(mn, totalRevOpp, cartGap, cartGapPct, actGap, authRevLoss);
+  const execBody = buildExecBody(mn, cartGap, cartGapPct, sessNoCart, actGap, D.spCust, D.spGmv, D.currentProcessor, authRevLoss, D.aov);
 
   const coverHTML = `
-    <div class="bc-cover">
-      <div class="bc-eyebrow">Business Case · Shopify Payments</div>
-      <div class="bc-title">${mn}</div>
-      <div class="bc-cover-meta">
-        <div class="bc-meta-item"><span class="bc-meta-label">Vertical</span><span class="bc-meta-val">${D.vertical}</span></div>
-        <div class="bc-meta-item"><span class="bc-meta-label">Shop ID</span><span class="bc-meta-val">${D.shopId||'—'}</span></div>
-        <div class="bc-meta-item"><span class="bc-meta-label">Prepared by</span><span class="bc-meta-val">${D.aeName}</span></div>
-        <div class="bc-meta-item"><span class="bc-meta-label">Date</span><span class="bc-meta-val">${dateStr}</span></div>
+  <div class="doc-cover">
+    <div class="doc-eyebrow">Business Case — Shopify Payments</div>
+    <div class="doc-merchant">${mn}</div>
+    <div class="doc-meta">
+      <div class="doc-meta-item"><div class="doc-meta-label">Vertical</div><div class="doc-meta-val">${D.vertical}</div></div>
+      <div class="doc-meta-item"><div class="doc-meta-label">Shop ID</div><div class="doc-meta-val">${D.shopId||'—'}</div></div>
+      <div class="doc-meta-item"><div class="doc-meta-label">Prepared by</div><div class="doc-meta-val">${D.aeName}</div></div>
+      <div class="doc-meta-item"><div class="doc-meta-label">Date</div><div class="doc-meta-val">${dateStr}</div></div>
+    </div>
+  </div>
+  <div class="doc-exec">
+    <div class="exec-split">
+      <div>${heroNumber}</div>
+      <div>
+        <div class="doc-exec-headline">${execHeadline}</div>
+        <div class="doc-exec-body">${execBody}</div>
       </div>
     </div>
-    <div class="bc-exec">
-      <div class="bc-exec-headline">${execHeadline}</div>
-      <div class="bc-exec-body">${execBodyParts}</div>
-    </div>`;
+  </div>`;
 
-  // ── SECTION 01: CURRENT PERFORMANCE ──
+  // ── SECTION 01: CONVERSION PERFORMANCE ──
+  const cartStatus = cartGap && cartGap > 1 ? 'bad' : cartGap && cartGap < -0.5 ? 'good' : 'warn';
+  const chkStatus  = chkGap && chkGap < -5 ? 'bad' : chkGap && chkGap > 5 ? 'good' : 'warn';
+  const actStatus  = actGap && actGap > 15 ? 'bad' : actGap ? 'warn' : 'neutral';
+
   const kpiCards = `
-    <div class="kpi-row">
-      <div class="kpi-card ${cartGap&&cartGap>5?'bad':cartGap&&cartGap<-5?'good':'warn'}">
-        <div class="kpi-label">Cart Add Rate</div>
-        <div class="kpi-val">${pct(D.cartRate)}</div>
-        <div class="kpi-bm">Benchmark median: <strong>${pct(D.cartBm)}</strong></div>
-        ${cartGap!==null?`<div class="kpi-delta">${cartGap>0?'↓ '+fmt(cartGap)+'pts below benchmark':'↑ '+fmt(Math.abs(cartGap))+'pts above benchmark'}</div>`:''}
-      </div>
-      <div class="kpi-card ${chkGap&&chkGap<-10?'bad':chkGap&&chkGap>10?'good':'warn'}">
-        <div class="kpi-label">Checkout Completion</div>
-        <div class="kpi-val">${pct(D.chkRate)}</div>
-        <div class="kpi-bm">Benchmark median: <strong>${pct(D.chkBm)}</strong></div>
-        ${chkGap!==null?`<div class="kpi-delta">${chkGap<0?'↓ '+fmt(Math.abs(chkGap))+'pts below benchmark':'↑ '+fmt(chkGap)+'pts above benchmark'}</div>`:''}
-      </div>
-      <div class="kpi-card ${actGap&&actGap>15?'bad':actGap?'warn':'neutral'}">
-        <div class="kpi-label">Shop Pay Activation Gap</div>
-        <div class="kpi-val">${actGap?fmt(actGap)+'pt':'—'}</div>
-        <div class="kpi-bm">${D.spCust?pct(D.spCust)+' hold SP':'—'} · ${D.spGmv?pct(D.spGmv)+' using it':'—'}</div>
-        ${actGap?`<div class="kpi-delta">${fmt(actGap)}pt untapped audience</div>`:''}
-      </div>
-    </div>`;
+  <div class="kpi-grid">
+    <div class="kpi ${cartStatus}">
+      <div class="kpi-label">Cart Add Rate</div>
+      <div class="kpi-value">${pct(D.cartRate)}</div>
+      <div class="kpi-bm">Benchmark: <strong>${pct(D.cartBm)}</strong></div>
+      ${cartGap!==null?`<div class="kpi-delta">${cartGap>0.1?'↓ '+fmt(cartGap)+'pts below median':'↑ '+fmt(Math.abs(cartGap))+'pts above median'}</div>`:''}
+    </div>
+    <div class="kpi ${chkStatus}">
+      <div class="kpi-label">Checkout Completion</div>
+      <div class="kpi-value">${pct(D.chkRate)}</div>
+      <div class="kpi-bm">Benchmark: <strong>${pct(D.chkBm)}</strong></div>
+      ${chkGap!==null?`<div class="kpi-delta">${chkGap<-0.1?'↓ '+fmt(Math.abs(chkGap))+'pts below median':'↑ '+fmt(chkGap)+'pts above median'}</div>`:''}
+    </div>
+    <div class="kpi ${actStatus}">
+      <div class="kpi-label">SP Activation Gap</div>
+      <div class="kpi-value">${actGap!==null?fmt(actGap)+'pt':'—'}</div>
+      <div class="kpi-bm">${D.spCust?pct(D.spCust)+' hold SP':'—'} · ${D.spGmv?pct(D.spGmv)+' GMV activated':'—'}</div>
+      ${actGap!==null?`<div class="kpi-delta">${fmt(actGap)}pt untapped</div>`:''}
+    </div>
+  </div>`;
 
-  const funnelSummary = D.sessions ? `
-    <p style="font-size:14px;color:#555;line-height:1.78;margin-bottom:${D.spCust&&D.spGmv?'14px':'0'}">
-      Over 90 days, ${fmtN(D.sessions)} sessions generated ${curCartN?fmtN(curCartN)+' cart adds':'—'} and ${_curChkN?fmtN(_curChkN)+' completed orders':'—'}.
-      ${sessNoCart?` <strong>${fmtN(sessNoCart)} sessions</strong> (${fmt(100-D.cartRate,1)}%) exited before adding to cart.`:''}
-      ${D.mobilePct?` ${pct(D.mobilePct)} of traffic arrived on mobile${D.socialPct?`, with ${pct(D.socialPct)} referred from social channels`:''}. `:''}
-    </p>` : '';
+  const funnelNarrative = D.sessions ? `
+  <p class="funnel-text">
+    Over the last 90 days, <strong>${fmtN(D.sessions)} sessions</strong> arrived at ${mn}'s store.
+    ${curCartN ? ` Of those, <strong>${fmtN(curCartN)} added to cart</strong> — a ${pct(D.cartRate)} add rate` : ''}${cartGap&&cartGap>1 ? ` sitting <strong>${fmt(cartGap,1)} percentage points below the Shopify benchmark median of ${pct(D.cartBm)}</strong>` : ''}.
+    ${sessNoCart ? ` <strong>${fmtN(sessNoCart)} sessions</strong> (${fmt(100-D.cartRate,1)}%) exited without interacting with the cart at all.` : ''}
+    ${D.mobilePct ? ` <strong>${pct(D.mobilePct)} of all traffic arrived on mobile</strong>${D.socialPct ? `, with ${pct(D.socialPct)} coming from social channels` : ''} — the highest-intent, lowest-patience buyer segment.` : ''}
+    ${curChkN ? ` ${fmtN(curChkN)} orders completed in the period.` : ''}
+  </p>` : '';
 
-  const gapBars = D.spCust && D.spGmv ? `
-    <div style="background:#fafafa;border-radius:10px;padding:18px 20px;border:1px solid #f0f0f0">
-      <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#bbb;margin-bottom:16px">Shop Pay audience vs activation</p>
-      <div style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:12px;font-weight:600;color:#555">Customers holding Shop Pay</span>
-          <span style="font-size:15px;font-weight:900;color:#008060">${pct(D.spCust)}</span>
-        </div>
-        <div style="height:7px;background:#e5e5e5;border-radius:4px;overflow:hidden">
-          <div style="height:100%;width:${Math.min(D.spCust,100)}%;background:#95bf47;border-radius:4px"></div>
-        </div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:12px;font-weight:600;color:#555">GMV currently via Shop Pay gateway</span>
-          <span style="font-size:15px;font-weight:900;color:#dc2626">${pct(D.spGmv)}</span>
-        </div>
-        <div style="height:7px;background:#e5e5e5;border-radius:4px;overflow:hidden">
-          <div style="height:100%;width:${Math.min(D.spGmv,100)}%;background:#fca5a5;border-radius:4px"></div>
-        </div>
-      </div>
-      <div style="margin-top:14px;background:#fee2e2;border-radius:7px;padding:10px 14px;font-size:13px;font-weight:700;color:#dc2626;text-align:center">
-        ${fmt(actGap)}-point gap — ${pct(D.spCust)} of customers hold Shop Pay · only ${pct(D.spGmv)} using it at checkout
-      </div>
-    </div>` : '';
+  const gapBars = D.spCust && D.spGmv && actGap > 0 ? `
+  <div class="bar-group">
+    <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-4);margin-bottom:20px">Shop Pay audience vs activation</p>
+    <div class="bar-label-row">
+      <span class="bar-label">Customers holding Shop Pay</span>
+      <span class="bar-value" style="color:var(--green)">${pct(D.spCust)}</span>
+    </div>
+    <div class="bar-track" style="margin-bottom:20px">
+      <div class="bar-fill" style="width:${Math.min(D.spCust,100)}%;background:var(--lime)"></div>
+    </div>
+    <div class="bar-label-row">
+      <span class="bar-label">GMV currently via Shop Pay gateway</span>
+      <span class="bar-value" style="color:var(--red)">${pct(D.spGmv)}</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${Math.min(D.spGmv,100)}%;background:#fca5a5"></div>
+    </div>
+    <div class="bar-gap-callout">
+      ${fmt(actGap)}-point activation gap — ${pct(D.spCust)} of customers hold Shop Pay · only ${pct(D.spGmv)} are using it at checkout
+    </div>
+  </div>` : '';
 
   const sec01 = `
-    <div class="bc-section">
-      <div class="bc-section-hdr">
-        <span class="bc-num">01</span>
-        <div>
-          <div class="bc-sec-title">Current Conversion Performance</div>
-          <div class="bc-sec-desc">Purchase funnel metrics vs Shopify benchmark medians · 90-day rolling window</div>
-        </div>
+  <div class="doc-section">
+    <div class="sec-header">
+      <span class="sec-n">01</span>
+      <div>
+        <div class="sec-title">Current Conversion Performance</div>
+        <div class="sec-desc">Purchase funnel metrics vs Shopify benchmark medians — 90-day rolling window</div>
       </div>
-      ${kpiCards}${funnelSummary}${gapBars}
-    </div>`;
+    </div>
+    ${kpiCards}${funnelNarrative}${gapBars}
+  </div>`;
 
   // ── SECTION 02: REVENUE LEAKAGE ──
-  const leakageItems = [];
+  const leakageRows = [];
 
-  leakageItems.push(`
-    <div class="leakage-item">
-      <div class="leakage-badge red">
-        <div class="leakage-num">${authRevLoss ? '~'+fmtC(authRevLoss) : '+243bps'}</div>
-        <div class="leakage-badge-label">${authRevLoss ? '90-day est.' : 'auth rate'}</div>
-      </div>
+  // Auth rate
+  leakageRows.push(`
+  <div class="leakage-row">
+    <div class="leakage-badge red">
+      <div class="leakage-num">${authRevLoss ? '$'+Math.round(authRevLoss).toLocaleString() : '+243bps'}</div>
+      <div class="leakage-tag">${authRevLoss ? 'per quarter' : 'auth rate'}</div>
+    </div>
+    <div class="leakage-content">
+      <div class="leakage-title">False decline leakage${D.currentProcessor ? ' — '+D.currentProcessor : ''}</div>
       <div class="leakage-body">
-        <strong>False decline leakage${D.currentProcessor ? ' — '+D.currentProcessor : ''}</strong> — Shopify Payments carries a 243 basis point higher authorisation rate than any alternative processor on Shopify. Legitimate transactions declined by ${procName}'s fraud model would have been approved by Shopify's — which is trained on 10 billion Shopify-native transactions, not generic card network data.
-        ${authRevLoss ? `Applied to ${fmtN(_curChkN)} completed orders at ${fmtC(D.aov)} AOV, this represents approximately <strong>${fmtC(authRevLoss)} per quarter</strong> in transactions declined that SP would have approved. These do not appear in revenue reporting because the purchase never completed.` : `Enter Average Order Value in the form above to quantify the exact quarterly impact for ${mn}.`}
-        <span class="lsub">Source: Shopify Payments authorisation data · 99.7% SP acceptance rate vs industry average · $745M fraud blocked without false declines</span>
+        Shopify Payments carries a <strong>243 basis point higher authorisation rate</strong> than any alternative processor available on Shopify. Its fraud model is trained on <strong>10 billion Shopify-native transactions</strong> — not generic card network data — meaning it approves orders that ${procName}'s model declines as false positives.
+        ${authRevLoss ? ` Applied to ${mn}'s ${fmtN(curChkN)} completed orders at ${fmtC(D.aov)} AOV, this represents approximately <strong>${fmtC(authRevLoss)} per quarter in revenue ${procName} is silently declining</strong>. These transactions never appear in reporting because the purchase never completed.` : (D.aov ? '' : ` Enter Average Order Value above to calculate the exact quarterly revenue loss for ${mn}.`)}
       </div>
-    </div>`);
+      <span class="leakage-source">Shopify Payments: 99.7% transaction acceptance rate · $745M fraud blocked without false declines · 10B+ ML-trained transactions</span>
+    </div>
+  </div>`);
 
+  // Checkout friction
   if(sessNoCart && totalRevOpp > 0){
-    leakageItems.push(`
-      <div class="leakage-item">
-        <div class="leakage-badge red">
-          <div class="leakage-num">${fmtC(totalRevOpp)}</div>
-          <div class="leakage-badge-label">90-day opp.</div>
-        </div>
-        <div class="leakage-body">
-          <strong>Checkout friction drop-off</strong> — ${fmtN(sessNoCart)} sessions per quarter exit without adding to cart.${D.revCart?` A conservative 5% improvement to this stage represents <strong>${fmtC(D.revCart)} in additional 90-day revenue</strong> — modelled on ${mn}'s actual session and conversion data.`:''} Shop Pay's express checkout at the product and cart stage reduces the steps required to purchase for the ${D.spCust?pct(D.spCust)+' of the customer base already holding Shop Pay':'pre-existing Shop Pay audience'}.
-          <span class="lsub">Based on ${mn}'s own purchase funnel data · Conservative 5% improvement model (Shopify / BCG study)</span>
-        </div>
-      </div>`);
+    leakageRows.push(`
+  <div class="leakage-row">
+    <div class="leakage-badge red">
+      <div class="leakage-num">${fmtC(totalRevOpp)}</div>
+      <div class="leakage-tag">90-day opp.</div>
+    </div>
+    <div class="leakage-content">
+      <div class="leakage-title">Checkout friction drop-off</div>
+      <div class="leakage-body">
+        <strong>${fmtN(sessNoCart)} sessions per quarter</strong> — ${fmt(100-D.cartRate,1)}% of all traffic — exit ${mn}'s store without adding a single item to cart.${D.revCart ? ` A conservative 5% improvement to this stage translates to <strong>${fmtC(D.revCart)} in additional 90-day revenue</strong>, modelled directly from ${mn}'s own session and conversion data.` : ''} For the ${D.spCust ? pct(D.spCust)+' of customers who already hold Shop Pay' : 'existing Shop Pay audience'}, express checkout at the product page and cart reduces the purchase journey to a single tap — removing the step where the majority of exits occur.
+      </div>
+      <span class="leakage-source">Based on ${mn}'s own purchase funnel data · BCG / Shopify study: 5% conservative checkout improvement model</span>
+    </div>
+  </div>`);
   }
 
-  if(actGap && actGap > 10){
-    leakageItems.push(`
-      <div class="leakage-item">
-        <div class="leakage-badge amber">
-          <div class="leakage-num">${fmt(actGap)}pt</div>
-          <div class="leakage-badge-label">activation gap</div>
-        </div>
-        <div class="leakage-body">
-          <strong>Dormant audience</strong> — ${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. Only ${pct(D.spGmv)} of GMV currently routes through it.${spCustCount?` That represents approximately ${fmtN(spCustCount)} customers per quarter arriving at checkout with a one-tap payment method in their pocket, being presented with a multi-field form instead.`:''} Shop Pay users convert at up to 36% higher rates on the same store when the native checkout experience is available to them.
-          <span class="lsub">Shop Pay users: 36% higher conversion rate index vs non-SP users · Source: Shopify internal data</span>
-        </div>
-      </div>`);
+  // Dormant audience
+  if(actGap && actGap > 8){
+    const dormantN = D.spCust && D.sessions ? Math.round(D.sessions * D.spCust/100) : null;
+    leakageRows.push(`
+  <div class="leakage-row">
+    <div class="leakage-badge amber">
+      <div class="leakage-num">${fmt(actGap)}pt</div>
+      <div class="leakage-tag">gap</div>
+    </div>
+    <div class="leakage-content">
+      <div class="leakage-title">Dormant Shop Pay audience</div>
+      <div class="leakage-body">
+        <strong>${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay</strong>. Only ${pct(D.spGmv)} of GMV flows through it.${dormantN ? ` That is approximately <strong>${fmtN(dormantN)} sessions per quarter</strong> from buyers who arrive at checkout with a one-tap payment method available — and are presented with a multi-field form instead.` : ''} Shop Pay users convert at up to <strong>36% higher rates on the same store</strong> when the native one-tap checkout experience is available to them. This audience does not need to be acquired — it already exists.
+      </div>
+      <span class="leakage-source">Shop Pay users: 36% higher conversion rate index vs non-SP users on identical stores · Source: Shopify internal data · 200M+ global Shop Pay users</span>
+    </div>
+  </div>`);
   }
 
+  // Redirect
   if(D.redirectGateway){
-    leakageItems.push(`
-      <div class="leakage-item">
-        <div class="leakage-badge amber">
-          <div class="leakage-num">Redirect</div>
-          <div class="leakage-badge-label">dropout risk</div>
-        </div>
-        <div class="leakage-body">
-          <strong>Third-party redirect penalty</strong> — ${D.mobilePct?`With ${pct(D.mobilePct)} of sessions on mobile, every redirect to a third-party payment page breaks checkout continuity at the moment of highest purchase intent.`:'Redirecting buyers to a third-party payment page introduces friction that disproportionately affects mobile users.'} The cost is not measured in transaction fees — it is measured in orders that begin and never complete. Buyers do not typically return after an interrupted checkout. Shopify Payments processes natively within the existing checkout flow: no redirect, no re-authentication, no additional form fields for returning customers.
-          <span class="lsub">${D.mobilePct&&D.socialPct?`${pct(D.mobilePct)} mobile · ${pct(D.socialPct)} social-referred — highest-intent, lowest-patience buyer segment`:'Native checkout continuity is a primary driver of mobile conversion rate'}</span>
-        </div>
-      </div>`);
+    leakageRows.push(`
+  <div class="leakage-row">
+    <div class="leakage-badge amber">
+      <div class="leakage-num">Redirect</div>
+      <div class="leakage-tag">dropout</div>
+    </div>
+    <div class="leakage-content">
+      <div class="leakage-title">Third-party redirect penalty</div>
+      <div class="leakage-body">
+        ${D.mobilePct ? `With <strong>${pct(D.mobilePct)} of sessions on mobile</strong>, every redirect to a third-party payment page breaks checkout continuity at the moment of highest purchase intent.` : 'Redirecting buyers to a third-party payment page introduces friction that disproportionately impacts mobile users.'} The cost is not measured in transaction fees — it is measured in orders that begin and never complete. Buyers who abandon at a redirect stage do not typically return. The calculation framed as "lower cost gateway" omits the orders not completed. Shopify Payments processes natively within the existing checkout flow: no redirect, no re-authentication, no additional form fields for returning customers.
+      </div>
+      <span class="leakage-source">${D.mobilePct&&D.socialPct ? `${pct(D.mobilePct)} mobile · ${pct(D.socialPct)} social-referred — highest-intent, lowest-patience segment` : 'Native checkout continuity is a primary driver of mobile conversion rate'}</span>
+    </div>
+  </div>`);
   }
 
   const sec02 = `
-    <div class="bc-section">
-      <div class="bc-section-hdr">
-        <span class="bc-num">02</span>
-        <div>
-          <div class="bc-sec-title">Revenue Leakage Analysis</div>
-          <div class="bc-sec-desc">Quantified and unquantified revenue loss attributable to current payment infrastructure</div>
-        </div>
+  <div class="doc-section">
+    <div class="sec-header">
+      <span class="sec-n">02</span>
+      <div>
+        <div class="sec-title">Revenue Leakage Analysis</div>
+        <div class="sec-desc">Quantified and unquantified revenue loss attributable to current payment infrastructure</div>
       </div>
-      ${leakageItems.join('')}
-    </div>`;
+    </div>
+    <div class="leakage-list">${leakageRows.join('')}</div>
+  </div>`;
 
   // ── SECTION 03: FINANCIAL MODEL ──
   let sec03 = '';
-  if(D.sessions && D.cartRate && D.chkRate){
+  if(D.sessions && D.cartRate && D.chkRate && curChkN && spChkN){
     const rows = [
-      ['Cart Add Rate',          pct(D.cartRate),    pct(fmt(spCartRate,2)),  `<span class="fi-chip">+${fmt(spCartRate-D.cartRate,2)}pt</span>`],
-      ['Checkout Completion',    pct(D.chkRate),     pct(fmt(spChkRate,2)),   `<span class="fi-chip">+${fmt(spChkRate-D.chkRate,2)}pt</span>`],
-      ['Carts (90d)',            fmtN(curCartN),     fmtN(spCartN),           `<span class="fi-chip">+${fmtN(spCartN-curCartN)}</span>`],
-      ['Completed Orders (90d)', fmtN(curChkNCalc),  fmtN(spChkN),            `<span class="fi-chip">+${fmtN(addedOrders)}</span>`],
-      ...(D.mobilePct?[['Mobile Conversion', `${pct(D.mobilePct)} of sessions`, '+18% lift on mobile sessions', `<span class="fi-chip">Shop Pay express</span>`]]:[]),
-      ...(actGap?[['SP Audience',       `${pct(D.spGmv)} activated`, `${pct(D.spCust)} reachable`, `<span class="fi-chip">${fmt(actGap)}pt gap</span>`]]:[]),
+      ['Cart Add Rate',          pct(D.cartRate), pct(fmt(spCartRate,2)), `<span class="fi-chip">+${fmt(spCartRate-D.cartRate,2)}pt</span>`],
+      ['Checkout Completion',    pct(D.chkRate),  pct(fmt(spChkRate,2)),  `<span class="fi-chip">+${fmt(spChkRate-D.chkRate,2)}pt</span>`],
+      ['Cart Adds (90d)',        fmtN(curCartN),  fmtN(spCartN),          `<span class="fi-chip">+${fmtN(spCartN-curCartN)}</span>`],
+      ['Completed Orders (90d)', fmtN(curChkN),   fmtN(spChkN),           `<span class="fi-chip">+${fmtN(addedOrders)}</span>`],
+      ...(D.mobilePct ? [['Mobile Conversion', `${pct(D.mobilePct)} of sessions`, 'Native 1-tap checkout', '<span class="fi-chip">+18% lift model</span>']] : []),
+      ...(actGap && actGap > 5 ? [['SP Audience Activated', pct(D.spGmv), pct(D.spCust)+' reachable', `<span class="fi-chip">${fmt(actGap)}pt unlocked</span>`]] : []),
     ];
     sec03 = `
-      <div class="bc-section">
-        <div class="bc-section-hdr">
-          <span class="bc-num">03</span>
-          <div>
-            <div class="bc-sec-title">Financial Impact Model</div>
-            <div class="bc-sec-desc">Conservative projection — Shopify BCG study (5% checkout uplift) · ${mn}'s own funnel data · 90-day horizon · Auth rate uplift additive</div>
-          </div>
-        </div>
-        <div style="overflow:auto">
-          <table class="fi-table">
-            <thead><tr>
-              <th>Metric</th>
-              <th class="th-now">Current State</th>
-              <th class="th-sp">With Shopify Payments</th>
-              <th>Change</th>
-            </tr></thead>
-            <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td class="td-now">${r[1]}</td><td class="td-sp">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
-            ${revLift>0?`<tfoot><tr class="fi-total">
-              <td>Revenue Uplift (90d)</td>
-              <td class="td-now">Baseline</td>
-              <td class="td-sp">${fmtC(revLift)}</td>
-              <td><span class="fi-chip big">+${fmtC(revLift)}</span></td>
-            </tr></tfoot>`:''}
-          </table>
-        </div>
-        <p class="fi-note">Assumptions: +5% checkout conversion (BCG / Shopify network data) · +15% cart add rate (Shop Pay express buttons at PDP + cart) · +18% mobile conversion (native one-tap, no form friction). Auth rate uplift (+243bps) and dormant SP audience activation are additive to these projections and not included in the totals above.</p>
-      </div>`;
+  <div class="doc-section">
+    <div class="sec-header">
+      <span class="sec-n">03</span>
+      <div>
+        <div class="sec-title">Financial Impact Model</div>
+        <div class="sec-desc">Conservative 90-day projection — Shopify / BCG study baseline · ${mn}'s own funnel data · Auth rate uplift is additive and not included in totals</div>
+      </div>
+    </div>
+    <div style="overflow:auto;border-radius:var(--radius-lg);border:1px solid var(--border)">
+      <table class="fi-table">
+        <thead><tr>
+          <th>Metric</th>
+          <th class="now-col">Current State</th>
+          <th class="sp-col">With Shopify Payments</th>
+          <th>Change</th>
+        </tr></thead>
+        <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td class="now">${r[1]}</td><td class="with-sp">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
+        ${revLift>0?`<tfoot><tr class="fi-total">
+          <td>Revenue Uplift (90d)</td>
+          <td class="now">Baseline</td>
+          <td class="with-sp">${fmtC(revLift)}</td>
+          <td><span class="fi-chip hero">+${fmtC(revLift)}</span></td>
+        </tr></tfoot>`:''}
+      </table>
+    </div>
+    <p class="fi-note">Model assumptions: +5% checkout conversion (BCG / Shopify network study) · +15% cart add rate from Shop Pay express buttons at PDP and cart · +18% mobile conversion uplift (native one-tap, no redirect, no form friction for returning customers). The 243bps authorisation rate advantage and activation of the dormant Shop Pay audience are additive to these projections and excluded from the totals above.</p>
+  </div>`;
   }
 
-  // ── SECTION 04: PLATFORM ADVANTAGE ──
-  const brandLogoHTML = brands.map(domain=>`
-    <div class="bc-brand-chip" title="${domain}">
-      <img src="https://logo.clearbit.com/${domain}" alt="${domain.split('.')[0]}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="fb">${domain.split('.')[0].substring(0,8).toUpperCase()}</div>
-    </div>`).join('');
+  // ── SECTION 04: PLATFORM ──
+  const brandLogoHTML = brands.map(d=>`
+  <div class="brand-chip" title="${d}">
+    <img src="https://logo.clearbit.com/${d}" alt="${d.split('.')[0]}"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="fb">${d.split('.')[0].substring(0,8).toUpperCase()}</div>
+  </div>`).join('');
 
   const sec04 = `
-    <div class="bc-section">
-      <div class="bc-section-hdr">
-        <span class="bc-num">04</span>
-        <div>
-          <div class="bc-sec-title">The Shopify Payments Platform Advantage</div>
-          <div class="bc-sec-desc">Performance data behind the recommendation</div>
-        </div>
+  <div class="doc-section">
+    <div class="sec-header">
+      <span class="sec-n">04</span>
+      <div>
+        <div class="sec-title">The Shopify Payments Advantage</div>
+        <div class="sec-desc">Platform-level performance data underpinning this recommendation</div>
       </div>
-      <div class="sp-proof">
-        <div class="sp-proof-item"><div class="sp-proof-val">+243bps</div><div class="sp-proof-label">Higher authorisation rate vs any alternative processor on Shopify</div></div>
-        <div class="sp-proof-item"><div class="sp-proof-val">99.7%</div><div class="sp-proof-label">Transaction acceptance rate — fewer false declines, more revenue</div></div>
-        <div class="sp-proof-item"><div class="sp-proof-val">10B+</div><div class="sp-proof-label">ML-trained Shopify transactions powering the fraud detection model</div></div>
-        <div class="sp-proof-item"><div class="sp-proof-val">200M+</div><div class="sp-proof-label">Shop Pay users — the world's largest 1-tap checkout network</div></div>
-      </div>
-      ${brands.length>0?`
-      <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#bbb;margin-bottom:10px">Brands in ${D.vertical} already on Shopify Payments</p>
-      <p style="font-size:13px;color:#666;margin-bottom:12px;line-height:1.65">These merchants share the same customer base and compete for the same buyers. Their customers checkout in one tap via Shop Pay. The competitive checkout standard has already been set.</p>
-      <div class="bc-brand-grid">${brandLogoHTML}</div>`:''
-      }
-    </div>`;
+    </div>
+    <div class="proof-grid">
+      <div class="proof-item"><div class="proof-val">+243bps</div><div class="proof-label">Higher auth rate than any alternative processor on Shopify</div></div>
+      <div class="proof-item"><div class="proof-val">99.7%</div><div class="proof-label">Transaction acceptance rate — near-zero false declines</div></div>
+      <div class="proof-item"><div class="proof-val">10B+</div><div class="proof-label">Shopify-native transactions training the fraud detection model</div></div>
+      <div class="proof-item"><div class="proof-val">200M+</div><div class="proof-label">Shop Pay users in the world's largest 1-tap checkout network</div></div>
+    </div>
+    ${brands.length>0 ? `
+    <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--grey-4);margin-bottom:8px">Brands in ${D.vertical} already on Shopify Payments</p>
+    <p style="font-size:13px;color:var(--text-sub);line-height:1.65;margin-bottom:16px">These merchants share ${mn}'s customer base and compete for the same buyers. Their customers checkout in one tap. The competitive checkout standard has already been set in this vertical.</p>
+    <div class="brand-grid">${brandLogoHTML}</div>` : ''}
+  </div>`;
 
-  // ── SECTION 05: RECOMMENDATION ──
+  // ── RECOMMENDATION ──
   const recBodyParts = [
-    totalRevOpp>0 ? `The analysis identifies ${fmtC(totalRevOpp)} in realizable 90-day revenue from checkout conversion improvements alone — before accounting for auth rate uplift${authRevLoss?` (est. ${fmtC(authRevLoss)}/quarter in false decline recovery)`:''}${actGap?` or full activation of the ${pct(D.spCust)} of customers already holding Shop Pay`:''}.` : null,
-    `Activating Shopify Payments as the primary gateway requires no frontend changes, no platform migration, and no additional customer acquisition spend. It is a structural change to the infrastructure that processes every transaction — delivering measurably higher authorisation rates, lower fraud exposure, and native one-tap checkout for an existing customer base that already expects it.`,
-    D.redirectGateway?`The current redirect-based gateway introduces friction at the final step of purchase for a predominantly mobile audience. Shopify Payments eliminates the redirect entirely, processing within the native checkout flow.`:null,
+    totalRevOpp > 0 ? `The analysis identifies <strong>${fmtC(totalRevOpp)} in realisable 90-day revenue</strong> from checkout conversion improvements alone — before accounting for the 243bps authorisation rate uplift${authRevLoss ? ` (estimated ${fmtC(authRevLoss)} per quarter in false decline recovery)` : ''}${actGap ? ` or full activation of the ${pct(D.spCust)} of the customer base already holding Shop Pay` : ''}.` : null,
+    `Activating Shopify Payments as the primary gateway requires no frontend changes, no platform migration, and no additional customer acquisition spend. It is a single infrastructure change — delivering measurably higher authorisation rates, lower fraud exposure, and native one-tap checkout for an existing audience that already expects it.`,
+    D.redirectGateway ? `The current redirect-based gateway is introducing friction at the final step of purchase for a store where ${D.mobilePct ? pct(D.mobilePct)+' of sessions arrive on mobile' : 'the majority of traffic is on mobile'}. Shopify Payments eliminates the redirect entirely, processing natively within the checkout flow.` : null,
   ].filter(Boolean).join(' ');
 
-  const recAsk = D.spCust
-    ? `Activate Shopify Payments as primary gateway and enable Shop Pay express checkout at product and cart level. <strong>${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay — this is not about acquiring a new audience. It's about converting the one that already exists.</strong>`
-    : `Activate Shopify Payments as primary gateway and enable Shop Pay express checkout at product and cart level. The infrastructure change that makes every transaction perform better — higher auth rates, lower friction, native one-tap checkout.`;
+  const recCta = D.spCust
+    ? `Activate Shopify Payments as the primary gateway and enable Shop Pay express checkout at product and cart level. <strong>${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. This is not about acquiring a new audience — it's about properly converting the one that already exists.</strong>`
+    : `Activate Shopify Payments as primary gateway and enable Shop Pay express checkout at product and cart level. The infrastructure change that makes every transaction perform better — higher auth rates, lower friction, one-tap checkout — without a single additional marketing pound spent.`;
 
-  const sec05 = `
-    <div class="bc-rec">
-      <div class="bc-rec-label">Recommendation</div>
-      <div class="bc-rec-title">The case is clear. The action is straightforward.</div>
-      <div class="bc-rec-body">${recBodyParts}</div>
-      <div class="bc-rec-ask">${recAsk}</div>
-    </div>`;
+  const recHTML = `
+  <div class="doc-rec">
+    <div class="rec-label">Recommendation</div>
+    <div class="rec-title">The case is clear. The action is straightforward.</div>
+    <div class="rec-body">${recBodyParts}</div>
+    <div class="rec-cta">${recCta}</div>
+  </div>`;
 
-  const html = `${coverHTML}${sec01}${sec02}${sec03}${sec04}${sec05}`;
-
-  document.getElementById('pitch-body').innerHTML = html;
-  document.getElementById('pitch-out').style.display = 'block';
-  document.getElementById('pitch-out').scrollIntoView({behavior:'smooth',block:'start'});
+  // Inject
+  document.getElementById('doc-body').innerHTML = coverHTML + sec01 + sec02 + sec03 + sec04 + recHTML;
+  document.getElementById('output').style.display = 'block';
+  setStep(3);
+  setTimeout(()=>document.getElementById('output').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
-// ── PDF GENERATION ──
+function buildExecHeadline(mn, totalRevOpp, cartGap, cartGapPct, actGap, authRevLoss){
+  if(totalRevOpp > 0 && actGap > 10)
+    return `${mn} has a <strong>$${Math.round(totalRevOpp).toLocaleString()} 90-day revenue opportunity</strong> sitting directly in its existing customer base and purchase funnel — before accounting for the 243bps authorisation rate advantage Shopify Payments provides over any alternative processor.`;
+  if(totalRevOpp > 0)
+    return `${mn}'s own purchase funnel data identifies a <strong>$${Math.round(totalRevOpp).toLocaleString()} revenue opportunity over 90 days</strong> — realisable without additional customer acquisition through structural improvements to checkout infrastructure.`;
+  if(authRevLoss)
+    return `${mn}'s current payment processor is silently declining an estimated <strong>$${Math.round(authRevLoss).toLocaleString()} per quarter</strong> in legitimate transactions that Shopify Payments' authorisation model would approve.`;
+  if(cartGap && cartGap > 1)
+    return `${mn}'s cart add rate is <strong>${fmt(cartGap,1)} percentage points below the Shopify benchmark median</strong>, with its checkout infrastructure creating friction for an audience that already expects a faster path to purchase.`;
+  return `${mn}'s purchase funnel data reveals material conversion gaps that Shopify Payments is structurally positioned to close.`;
+}
+
+function buildExecBody(mn, cartGap, cartGapPct, sessNoCart, actGap, spCust, spGmv, proc, authRevLoss, aov){
+  const parts = [];
+  if(cartGap && cartGap > 1 && sessNoCart)
+    parts.push(`Cart add rate sits ${fmt(cartGap,1)} percentage points below benchmark, with ${fmtN(sessNoCart)} sessions per quarter exiting before reaching the cart.`);
+  if(actGap && actGap > 8 && spCust)
+    parts.push(`${pct(spCust)} of customers already hold Shop Pay yet only ${pct(spGmv)} of GMV routes through it — a ${fmt(actGap)}-point activation gap representing a pre-qualified audience not being offered the checkout experience they convert on.`);
+  if(proc || authRevLoss)
+    parts.push(`With a 243 basis point authorisation rate advantage over any alternative processor, activating Shopify Payments also recovers revenue silently lost to false transaction declines — revenue that never appears in standard reporting because the purchase never completed.`);
+  if(parts.length === 0)
+    parts.push(`Shopify Payments delivers a 243bps higher authorisation rate than any alternative on the platform, paired with native one-tap checkout for 200M+ Shop Pay users. This recommendation is structural, not speculative.`);
+  return parts.join(' ');
+}
+
+function resetForm(){
+  document.getElementById('output').style.display='none';
+  document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'});
+  setStep(2);
+}
+
+// ── PDF ──
 async function downloadPDF(){
-  if(!D.merchantName){ alert('Generate the pitch brief first.'); return; }
+  if(!D.merchantName){ return; }
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   const W=210, H=297, M=20;
+  const mn = D.merchantName;
 
-  function darkHeader(label, subLabel){
-    doc.setFillColor(26,26,26);
-    doc.rect(0,0,W,30,'F');
-    doc.setFillColor(0,128,96);
-    doc.rect(0,30,W,3,'F');
-    doc.setTextColor(255,255,255);
-    doc.setFontSize(9); doc.setFont('helvetica','bold');
-    doc.text('SHOPIFY GROWTH SERVICES', M, 13);
-    doc.setFontSize(9); doc.setFont('helvetica','normal');
-    doc.setTextColor(149,191,71);
-    doc.text(label, M, 22);
-    if(subLabel){
-      doc.setTextColor(120,120,120);
-      doc.text(subLabel, W-M, 22, {align:'right'});
-    }
-  }
-
-  function footer(pg, total){
-    doc.setFillColor(26,26,26);
-    doc.rect(0,H-11,W,11,'F');
+  function footer(pg,total){
+    doc.setFillColor(26,26,26); doc.rect(0,H-10,W,10,'F');
     doc.setFontSize(7); doc.setFont('helvetica','normal');
+    doc.setTextColor(80,80,80);
+    doc.text(`Prepared by ${D.aeName} · Shopify Growth Services · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`,M,H-4);
     doc.setTextColor(100,100,100);
-    doc.text(`Prepared by ${D.aeName} · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-4);
-    doc.text(`${pg}/${total}`, W-M, H-4, {align:'right'});
-    doc.setTextColor(60,60,60);
-    doc.text('Shop Pay: Optimised for conversion, not cost.', W/2, H-4, {align:'center'});
-  }
-
-  function statBox(x,y,w,h,label,value,sub,badge,badgeColor){
-    doc.setFillColor(248,248,248);
-    doc.roundedRect(x,y,w,h,3,3,'F');
-    doc.setDrawColor(230,230,230);
-    doc.roundedRect(x,y,w,h,3,3,'S');
-    doc.setFontSize(7); doc.setFont('helvetica','bold');
-    doc.setTextColor(130,130,130);
-    doc.text(label.toUpperCase(), x+5, y+8);
-    doc.setFontSize(16); doc.setFont('helvetica','bold');
-    doc.setTextColor(26,26,26);
-    doc.text(value, x+5, y+20);
-    doc.setFontSize(8); doc.setFont('helvetica','normal');
-    doc.setTextColor(150,150,150);
-    doc.text(sub, x+5, y+27);
-    if(badge){
-      const [r,g,b] = badgeColor||[0,128,96];
-      doc.setFillColor(r,g,b,0.15);
-      doc.setTextColor(r,g,b);
-      doc.setFontSize(7.5); doc.setFont('helvetica','bold');
-      doc.text(badge, x+5, y+35);
-    }
+    doc.text('Shop Pay — Optimised for conversion, not cost',W/2,H-4,{align:'center'});
+    doc.text(`${pg}/${total}`,W-M,H-4,{align:'right'});
   }
 
   // ── PAGE 1: COVER ──
-  // Full dark background
-  doc.setFillColor(17,17,17);
-  doc.rect(0,0,W,H,'F');
-  // Green accent bar top
-  doc.setFillColor(0,128,96);
-  doc.rect(0,0,W,3,'F');
-  // Subtle green stripe at bottom of cover
-  doc.setFillColor(149,191,71);
-  doc.rect(0,H-2,W,2,'F');
-
-  // Eyebrow
-  doc.setFontSize(8); doc.setFont('helvetica','bold');
-  doc.setTextColor(0,128,96);
-  doc.text('BUSINESS CASE · SHOPIFY PAYMENTS', M, 28);
-
-  // Merchant name — large
-  doc.setFontSize(38); doc.setFont('helvetica','bold');
-  doc.setTextColor(255,255,255);
-  const nameLines = doc.splitTextToSize(D.merchantName, W-M*2);
-  doc.text(nameLines, M, 52);
-
-  // Divider line
-  const divY = 52 + nameLines.length * 16;
-  doc.setDrawColor(40,40,40);
-  doc.line(M, divY, W-M, divY);
-
-  // Meta row
-  const metaY = divY + 10;
-  const metaItems = [
-    ['VERTICAL', D.vertical],
-    ['SHOP ID',  D.shopId||'—'],
-    ['PREPARED BY', D.aeName],
-    ['DATE', new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})],
-  ];
-  const mColW = (W-M*2)/4;
-  metaItems.forEach((m,i)=>{
-    const mx = M + i*mColW;
-    doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60);
-    doc.text(m[0], mx, metaY);
-    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(150,150,150);
-    doc.text(m[1], mx, metaY+8);
-  });
-
-  // Executive Summary box
-  const esY = metaY + 24;
-  doc.setFillColor(25,25,25);
-  doc.roundedRect(M, esY, W-M*2, 60, 4,4,'F');
-  doc.setDrawColor(0,128,96);
-  doc.roundedRect(M, esY, W-M*2, 60, 4,4,'S');
-  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
-  doc.text('EXECUTIVE SUMMARY', M+6, esY+9);
-  const esText = D._totalRevOpp > 0
-    ? `${mn} has a ${fmtC(D._totalRevOpp)} 90-day revenue opportunity identified from purchase funnel and payments data. With a 243 basis point authorisation rate advantage over any alternative processor and ${D.spCust?pct(D.spCust)+' of customers already holding Shop Pay, the':'a significant proportion of the customer base holding Shop Pay — the'} case for activating Shopify Payments is structural, not speculative.`
-    : `This analysis identifies material conversion and authorisation performance gaps in ${mn}'s current payment infrastructure. Activating Shopify Payments as the primary gateway addresses checkout friction, false decline leakage, and a dormant Shop Pay audience simultaneously.`;
-  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(180,180,180);
-  const esLines = doc.splitTextToSize(esText, W-M*2-12);
-  doc.text(esLines, M+6, esY+18);
-
-  // 4-metric summary row
-  const smY = esY + 72;
-  const smW = (W-M*2-18)/4;
-  const smMetrics = [
-    ['Cart Add Rate', pct(D.cartRate), D._cartGap&&D._cartGap>0?'↓ below benchmark':null, D._cartGap&&D._cartGap>0],
-    ['Checkout Completion', pct(D.chkRate), D._chkGap&&D._chkGap<0?'↓ below benchmark':null, D._chkGap&&D._chkGap<0],
-    ['SP Activation Gap', D._actGap?fmt(D._actGap)+'pt':'—', D._actGap?'Untapped audience':null, !!D._actGap],
-    ['90d Revenue Opp.', D._totalRevOpp>0?fmtC(D._totalRevOpp):'—', D._totalRevOpp>0?'Conversion uplift':null, false],
-  ];
-  smMetrics.forEach((m,i)=>{
-    const sx = M + i*(smW+6);
-    const isRed = m[3];
-    doc.setFillColor(isRed?40:25, isRed?20:35, isRed?20:25);
-    doc.roundedRect(sx, smY, smW, 32, 3,3,'F');
-    doc.setFontSize(7); doc.setFont('helvetica','bold');
-    doc.setTextColor(isRed?192:100,isRed?57:100,isRed?43:100);
-    doc.text(m[0].toUpperCase(), sx+4, smY+8);
-    doc.setFontSize(14); doc.setFont('helvetica','bold');
-    doc.setTextColor(isRed?220:255, isRed?80:255, isRed?80:255);
-    doc.text(m[1], sx+4, smY+20);
-    if(m[2]){
-      doc.setFontSize(7); doc.setFont('helvetica','normal');
-      doc.setTextColor(isRed?192:100,isRed?57:150,isRed?43:100);
-      doc.text(m[2], sx+4, smY+28);
-    }
-  });
-
-  // Activation gap bars (if data)
-  if(D.spCust && D.spGmv){
-    const agY = smY + 44;
-    doc.setFillColor(25,25,25); doc.roundedRect(M,agY,W-M*2,40,3,3,'F');
-    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(100,100,100);
-    doc.text(`Customers holding Shop Pay: ${pct(D.spCust)}`, M+6, agY+10);
-    const bw2 = W-M*2-12;
-    doc.setFillColor(40,40,40); doc.roundedRect(M+6,agY+12,bw2,4,2,2,'F');
-    doc.setFillColor(149,191,71); doc.roundedRect(M+6,agY+12,bw2*(D.spCust/100),4,2,2,'F');
-    doc.text(`GMV currently via Shop Pay gateway: ${pct(D.spGmv)}`, M+6, agY+24);
-    doc.setFillColor(40,40,40); doc.roundedRect(M+6,agY+26,bw2,4,2,2,'F');
-    doc.setFillColor(192,57,43); doc.roundedRect(M+6,agY+26,bw2*(D.spGmv/100),4,2,2,'F');
-  }
-
-  // Footer
-  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(50,50,50);
-  doc.text(`Prepared by ${D.aeName} · Shopify Growth Services · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
-  doc.text('1/3', W-M, H-6, {align:'right'});
-
-  // ── PAGE 2: LEAKAGE + PROJECTIONS ──
-  doc.addPage();
-  doc.setFillColor(248,250,249);
-  doc.rect(0,0,W,H,'F');
+  doc.setFillColor(17,17,17); doc.rect(0,0,W,H,'F');
   doc.setFillColor(0,128,96); doc.rect(0,0,W,3,'F');
-
-  // Header
-  doc.setFillColor(26,26,26); doc.rect(0,3,W,24,'F');
+  doc.setFillColor(149,191,71); doc.rect(0,H-2,W,2,'F');
   doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
-  doc.text('REVENUE LEAKAGE ANALYSIS', M, 13);
+  doc.text('BUSINESS CASE — SHOPIFY PAYMENTS',M,26);
+  const nameLines = doc.splitTextToSize(mn, W-M*2);
+  doc.setFontSize(Math.max(28,42-nameLines.length*4)); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
+  doc.text(nameLines,M,50);
+  const metaY = 50 + nameLines.length*14 + 8;
+  doc.setDrawColor(40,40,40); doc.line(M,metaY,W-M,metaY);
+  const mItems = [['VERTICAL',D.vertical],['SHOP ID',D.shopId||'—'],['PREPARED BY',D.aeName],['DATE',new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})]];
+  const mW = (W-M*2)/4;
+  mItems.forEach((m,i)=>{
+    const mx=M+i*mW;
+    doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(60,60,60); doc.text(m[0],mx,metaY+9);
+    doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(130,130,130); doc.text(m[1],mx,metaY+18);
+  });
+  const esY = metaY+30;
+  doc.setFillColor(25,25,25); doc.roundedRect(M,esY,W-M*2,72,4,4,'F');
+  doc.setDrawColor(0,128,96); doc.roundedRect(M,esY,W-M*2,72,4,4,'S');
+  doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+  doc.text('EXECUTIVE SUMMARY',M+6,esY+10);
+  const esHeadline = D._totalRevOpp>0
+    ? `${mn} has a $${Math.round(D._totalRevOpp).toLocaleString()} 90-day revenue opportunity in its existing funnel and customer base — before the 243bps auth rate advantage.`
+    : `${mn}'s funnel data reveals conversion gaps that Shopify Payments is structurally positioned to close.`;
+  doc.setFontSize(9.5); doc.setFont('helvetica','bold'); doc.setTextColor(220,220,220);
+  doc.text(doc.splitTextToSize(esHeadline,W-M*2-14),M+7,esY+20);
+  const esBodyText = buildExecBody(mn,D._cartGap,D._cartGapPct,D._sessNoCart,D._actGap,D.spCust,D.spGmv,D.currentProcessor,D._authRevLoss,D.aov).replace(/<[^>]+>/g,'');
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(150,150,150);
+  doc.text(doc.splitTextToSize(esBodyText,W-M*2-14),M+7,esY+36);
+  const smY=esY+82; const smW=(W-M*2-18)/4;
+  const smCols=[
+    ['CART ADD RATE',pct(D.cartRate),D._cartGap&&D._cartGap>1],
+    ['CHECKOUT RATE',pct(D.chkRate),false],
+    ['SP ACTIVATION GAP',D._actGap?fmt(D._actGap)+'pt':null,!!D._actGap],
+    ['90D REVENUE OPP.',D._totalRevOpp>0?'$'+Math.round(D._totalRevOpp).toLocaleString():null,false]
+  ];
+  smCols.forEach((m,i)=>{
+    const sx=M+i*(smW+6); const isRed=m[2];
+    doc.setFillColor(isRed?45:28,isRed?22:28,isRed?22:28);
+    doc.roundedRect(sx,smY,smW,28,3,3,'F');
+    doc.setFontSize(6.5); doc.setFont('helvetica','bold');
+    doc.setTextColor(isRed?180:100,isRed?60:100,isRed?60:100);
+    doc.text(m[0],sx+4,smY+8);
+    doc.setFontSize(13); doc.setFont('helvetica','bold');
+    doc.setTextColor(isRed?220:200,isRed?80:200,isRed?80:200);
+    doc.text(m[1]||'—',sx+4,smY+21);
+  });
+  if(D.spCust&&D.spGmv){
+    const bY=smY+38;
+    doc.setFillColor(28,28,28); doc.roundedRect(M,bY,W-M*2,36,3,3,'F');
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(100,100,100);
+    doc.text(`Customers holding Shop Pay: ${pct(D.spCust)}`,M+6,bY+10);
+    const bw=W-M*2-12;
+    doc.setFillColor(40,40,40); doc.roundedRect(M+6,bY+12,bw,5,2,2,'F');
+    doc.setFillColor(149,191,71); doc.roundedRect(M+6,bY+12,bw*Math.min(D.spCust/100,1),5,2,2,'F');
+    doc.text(`GMV via Shop Pay gateway: ${pct(D.spGmv)}`,M+6,bY+24);
+    doc.setFillColor(40,40,40); doc.roundedRect(M+6,bY+26,bw,5,2,2,'F');
+    doc.setFillColor(200,60,60); doc.roundedRect(M+6,bY+26,bw*Math.min(D.spGmv/100,1),5,2,2,'F');
+  }
+  footer(1,3);
+
+  // ── PAGE 2: LEAKAGE + FINANCIAL ──
+  doc.addPage();
+  doc.setFillColor(249,250,251); doc.rect(0,0,W,H,'F');
+  doc.setFillColor(0,128,96); doc.rect(0,0,W,3,'F');
+  doc.setFillColor(26,26,26); doc.rect(0,3,W,22,'F');
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
+  doc.text('REVENUE LEAKAGE ANALYSIS',M,13);
   doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
-  doc.text(D.merchantName, W-M, 13, {align:'right'});
+  doc.text(mn,W-M,13,{align:'right'});
   doc.setFontSize(7.5); doc.setTextColor(70,70,70);
-  doc.text('Quantified and unquantified revenue loss attributable to current payment infrastructure', M, 22);
-
-  let py = 36;
-
-  // Auth rate leakage
-  doc.setFillColor(255,245,245); doc.roundedRect(M,py,W-M*2,authRevLoss?38:32,3,3,'F');
-  doc.setFillColor(220,38,38); doc.rect(M,py,3,authRevLoss?38:32,'F');
-  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(220,38,38);
-  doc.text(authRevLoss ? `FALSE DECLINE LEAKAGE — ${fmtC(authRevLoss)}/QUARTER` : 'FALSE DECLINE LEAKAGE — +243BPS AUTH RATE GAP', M+7, py+9);
-  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-  const authText = authRevLoss
-    ? `Shopify Payments has a 243bps higher authorisation rate than any alternative on Shopify. Based on ${fmtN(_curChkN)} orders at ${fmtC(D.aov)} AOV, ${D.currentProcessor||'your processor'} is declining ~${fmtC(authRevLoss)}/quarter in legitimate transactions SP would have approved. This revenue is invisible in reporting — the sale never completed.`
-    : `Shopify Payments carries a 243 basis point higher authorisation rate than any alternative processor on Shopify. Your current processor is declining legitimate buyers that SP would approve. Enter AOV above to quantify the exact quarterly impact.`;
-  const authLines = doc.splitTextToSize(authText, W-M*2-12);
-  doc.text(authLines, M+7, py+17);
-  py += authRevLoss ? 46 : 40;
-
-  // Checkout friction
-  if(D._totalRevOpp > 0 && sessNoCart){
-    doc.setFillColor(255,245,245); doc.roundedRect(M,py,W-M*2,32,3,3,'F');
-    doc.setFillColor(220,38,38); doc.rect(M,py,3,32,'F');
-    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(220,38,38);
-    doc.text(`CHECKOUT FRICTION DROP-OFF — ${fmtC(D._totalRevOpp)} 90-DAY OPPORTUNITY`, M+7, py+9);
+  doc.text('Quantified and unquantified revenue loss attributable to current payment infrastructure',M,21);
+  let py=34;
+  const leakBlocks=[
+    {
+      show:true,
+      color:[220,38,38],
+      bgR:[255,245,245],
+      heading: D._authRevLoss
+        ? `FALSE DECLINE LEAKAGE — $${Math.round(D._authRevLoss).toLocaleString()}/QUARTER`
+        : 'FALSE DECLINE LEAKAGE — +243BPS AUTH RATE GAP',
+      text: D._authRevLoss
+        ? `Shopify Payments has a 243bps higher auth rate than any alternative on Shopify. Based on ${fmtN(D._curChkN)} orders at ${fmtC(D.aov)} AOV, ${D.currentProcessor||'your processor'} is declining ~${fmtC(D._authRevLoss)}/quarter in legitimate transactions that SP would approve. This revenue is invisible in reporting — the sale never completed.`
+        : `Shopify Payments carries a 243bps higher authorisation rate than any alternative processor. Your current processor is declining legitimate buyers that SP would approve. Enter AOV in the form to quantify the quarterly impact.`
+    },
+    {
+      show: !!D._sessNoCart && D._totalRevOpp>0,
+      color:[220,38,38], bgR:[255,245,245],
+      heading:`CHECKOUT FRICTION — ${fmtC(D._totalRevOpp)} 90-DAY OPPORTUNITY`,
+      text:`${fmtN(D._sessNoCart)} sessions per quarter exit without adding to cart.${D.revCart?` A conservative 5% improvement represents ${fmtC(D.revCart)} in 90-day revenue — from ${mn}'s actual data.`:''} Shop Pay express checkout activates 1-tap purchasing for the ${pct(D.spCust)||'existing'} of customers already holding SP.`
+    },
+    {
+      show: !!D._actGap && D._actGap>8,
+      color:[180,120,0], bgR:[255,251,235],
+      heading:`DORMANT AUDIENCE — ${D._actGap?fmt(D._actGap):0}PT ACTIVATION GAP`,
+      text:`${pct(D.spCust)} of ${mn}'s customers hold Shop Pay. Only ${pct(D.spGmv)} of GMV uses it. Shop Pay users convert at 36% higher rates — this audience doesn't need to be acquired. It just needs the checkout experience it converts on.`
+    },
+    {
+      show: D.redirectGateway,
+      color:[180,120,0], bgR:[255,251,235],
+      heading:'REDIRECT GATEWAY — MOBILE CHECKOUT DROPOUT',
+      text:`${D.mobilePct?`With ${pct(D.mobilePct)} of sessions on mobile, every`:'Every'} redirect to a third-party payment page breaks purchase intent continuity. Buyers who abandon at a redirect rarely return. Shopify Payments processes natively — no redirect, no re-auth, no additional fields for returning customers.`
+    }
+  ];
+  leakBlocks.filter(b=>b.show).forEach(b=>{
+    const h=b.text.length>200?42:34;
+    doc.setFillColor(...b.bgR); doc.roundedRect(M,py,W-M*2,h,3,3,'F');
+    doc.setFillColor(...b.color); doc.rect(M,py,3,h,'F');
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(...b.color);
+    doc.text(b.heading,M+7,py+9);
     doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-    const frText = `${fmtN(sessNoCart)} sessions per quarter exit before adding to cart.${D.revCart?` A conservative 5% improvement represents ${fmtC(D.revCart)} in 90-day revenue — from ${mn}'s actual data.`:''} Shop Pay express checkout activates one-tap purchasing for customers who already hold SP.`;
-    doc.text(doc.splitTextToSize(frText, W-M*2-12), M+7, py+17);
-    py += 40;
-  }
-
-  // Activation gap
-  if(D._actGap && D._actGap > 10){
-    doc.setFillColor(255,251,235); doc.roundedRect(M,py,W-M*2,32,3,3,'F');
-    doc.setFillColor(245,158,11); doc.rect(M,py,3,32,'F');
-    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(180,120,0);
-    doc.text(`DORMANT SP AUDIENCE — ${fmt(D._actGap)}PT ACTIVATION GAP`, M+7, py+9);
-    doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
-    const actText = `${pct(D.spCust)} of ${mn}'s customers hold Shop Pay. Only ${pct(D.spGmv)} of GMV uses it. Shop Pay users convert at 36% higher rates — this audience is already pre-qualified. They just haven't been offered the checkout experience they expect.`;
-    doc.text(doc.splitTextToSize(actText, W-M*2-12), M+7, py+17);
-    py += 40;
-  }
-
-  // Financial model table (if data)
-  if(D.sessions && D.cartRate && D.chkRate && spChkN){
-    py += 4;
-    doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
-    doc.text('FINANCIAL IMPACT MODEL — CONSERVATIVE PROJECTION · 90-DAY HORIZON', M, py+4);
-    py += 10;
-
-    // Table header
-    doc.setFillColor(26,26,26); doc.rect(M,py,W-M*2,10,'F');
-    const cols4 = ['METRIC','CURRENT STATE','WITH SHOPIFY PAYMENTS','CHANGE'];
-    const cw4 = [(W-M*2)*0.3,(W-M*2)*0.23,(W-M*2)*0.27,(W-M*2)*0.2];
-    let cx = M;
-    cols4.forEach((c,i)=>{
+    doc.text(doc.splitTextToSize(b.text,W-M*2-12),M+7,py+18);
+    py+=h+6;
+  });
+  if(D._spChkN && D._curChkN && py<200){
+    py+=4;
+    doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+    doc.text('FINANCIAL IMPACT MODEL — CONSERVATIVE PROJECTION · 90-DAY HORIZON',M,py+4);
+    py+=10;
+    doc.setFillColor(26,26,26); doc.rect(M,py,W-M*2,9,'F');
+    const cw=[(W-M*2)*.32,(W-M*2)*.24,(W-M*2)*.28,(W-M*2)*.16];
+    const hdr=['METRIC','CURRENT STATE','WITH SHOPIFY PAYMENTS','CHANGE'];
+    let cx2=M;
+    hdr.forEach((h,i)=>{
       doc.setFontSize(6.5); doc.setFont('helvetica','bold');
-      doc.setTextColor(i===2?149:i===0?255:130,i===2?191:130,i===2?71:130);
-      doc.text(c, cx+3, py+7);
-      cx += cw4[i];
+      doc.setTextColor(i===2?149:i===0?255:120,i===2?191:120,i===2?71:120);
+      doc.text(h,cx2+3,py+6.5); cx2+=cw[i];
     });
-    py += 10;
-
-    const tRows = [
-      ['Cart Add Rate', pct(D.cartRate), pct(fmt(spCartRate,2)), `+${fmt(spCartRate-D.cartRate,2)}pt`],
-      ['Checkout Completion', pct(D.chkRate), pct(fmt(spChkRate,2)), `+${fmt(spChkRate-D.chkRate,2)}pt`],
-      ['Completed Orders (90d)', fmtN(curChkNCalc), fmtN(spChkN), `+${fmtN(addedOrders)}`],
+    py+=9;
+    const trows=[
+      ['Cart Add Rate',pct(D.cartRate),pct(fmt(D._spCartRate,2)),`+${fmt(D._spCartRate-D.cartRate,2)}pt`],
+      ['Checkout Completion',pct(D.chkRate),pct(fmt(D._spChkRate,2)),`+${fmt(D._spChkRate-D.chkRate,2)}pt`],
+      ['Completed Orders',fmtN(D._curChkN),fmtN(D._spChkN),`+${fmtN(D._addedOrders)}`],
     ];
-    if(revLift>0) tRows.push(['Revenue Uplift (90d)', 'Baseline', fmtC(revLift), `+${fmtC(revLift)}`]);
-
-    tRows.forEach((r,ri)=>{
-      const isLast = ri === tRows.length-1 && revLift > 0;
-      doc.setFillColor(ri%2===0?255:248,ri%2===0?255:250,ri%2===0?255:249);
+    if(D._revLift>0) trows.push(['Revenue Uplift (90d)','Baseline','$'+Math.round(D._revLift).toLocaleString(),`+$${Math.round(D._revLift).toLocaleString()}`]);
+    trows.forEach((r,ri)=>{
+      const isLast=ri===trows.length-1&&D._revLift>0;
+      doc.setFillColor(ri%2===0?255:248,ri%2===0?255:250,ri%2===0?255:250);
       doc.rect(M,py,W-M*2,9,'F');
-      if(isLast){ doc.setDrawColor(0,128,96); doc.line(M,py,M+W-M*2,py); }
-      cx = M;
-      r.forEach((v,vi)=>{
+      if(isLast){doc.setDrawColor(0,128,96);doc.line(M,py,M+W-M*2,py);}
+      cx2=M;
+      r.forEach((val,vi)=>{
         doc.setFontSize(vi===0?8:8.5);
-        doc.setFont('helvetica', vi===0||isLast?'bold':'normal');
-        doc.setTextColor(vi===2?0:vi===3&&isLast?0:60, vi===2?128:vi===3&&isLast?128:60, vi===2?96:vi===3&&isLast?96:60);
-        doc.text(v, cx+3, py+6.5);
-        cx += cw4[vi];
+        doc.setFont('helvetica',vi===0||isLast?'bold':'normal');
+        doc.setTextColor(vi===2?0:vi===3&&isLast?0:60,vi===2?128:vi===3&&isLast?128:60,vi===2?96:vi===3&&isLast?96:60);
+        doc.text(val,cx2+3,py+6.5);
+        cx2+=cw[vi];
       });
-      py += 9;
+      py+=9;
     });
     doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
-    doc.text('Assumptions: +5% checkout conversion (BCG/Shopify) · +15% cart add rate (Shop Pay express) · Auth rate uplift additive, not included above', M, py+8);
-    py += 16;
+    doc.text('+5% checkout conversion (BCG/Shopify) · +15% cart rate (SP express) · Auth uplift additive, not included',M,py+8);
   }
-
-  // Footer p2
-  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
-  doc.text(`Prepared by ${D.aeName} · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
-  doc.text('Optimised for conversion, not cost.', W/2, H-6, {align:'center'});
-  doc.text('2/3', W-M, H-6, {align:'right'});
+  footer(2,3);
 
   // ── PAGE 3: PLATFORM + RECOMMENDATION ──
   doc.addPage();
-  doc.setFillColor(248,250,249); doc.rect(0,0,W,H,'F');
+  doc.setFillColor(249,250,251); doc.rect(0,0,W,H,'F');
   doc.setFillColor(0,128,96); doc.rect(0,0,W,3,'F');
-  doc.setFillColor(26,26,26); doc.rect(0,3,W,24,'F');
+  doc.setFillColor(26,26,26); doc.rect(0,3,W,22,'F');
   doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
-  doc.text('THE SHOPIFY PAYMENTS ADVANTAGE', M, 13);
+  doc.text('THE SHOPIFY PAYMENTS ADVANTAGE',M,13);
   doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(100,100,100);
-  doc.text(D.merchantName, W-M, 13, {align:'right'});
-  doc.setFontSize(7.5); doc.setTextColor(70,70,70);
-  doc.text('Performance data behind the recommendation', M, 22);
-
-  // 4 proof point boxes
-  const ppY = 35;
-  const ppW = (W-M*2-18)/4;
-  const pps = [['+243bps','Higher auth rate than any alternative processor on Shopify'],[`99.7%`,'Transaction acceptance rate'],[`10B+`,'ML-trained transactions in fraud model'],[`200M+`,'Shop Pay users worldwide']];
+  doc.text(mn,W-M,13,{align:'right'});
+  const ppY=33; const ppW=(W-M*2-18)/4;
+  const pps=[['+243bps','Higher auth rate than any alternative on Shopify'],['99.7%','Transaction acceptance rate'],['10B+','ML transactions training fraud model'],['200M+','Shop Pay users worldwide']];
   pps.forEach((p,i)=>{
-    const px2 = M + i*(ppW+6);
+    const px2=M+i*(ppW+6);
     doc.setFillColor(240,250,245); doc.roundedRect(px2,ppY,ppW,30,3,3,'F');
     doc.setDrawColor(187,247,208); doc.roundedRect(px2,ppY,ppW,30,3,3,'S');
-    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
-    doc.text(p[0], px2+4, ppY+13);
+    doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(0,128,96);
+    doc.text(p[0],px2+4,ppY+14);
     doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(80,80,80);
-    const pl = doc.splitTextToSize(p[1], ppW-8);
-    doc.text(pl, px2+4, ppY+20);
+    doc.text(doc.splitTextToSize(p[1],ppW-8),px2+4,ppY+21);
   });
-
-  // Competitors
-  const brands3 = BRANDS[D.vertical]||[];
-  if(brands3.length > 0){
+  const brands3=BRANDS[D.vertical]||[];
+  if(brands3.length>0){
     doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(120,120,120);
-    doc.text(`BRANDS IN ${D.vertical.toUpperCase()} ALREADY ON SHOPIFY PAYMENTS`, M, ppY+42);
-    doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(130,130,130);
-    doc.text('These merchants share your customer base. Their buyers checkout in one tap.', M, ppY+50);
-    const bxW2=44, bxH2=18, bxG=6;
-    brands3.forEach((domain,i)=>{
-      const bx2 = M + (i%(Math.floor((W-M*2)/(bxW2+bxG))))*(bxW2+bxG);
-      const bRow = Math.floor(i/(Math.floor((W-M*2)/(bxW2+bxG))));
-      const by2 = ppY+55+bRow*(bxH2+5);
+    doc.text(`BRANDS IN ${D.vertical.toUpperCase()} ALREADY ON SHOPIFY PAYMENTS`,M,ppY+42);
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(130,130,130);
+    doc.text(`These merchants share ${mn}'s customer base. Their buyers checkout in one tap.`,M,ppY+50);
+    const bxW=44,bxH=18,bxG=6,bxPerRow=Math.floor((W-M*2)/(bxW+bxG));
+    brands3.forEach((d,i)=>{
+      const col=i%bxPerRow, row=Math.floor(i/bxPerRow);
+      const bx2=M+col*(bxW+bxG), by2=ppY+56+row*(bxH+4);
       doc.setFillColor(255,255,255); doc.setDrawColor(215,215,215);
-      doc.roundedRect(bx2,by2,bxW2,bxH2,2,2,'FD');
+      doc.roundedRect(bx2,by2,bxW,bxH,2,2,'FD');
       doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(70,70,70);
-      doc.text(domain.split('.')[0].toUpperCase().substring(0,7), bx2+bxW2/2, by2+bxH2/2+2, {align:'center'});
+      doc.text(d.split('.')[0].toUpperCase().substring(0,7),bx2+bxW/2,by2+bxH/2+3,{align:'center'});
     });
   }
-
-  // Recommendation box
-  const recY = H - 80;
-  doc.setFillColor(17,17,17); doc.roundedRect(M,recY,W-M*2,64,5,5,'F');
-  doc.setFillColor(0,128,96); doc.rect(M,recY,W-M*2,3,'F');
+  const recY=H-90;
+  doc.setFillColor(17,17,17); doc.roundedRect(M,recY,W-M*2,74,5,5,'F');
+  doc.setFillColor(149,191,71); doc.rect(M,recY,W-M*2,3,'F');
   doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.setTextColor(149,191,71);
-  doc.text('RECOMMENDATION', M+6, recY+12);
+  doc.text('RECOMMENDATION',M+6,recY+13);
   doc.setFontSize(12); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-  doc.text('Activate Shopify Payments as primary gateway.', M+6, recY+23);
-  const recText2 = D.spCust
-    ? `${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. This is not about acquiring a new audience — it's about converting the one that already exists. Higher auth rates, no redirect friction, native 1-tap checkout. No platform migration required.`
-    : `Higher authorisation rates, native 1-tap checkout, no redirect friction, $745M in fraud blocked without false declines. The infrastructure change that makes every transaction perform better — without acquiring a single new customer.`;
-  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(140,140,140);
-  doc.text(doc.splitTextToSize(recText2, W-M*2-12), M+6, recY+33);
+  doc.text('Activate Shopify Payments as primary gateway.',M+6,recY+25);
+  const recT=D.spCust
+    ?`${pct(D.spCust)} of ${mn}'s customers already hold Shop Pay. This is not about acquiring a new audience — it's about converting the one that already exists. Higher auth rates, no redirect friction, native 1-tap checkout. No platform migration required.`
+    :`Higher authorisation rates, native 1-tap checkout, no redirect friction, $745M in fraud blocked without false declines. The infrastructure change that makes every transaction perform better — without acquiring a single new customer.`;
+  doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(140,140,140);
+  doc.text(doc.splitTextToSize(recT,W-M*2-14),M+6,recY+35);
+  footer(3,3);
 
-  // Footer p3
-  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(170,170,170);
-  doc.text(`Prepared by ${D.aeName} · Shopify Growth Services · ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`, M, H-6);
-  doc.text('Optimised for conversion, not cost.', W/2, H-6, {align:'center'});
-  doc.text('3/3', W-M, H-6, {align:'right'});
-
-  const slug = D.merchantName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const slug=D.merchantName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
   doc.save(`shopify-payments-business-case-${slug}.pdf`);
 }
 
-function copyBrief(){
-  const text = document.getElementById('pitch-body').innerText;
+function copyCase(){
+  const text = document.getElementById('doc-body').innerText;
   navigator.clipboard.writeText(text).then(()=>{
     const btn = event.currentTarget;
     const orig = btn.innerHTML;
-    btn.innerHTML = '✓ Copied!';
+    btn.innerHTML = '✓ Copied';
     setTimeout(()=>{ btn.innerHTML=orig; }, 2000);
   });
 }
