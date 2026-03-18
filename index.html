@@ -242,6 +242,41 @@ hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp .4s ease}
 
+/* ── SETTINGS MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;border-radius:var(--radius-lg);padding:28px;max-width:520px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.2)}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
+.modal-sub{font-size:13px;color:var(--text-sub);line-height:1.65;margin-bottom:20px}
+.modal-step{display:flex;gap:12px;margin-bottom:12px;font-size:13px;line-height:1.6;color:var(--grey-6)}
+.modal-step-num{width:22px;height:22px;background:var(--green);border-radius:50%;color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.modal-url-row{display:flex;gap:8px;margin-top:20px}
+.modal-url-row input{flex:1;height:38px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
+.modal-url-row input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(0,128,96,.1)}
+.modal-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--grey-2)}
+.btn-icon{width:36px;height:36px;border-radius:var(--radius);background:none;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-sub);transition:all .15s}
+.btn-icon:hover{background:var(--grey-1);border-color:var(--grey-4);color:var(--text)}
+.btn-icon.active{background:var(--green-light);border-color:var(--green-mid);color:var(--green)}
+
+/* ── FETCH STATE ── */
+.fetch-banner{border-radius:var(--radius);padding:12px 16px;margin-top:14px;font-size:13px;font-weight:600;display:none;align-items:center;gap:10px}
+.fetch-banner.loading{background:var(--grey-1);border:1px solid var(--border);color:var(--text-sub);display:flex}
+.fetch-banner.success{background:var(--green-light);border:1px solid var(--green-mid);color:#1a4d39;display:flex}
+.fetch-banner.error{background:var(--red-light);border:1px solid #fca5a5;color:var(--red);display:flex}
+.spinner{width:16px;height:16px;border:2px solid var(--grey-3);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── AUTO-FILLED FIELDS ── */
+.field input.auto-filled{background:#f0faf5;border-color:var(--green-mid);color:var(--dark)}
+.field-auto-tag{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+/* ── DATA SUMMARY BANNER ── */
+.data-summary{background:var(--green-light);border:1px solid var(--green-mid);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:16px;display:none}
+.data-summary-title{font-size:13px;font-weight:700;color:#1a4d39;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.data-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.data-metric{text-align:center}
+.data-metric-val{font-size:18px;font-weight:900;color:var(--green);letter-spacing:-.5px}
+.data-metric-label{font-size:10px;color:var(--text-sub);margin-top:2px;font-weight:600}
+
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
   .page{padding:16px 12px 60px}
@@ -269,7 +304,31 @@ hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
   <div class="nav-div"></div>
   <span class="nav-tag">Growth Services</span>
   <span class="nav-pill">Optimised for conversion, not cost</span>
+  <button class="btn-icon" id="settings-btn" onclick="toggleSettings()" title="Configure auto-pull">
+    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+  </button>
 </nav>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-overlay" style="display:none" onclick="if(event.target===this)toggleSettings()">
+  <div class="modal">
+    <div class="modal-title">Auto-pull Setup</div>
+    <div class="modal-sub">Deploy one Google Apps Script and this tool will automatically pull all BigQuery data when an AE enters a Shop ID. One deployment works for the whole team.</div>
+    <div class="modal-step"><div class="modal-step-num">1</div><div>Go to <strong>script.google.com</strong> → New project → name it <em>SP Pitch Builder API</em></div></div>
+    <div class="modal-step"><div class="modal-step-num">2</div><div>Paste the contents of <strong>sp-pitch-builder-apps-script.gs</strong> into the editor (ask Dougie for the file)</div></div>
+    <div class="modal-step"><div class="modal-step-num">3</div><div>Left sidebar → <strong>Services (+)</strong> → add <em>BigQuery API</em></div></div>
+    <div class="modal-step"><div class="modal-step-num">4</div><div><strong>Deploy → New deployment → Web App</strong><br>Execute as: Me · Who has access: Anyone · Deploy · copy the URL</div></div>
+    <div class="modal-step"><div class="modal-step-num">5</div><div>Paste the Web App URL below</div></div>
+    <div class="modal-url-row">
+      <input type="text" id="apps-script-url" placeholder="https://script.google.com/macros/s/.../exec">
+      <button class="btn btn-primary" onclick="saveScriptUrl()">Save</button>
+    </div>
+    <div class="modal-foot">
+      <span id="url-status" style="font-size:12px;color:var(--grey-4)">Without setup, data is entered manually in Step 2</span>
+      <button class="btn btn-outline" onclick="toggleSettings()">Close</button>
+    </div>
+  </div>
+</div>
 
 <div class="page">
 
@@ -296,6 +355,10 @@ hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
         <input type="text" id="shop-id" placeholder="e.g. 55472324767" autocomplete="off" onkeydown="if(event.key==='Enter')loadMerchant()">
         <button class="btn btn-primary" style="height:44px;padding:0 20px;font-size:14px" onclick="loadMerchant()">Load Merchant →</button>
       </div>
+      <div class="fetch-banner" id="fetch-banner">
+        <div class="spinner" id="fetch-spinner"></div>
+        <span id="fetch-msg">Pulling merchant data from BigQuery…</span>
+      </div>
       <div class="mbanner" id="mbanner">
         <span class="mbanner-name" id="m-name">Merchant</span>
         <span class="mbanner-id" id="m-id">—</span>
@@ -317,6 +380,12 @@ hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- DATA SUMMARY (shown after auto-pull) -->
+  <div class="data-summary" id="data-summary">
+    <div class="data-summary-title">✓ Data loaded from BigQuery — key fields auto-populated below</div>
+    <div class="data-metrics" id="data-metrics"></div>
   </div>
 
   <!-- STEP 2 -->
@@ -482,6 +551,11 @@ hr.d{border:none;border-top:1px solid var(--grey-2);margin:20px 0}
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+// Paste your Google Apps Script Web App URL here, OR use the settings gear icon.
+// Leave empty to use manual data entry mode.
+let APPS_SCRIPT_URL = localStorage.getItem('sp_apps_script_url') || '';
+
 const R1 = 'https://lookerstudio.google.com/reporting/7e958a1f-3d14-4057-8024-d06918174416/page/p_jj8oo1jpwd';
 const R2 = 'https://lookerstudio.google.com/reporting/f4423a60-f1bc-42f6-a548-79f5a45e0074/page/p_ahl9q4zfad';
 const AUTH_RATE_GAP = 0.0243;
@@ -515,18 +589,165 @@ function setStep(n){
   });
 }
 
-function loadMerchant(){
+// ── SETTINGS ─────────────────────────────────────────────────────────────────
+function toggleSettings(){
+  const overlay = document.getElementById('settings-overlay');
+  const isOpen = overlay.style.display !== 'none';
+  overlay.style.display = isOpen ? 'none' : 'flex';
+  if (!isOpen) {
+    document.getElementById('apps-script-url').value = APPS_SCRIPT_URL;
+    document.getElementById('url-status').textContent = APPS_SCRIPT_URL
+      ? '✓ Auto-pull configured' : 'Without setup, data is entered manually in Step 2';
+    document.getElementById('url-status').style.color = APPS_SCRIPT_URL ? 'var(--green)' : 'var(--grey-4)';
+    document.getElementById('settings-btn').classList.toggle('active', !!APPS_SCRIPT_URL);
+  }
+}
+
+function saveScriptUrl(){
+  const url = document.getElementById('apps-script-url').value.trim();
+  APPS_SCRIPT_URL = url;
+  localStorage.setItem('sp_apps_script_url', url);
+  const status = document.getElementById('url-status');
+  status.textContent = url ? '✓ Saved — auto-pull active' : 'Cleared — manual mode';
+  status.style.color = url ? 'var(--green)' : 'var(--grey-4)';
+  document.getElementById('settings-btn').classList.toggle('active', !!url);
+  if (url) setTimeout(toggleSettings, 800);
+}
+
+// ── LOAD MERCHANT ─────────────────────────────────────────────────────────────
+async function loadMerchant(){
   const id = v('shop-id').trim();
   if(!id){ document.getElementById('shop-id').focus(); return; }
-  document.getElementById('m-id').textContent = 'Shop ID: '+id;
-  document.getElementById('m-name').textContent = v('merch-name')||'Merchant loaded';
-  document.getElementById('mbanner').style.display='flex';
+
+  // Always set up Looker links immediately
   document.getElementById('link1').href = R1;
   document.getElementById('link2').href = R2;
   document.getElementById('rlinks').style.display='grid';
-  document.getElementById('card2').style.display='block';
-  setStep(2);
-  setTimeout(()=>document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'}),100);
+
+  if(APPS_SCRIPT_URL){
+    await fetchFromBigQuery(id);
+  } else {
+    // Manual mode — just open card 2
+    document.getElementById('m-id').textContent = 'Shop ID: '+id;
+    document.getElementById('m-name').textContent = 'Merchant loaded';
+    document.getElementById('mbanner').style.display='flex';
+    document.getElementById('card2').style.display='block';
+    setStep(2);
+    setTimeout(()=>document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'}),100);
+  }
+}
+
+async function fetchFromBigQuery(shopId){
+  const banner = document.getElementById('fetch-banner');
+  const spinner = document.getElementById('fetch-spinner');
+  const msg = document.getElementById('fetch-msg');
+
+  // Show loading
+  banner.className = 'fetch-banner loading';
+  spinner.style.display = 'block';
+  msg.textContent = 'Pulling data from BigQuery — usually takes 10–20 seconds…';
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ shopId }),
+    });
+    const data = await res.json();
+
+    if(data.error) throw new Error(data.error);
+
+    // Success
+    banner.className = 'fetch-banner success';
+    spinner.style.display = 'none';
+    msg.textContent = `✓ Data loaded for Shop ID ${shopId}`;
+
+    // Populate form + show card
+    populateFromData(data);
+    document.getElementById('m-id').textContent = 'Shop ID: '+shopId;
+    document.getElementById('m-name').textContent = v('merch-name')||'Merchant loaded';
+    document.getElementById('mbanner').style.display='flex';
+    document.getElementById('card2').style.display='block';
+    showDataSummary(data);
+    setStep(2);
+    setTimeout(()=>document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'}),200);
+
+  } catch(err) {
+    banner.className = 'fetch-banner error';
+    spinner.style.display = 'none';
+    msg.textContent = `⚠ Fetch failed: ${err.message} — enter data manually below`;
+    // Fall back to manual mode
+    document.getElementById('m-id').textContent = 'Shop ID: '+shopId;
+    document.getElementById('m-name').textContent = 'Enter merchant name below';
+    document.getElementById('mbanner').style.display='flex';
+    document.getElementById('card2').style.display='block';
+    setStep(2);
+    setTimeout(()=>document.getElementById('card2').scrollIntoView({behavior:'smooth',block:'start'}),200);
+  }
+}
+
+// ── POPULATE FORM FROM BIGQUERY DATA ─────────────────────────────────────────
+function populateFromData(data){
+  function setField(id, val, isAutoFilled=true){
+    const el = document.getElementById(id);
+    if(!el || val === null || val === undefined) return;
+    el.value = typeof val === 'number' ? (Number.isInteger(val) ? val : Math.round(val*100)/100) : val;
+    if(isAutoFilled) el.classList.add('auto-filled');
+  }
+
+  // ── Report 1: Purchase Funnel ──
+  setField('sessions',    data.sessions);
+  setField('mobile-pct', data.mobilePct);
+  setField('cart-rate',  data.cartRatePct);
+  setField('cart-bm',    data.benchmarkCartPct);
+  setField('chk-rate',   data.checkoutCompPct);
+  setField('chk-bm',     data.benchmarkChkPct);
+
+  // ── Report 2: Shop Pay ──
+  if(data.spRevBoost90d) setField('sp-rev', data.spRevBoost90d);
+
+  // ── Transactions: Gateway Data ──
+  if(data.spGmvPct)    setField('sp-gmv',   data.spGmvPct);
+  if(data.spOrdersPct) setField('sp-orders', data.spOrdersPct);
+  if(data.aov)         setField('aov',       Math.round(data.aov));
+  if(data.secondGateway) setField('gateway2', data.secondGateway, false);
+  if(data.hasRedirectGw) document.getElementById('redirect-gateway').checked = true;
+
+  // ── Derived: Revenue uplift (if AOV available) ──
+  if(data.revCart) setField('rev-cart', data.revCart);
+  if(data.revChk)  setField('rev-chk',  data.revChk);
+
+  // AOV change triggers revenue recalculation
+  document.getElementById('aov').addEventListener('input', recalcRevenue);
+}
+
+function recalcRevenue(){
+  const sessions  = fv('sessions');
+  const cartRate  = fv('cart-rate');
+  const chkRate   = fv('chk-rate');
+  const aov       = fv('aov');
+  if(!sessions || !cartRate || !aov) return;
+  const cartAdds     = sessions * cartRate/100;
+  const orders       = cartAdds * (chkRate||0)/100;
+  const sessNoCart   = sessions * (1 - cartRate/100);
+  const chkDropoffs  = Math.max(cartAdds - orders, 0);
+  const revCartEl = document.getElementById('rev-cart');
+  const revChkEl  = document.getElementById('rev-chk');
+  if(revCartEl && sessNoCart > 0){ revCartEl.value = Math.round(sessNoCart * 0.05 * aov); revCartEl.classList.add('auto-filled'); }
+  if(revChkEl  && chkDropoffs > 0){ revChkEl.value  = Math.round(chkDropoffs * 0.05 * aov); revChkEl.classList.add('auto-filled'); }
+}
+
+// ── DATA SUMMARY BANNER ───────────────────────────────────────────────────────
+function showDataSummary(data){
+  const summary = document.getElementById('data-summary');
+  const metrics = document.getElementById('data-metrics');
+  const items = [
+    { val: data.sessions ? Math.round(data.sessions).toLocaleString() : '—', label: 'Sessions (90d)' },
+    { val: data.cartRatePct ? data.cartRatePct.toFixed(1)+'%' : '—', label: 'Cart Add Rate' },
+    { val: data.mobilePct ? data.mobilePct.toFixed(0)+'%' : '—', label: 'Mobile Traffic' },
+    { val: data.spRevBoost90d ? '$'+Math.round(data.spRevBoost90d).toLocaleString() : '—', label: 'SP Rev Boost (90d)' },
+  ];
+  metrics.innerHTML = items.map(m=>`<div class="data-metric"><div class="data-metric-val">${m.val}</div><div class="data-metric-label">${m.label}</div></div>`).join('');
+  summary.style.display = 'block';
 }
 
 function generateCase(){
@@ -1137,6 +1358,11 @@ async function downloadPDF(){
   const slug=D.merchantName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
   doc.save(`shopify-payments-business-case-${slug}.pdf`);
 }
+
+// On load, reflect configured state
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(APPS_SCRIPT_URL) document.getElementById('settings-btn').classList.add('active');
+});
 
 function copyCase(){
   const text = document.getElementById('doc-body').innerText;
